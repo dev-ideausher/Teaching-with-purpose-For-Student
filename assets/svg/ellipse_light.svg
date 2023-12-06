@@ -1,0 +1,24 @@
+<svg width="33" height="25" viewBox="0 0 33 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="33" height="25" fill="#999999"/>
+<g clip-path="url(#clip0_132_1539)">
+<rect width="375" height="1166" transform="translate(-134 -456)" fill="#FAFAFA"/>
+<g clip-path="url(#clip1_132_1539)">
+<rect y="-49" width="106.333" height="74" rx="8" fill="white"/>
+<ellipse opacity="0.5" cx="2.5" cy="29" rx="30.5" ry="29" fill="#FFFDDF"/>
+<g style="mix-blend-mode:multiply" opacity="0.5">
+<ellipse cx="16.8205" cy="44.5161" rx="28.5" ry="27.5" transform="rotate(-32.559 16.8205 44.5161)" fill="#FBE0E1"/>
+</g>
+<g style="mix-blend-mode:multiply" opacity="0.5">
+<ellipse cx="-12" cy="14" rx="24" ry="23" fill="#DDF7E6"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_132_1539">
+<rect width="375" height="1166" fill="white" transform="translate(-134 -456)"/>
+</clipPath>
+<clipPath id="clip1_132_1539">
+<rect y="-49" width="106.333" height="74" rx="8" fill="white"/>
+</clipPath>
+</defs>
+</svg>
