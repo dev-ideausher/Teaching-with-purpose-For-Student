@@ -1,8 +1,11 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lwp_for_student/app/components/custom_appbar.dart';
 import 'package:lwp_for_student/app/components/stcard.dart';
+import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
+import 'package:lwp_for_student/app/services/text_style_util.dart';
 import 'package:lwp_for_student/gen/assets.gen.dart';
 import '../controllers/quizz_controller.dart';
 
@@ -21,45 +24,32 @@ class QuizzView extends GetView<QuizzController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Container(
-              //   height: 56.kh,
-              //   width: 343.kw,
-              //   decoration: BoxDecoration(
-              //     color: context.kWhite,
-              //     borderRadius: BorderRadius.circular(8),
-              //   ),
-              //   child: Center(
-              //     child: Obx(() => DropdownButton<String>(
-              //       value: controller.selectedMonth.value,
-              //       items: controller.months.map((String month) {
-              //         return DropdownMenuItem<String>(
-              //             value: month, child: Text(month));
-              //       }).toList(),
-              //       onChanged: (String? newMonth) {
-              //         if (newMonth != null) {
-              //           controller.selectMonth(newMonth);
-              //         }
-              //       },
-              //     )),
-              //   ),
-              // ),
-              SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: Obx(() => DropdownButton<String>(
-                      value: controller.selectedMonth.value,
-                      items: controller.months.map((String month) {
-                        return DropdownMenuItem<String>(
-                            value: month, child: Text(month));
-                      }).toList(),
-                      onChanged: (String? newMonth) {
-                        if (newMonth != null) {
-                          controller.selectMonth(newMonth);
-                        }
-                      },
+              Obx(() => Container(
+                    decoration: BoxDecoration(
+                      color: context.kWhite,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Get.context!.kNeutral,width: 0.5),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                        child: DropdownButton2<String>(
+                      isExpanded: true,
+                      hint: Text(
+                        'Select subject',
+                        style: TextStyleUtil.kText14_4(
+                            fontWeight: FontWeight.w400,
+                            color: Get.context!.kLightTextColor),
+                      ),
+                      items: controller.subjects
+                          .map((String item) => DropdownMenuItem<String>(
+                              value: item, child: Text(item,style: TextStyleUtil.kText16_5(
+                            fontWeight: FontWeight.w400,
+                            color: Get.context!.kLightTextColor))))
+                          .toList(),
+                      value: controller.sub.value,
+                      onChanged: (String? value) =>
+                          controller.selectSubjects(value!),
                     )),
-              ),
-
+                  )),
               32.kheightBox,
               StCard(
                   title: 'Physics',

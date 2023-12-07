@@ -4,8 +4,12 @@ import 'package:lwp_for_student/app/modules/education_profile/views/screens/disc
 import 'package:lwp_for_student/app/modules/education_profile/views/screens/discussion_form/selected_sub_discussion_screen.dart';
 import 'package:lwp_for_student/app/modules/education_profile/views/screens/goals_and%20_plans/goals_plans_screen.dart';
 import 'package:lwp_for_student/app/modules/education_profile/views/screens/self_assessment/self_assessment_screen.dart';
+import 'package:lwp_for_student/app/modules/events/bindings/events_binding.dart';
+import 'package:lwp_for_student/app/modules/events/views/events_view.dart';
 import 'package:lwp_for_student/app/modules/quizz/bindings/quizz_binding.dart';
 import 'package:lwp_for_student/app/modules/quizz/views/quizz_view.dart';
+import 'package:lwp_for_student/app/modules/subjects/bindings/subjects_binding.dart';
+import 'package:lwp_for_student/app/modules/subjects/views/subjects_view.dart';
 import '../modules/attendance/bindings/attendance_binding.dart';
 import '../modules/attendance/views/attendance_view.dart';
 import '../modules/book_marks/bindings/book_marks_binding.dart';
@@ -96,9 +100,19 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
+      name: _Paths.SUBJECTS,
+      page: () => const SubjectsView(),
+      binding: SubjectsBinding(),
+    ),
+    GetPage(
       name: _Paths.QUIZZ,
       page: () => const QuizzView(),
       binding: QuizzBinding(),
+    ),
+    GetPage(
+      name: _Paths.EVENTS,
+      page: () => const EventsView(),
+      binding: EventsBinding(),
     ),
     GetPage(
       name: _Paths.FORGOT_PASSWORD,
@@ -139,11 +153,6 @@ class AppPages {
       binding: HelpCenterBinding(),
     ),
     GetPage(
-      name: _Paths.ATTENDANCE,
-      page: () => const AttendanceView(),
-      binding: AttendanceBinding(),
-    ),
-    GetPage(
       name: _Paths.EDUCATION_PROFILE,
       page: () => const EducationProfileView(),
       binding: EducationProfileBinding(),
@@ -167,6 +176,11 @@ class AppPages {
       GetPage(
       name: _Paths.SELECTED_DISCUSSION,
       page: () =>  SelectedSubDiscussionScreen(),
+    ),
+    GetPage(
+      name: _Paths.ATTENDANCE,
+      page: () => const AttendanceView(),
+      binding: AttendanceBinding(),
     )
   ];
 }

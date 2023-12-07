@@ -1,23 +1,19 @@
 import 'package:get/get.dart';
 
 class QuizzController extends GetxController {
-  var selectedMonth = 'January'.obs;
-  var months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',];
+  var sub = 'Physics'.obs;
+  final List<String> subjects = [
+    'Physics',
+    'English',
+    'Mathematics',
+    'Chemistry',
+    'Biology',
+    'history',
+    'Geography'
+  ];
 
 
-  void selectMonth(String month) {
-    selectedMonth.value = month;
+  void selectSubjects(String subjects) {
+    sub.value = subjects;
   }
 }

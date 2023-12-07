@@ -4,6 +4,7 @@
 class SubjectsListModelData {
 /*
 {
+  "icon": "",
   "_id": "6570261b8c2337e8d3e2e313",
   "subject": "English",
   "subjectCode": "005",
@@ -14,6 +15,7 @@ class SubjectsListModelData {
 } 
 */
 
+  String? icon;
   String? Id;
   String? subject;
   String? subjectCode;
@@ -23,6 +25,7 @@ class SubjectsListModelData {
   int? V;
 
   SubjectsListModelData({
+    this.icon,
     this.Id,
     this.subject,
     this.subjectCode,
@@ -32,6 +35,7 @@ class SubjectsListModelData {
     this.V,
   });
   SubjectsListModelData.fromJson(Map<String, dynamic> json) {
+    icon = json['icon']?.toString();
     Id = json['_id']?.toString();
     subject = json['subject']?.toString();
     subjectCode = json['subjectCode']?.toString();
@@ -42,6 +46,7 @@ class SubjectsListModelData {
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
+    data['icon'] = icon;
     data['_id'] = Id;
     data['subject'] = subject;
     data['subjectCode'] = subjectCode;
@@ -60,6 +65,7 @@ class SubjectsListModel {
   "result": 6,
   "data": [
     {
+      "icon": "",
       "_id": "6570261b8c2337e8d3e2e313",
       "subject": "English",
       "subjectCode": "005",
@@ -108,3 +114,4 @@ class SubjectsListModel {
     return data;
   }
 }
+

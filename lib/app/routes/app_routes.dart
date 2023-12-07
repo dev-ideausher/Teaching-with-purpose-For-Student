@@ -12,7 +12,9 @@ abstract class Routes {
   static const PROGRESS = _Paths.PROGRESS;
   static const PROFILE = _Paths.PROFILE;
   static const HOME = _Paths.HOME;
+  static const SUBJECTS = _Paths.SUBJECTS;
   static const QUIZZ = _Paths.QUIZZ;
+  static const EVENTS = _Paths.EVENTS;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const CHANGE_PASSWORD_SUCCESS = _Paths.CHANGE_PASSWORD_SUCCESS;
@@ -21,13 +23,13 @@ abstract class Routes {
   static const BOOK_MARKS = _Paths.BOOK_MARKS;
   static const FEEDBACKS = _Paths.FEEDBACKS;
   static const HELP_CENTER = _Paths.HELP_CENTER;
-  static const ATTENDANCE = _Paths.ATTENDANCE;
   static const EDUCATION_PROFILE = _Paths.EDUCATION_PROFILE;
   static const SELF_ASSESSMENT = _Paths.SELF_ASSESSMENT;
   static const GOALS_AND_PLANS = _Paths.GOALS_AND_PLANS;
   static const PERSONAL_ACHIVEMENT = _Paths.PERSONAL_ACHIVEMENT;
   static const DISCUSSSION_FORM = _Paths.DISCUSSSION_FORM;
   static const SELECTED_DISCUSSION = _Paths.SELECTED_DISCUSSION;
+  static const ATTENDANCE = _Paths.ATTENDANCE;
 }
 
 abstract class _Paths {
@@ -41,7 +43,9 @@ abstract class _Paths {
   static const PROGRESS = '/progress';
   static const PROFILE = '/profile';
   static const HOME = '/home';
+  static const SUBJECTS = '/subjects';
   static const QUIZZ = '/quizz';
+  static const EVENTS = '/events';
   static const FORGOT_PASSWORD = '/forgot-password';
   static const CHANGE_PASSWORD = '/change-password';
   static const CHANGE_PASSWORD_SUCCESS = '/change-password-success';
@@ -50,11 +54,11 @@ abstract class _Paths {
   static const BOOK_MARKS = '/book-marks';
   static const FEEDBACKS = '/feedbacks';
   static const HELP_CENTER = '/help-center';
-  static const ATTENDANCE = '/attendance';
   static const EDUCATION_PROFILE = '/education-profile';
   static const SELF_ASSESSMENT = '/self-assessment';
   static const GOALS_AND_PLANS = '/goals-and-plans';
   static const PERSONAL_ACHIVEMENT = '/personal-achivement';
   static const DISCUSSSION_FORM = '/discussion-form';
   static const SELECTED_DISCUSSION = '/selected-discussion';
+  static const ATTENDANCE = '/attendance';
 }

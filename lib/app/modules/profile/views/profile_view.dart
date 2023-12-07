@@ -81,7 +81,7 @@ class ProfileView extends GetView<ProfileController> {
           children: [
             Center(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(30),
                 child: profileImg(),
               ),
             ),
@@ -163,7 +163,7 @@ class ProfileView extends GetView<ProfileController> {
         bottomSheetImg: Lottie.asset('assets/lottiefiles/rating.json'),
         title: 'Enjoying Teaching With Purpose ?',
         text1:
-            'Support us by giving rate and your precious review ! It will take few seconds only.',
+            'Support us by giving rate and your precious review !It will take few seconds only.',
         text2: 'Maybe Later',
       ),
     );

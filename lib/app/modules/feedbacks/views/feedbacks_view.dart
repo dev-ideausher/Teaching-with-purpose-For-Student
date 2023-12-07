@@ -109,8 +109,8 @@ class FeedbacksView extends GetView<FeedbacksController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
          Text(
-        textAlign: TextAlign.left,
         qText,
+        textAlign: TextAlign.left,
         style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400)),
       16.kheightBox,
       SizedBox(

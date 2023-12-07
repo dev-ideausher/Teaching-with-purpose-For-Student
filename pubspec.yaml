@@ -60,6 +60,7 @@ dependencies:
   intl: ^0.18.1
 
 
+
   #Firebase
   firebase_auth: ^4.15.0
   stacked_firebase_auth: ^2.19.6

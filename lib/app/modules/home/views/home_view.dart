@@ -29,18 +29,19 @@ class HomeView extends GetView<HomeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                studentSection(),
+                buildStudentSection(),
                 32.kheightBox,
-                clockWidget(),
+                buildClockWidget(),
                 32.kheightBox,
                 Text(
-                    textAlign: TextAlign.center,
                     'My Subjects',
                     style:
                         TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
                 16.kheightBox,
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                        Get.toNamed(Routes.SUBJECTS);
+                        },
                         child: GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -56,11 +57,12 @@ class HomeView extends GetView<HomeController> {
                               imageWidget: controller.subjectImages[index],
                               text: controller.subjectLists.value.data?[index]?.subject ?? '',
                             );
+                           // controller.subjectLists.value.data![index]!.icon
                           },
                         ),
                       ),
                 32.kheightBox,
-                rowWidget(title: 'Live Quizzes', subtitle: 'See all',onTap: ()=> Get.toNamed(Routes.QUIZZ)),
+                buildRowWidget(title: 'Live Quizzes', subtitle: 'See all',onTap: ()=> Get.toNamed(Routes.QUIZZ)),
                 16.kheightBox,
                 StCard(
                     imagePath: Assets.images.img.path,
@@ -73,7 +75,7 @@ class HomeView extends GetView<HomeController> {
                     text4: 'Topics covered: ',
                     text5: 'Electric charge, Friction, Newton’s law of motion'),
                 32.kheightBox,
-                rowWidget(title: 'Events', subtitle: 'See all',onTap: (){}),
+                buildRowWidget(title: 'Events', subtitle: 'See all',onTap: (){Get.toNamed(Routes.EVENTS);}),
                 16.kheightBox,
                 SizedBox(
                   height: 156.kh,
@@ -98,10 +100,12 @@ class HomeView extends GetView<HomeController> {
   }
 
 // section for the student details like roll Number and name with img
-Widget studentSection() {
+Widget buildStudentSection() {
  return Row(
       children: [
-        ClipRRect(child: profileImg()),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+        child: buildProfileImg()),
         16.kwidthBox,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,8 +129,8 @@ Widget studentSection() {
   }
 
 
-//
-  Widget profileImg() {
+//image logic
+  Widget buildProfileImg() {
     if (Get.find<ProfileController>().studentModel?.data?.first?.image !=null) {
       return CachedNetworkImage(
           imageUrl: Get.find<ProfileController>().studentModel?.data?.first?.image ?? '',
@@ -137,7 +141,7 @@ Widget studentSection() {
   }
 
 // custom clock widget
-Widget clockWidget() {
+Widget buildClockWidget() {
     return SizedBox(
       height: 192.kh,
       width: 343.kw,
@@ -207,7 +211,7 @@ Widget clockWidget() {
   }
 
 // insted of use multiple row in  a single tree
-Widget rowWidget({required String title, required String subtitle, required void Function() onTap}) {
+Widget buildRowWidget({required String title, required String subtitle, required void Function() onTap}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
