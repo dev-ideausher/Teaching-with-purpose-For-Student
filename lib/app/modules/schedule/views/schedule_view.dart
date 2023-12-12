@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lwp_for_student/app/components/custom_appbar.dart';
 import 'package:lwp_for_student/app/components/stexamdatesheet.dart';
-import 'package:lwp_for_student/app/components/sttimetabledata.dart';
+import 'package:lwp_for_student/app/components/sttimetable_data.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
 import 'package:lwp_for_student/app/services/text_style_util.dart';

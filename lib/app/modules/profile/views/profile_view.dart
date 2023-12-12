@@ -9,6 +9,7 @@ import 'package:lwp_for_student/app/constants/image_constant.dart';
 import 'package:lwp_for_student/app/routes/app_pages.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
+import 'package:lwp_for_student/app/services/storage.dart';
 import 'package:lwp_for_student/app/services/text_style_util.dart';
 import 'package:lwp_for_student/gen/assets.gen.dart';
 import '../controllers/profile_controller.dart';
@@ -22,52 +23,69 @@ class ProfileView extends GetView<ProfileController> {
             preferredSize: Size.fromHeight(46.kh),
             child: CustomAppBar(title: 'Profile', isBack: false)),
         body: Obx(() => controller.isLoding.value?
-       CircularProgressIndicator(color: context.kPrimary,):
+       Center(child: CircularProgressIndicator(color: context.kPrimary,)):
         SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                profileImage(),
-                32.kheightBox,
-                profileSectionWidget(Assets.svg.editProfile, 'Edit Profile',
-                    () => Get.toNamed(Routes.EDIT_PROFILE)),
-                8.kheightBox,
-                profileSectionWidget(
-                    Assets.svg.educationProfile,
-                    'Education Profile',
-                    () => Get.toNamed(Routes.EDUCATION_PROFILE)),
-                8.kheightBox,
-                profileSectionWidget(Assets.svg.attendance, 'My Attendance',
-                    () => Get.toNamed(Routes.ATTENDANCE)),
-                8.kheightBox,
-                profileSectionWidget(Assets.svg.bookmark, 'Bookmarks',
-                    () => Get.toNamed(Routes.BOOK_MARKS)),
-                8.kheightBox,
-                profileSectionWidget(Assets.svg.feedbackOutline,
-                    'Student Feedbacks', () => Get.toNamed(Routes.FEEDBACKS)),
-                8.kheightBox,
-                profileSectionWidget(
-                    Assets.svg.ratingOutline,
-                    'App Review & Ratings',
-                    () => showBottomSheetWidget(context)),
-                8.kheightBox,
-                profileSectionWidget(
-                    Assets.svg.language, 'Content Language', () {}),
-                8.kheightBox,
-                profileSectionWidget(Assets.svg.password, 'Change Password',
-                    () => Get.toNamed(Routes.CHANGE_PASSWORD)),
-                8.kheightBox,
-                profileSectionWidget(Assets.svg.helpCircle, 'Help Center',
-                    () => Get.toNamed(Routes.HELP_CENTER)),
-                8.kheightBox,
-                profileSectionWidget(Assets.svg.logout, 'Logout', () {
-                  logoutWidget();
-                }),
-              ],
-            ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      profileImage(),
+                      32.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.editProfile,
+                          title: 'Edit Profile',
+                          onTap: () => Get.toNamed(Routes.EDIT_PROFILE)),
+                      8.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.educationProfile,
+                          title: 'Education Profile',
+                          onTap: () => Get.toNamed(Routes.EDUCATION_PROFILE)),
+                      8.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.attendance,
+                          title: 'My Attendance',
+                          onTap: () => Get.toNamed(Routes.ATTENDANCE)),
+                      8.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.bookmark,
+                          title: 'Bookmarks',
+                          onTap: () => Get.toNamed(Routes.BOOK_MARKS)),
+                      8.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.feedbackOutline,
+                          title: 'Student Feedbacks',
+                          onTap: () => Get.toNamed(Routes.FEEDBACKS)),
+                      8.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.ratingOutline,
+                          title: 'App Review & Ratings',
+                          onTap: () => showBottomSheetWidget(context)),
+                      8.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.language,
+                          title: 'Content Language',
+                          onTap: () {}),
+                      8.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.password,
+                          title: 'Change Password',
+                          onTap: () => Get.toNamed(Routes.CHANGE_PASSWORD)),
+                      8.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.helpCircle,
+                          title: 'Help Center',
+                          onTap: () => Get.toNamed(Routes.HELP_CENTER)),
+                      8.kheightBox,
+                      profileSectionWidget(
+                          image: Assets.svg.logout,
+                          title: 'Logout',
+                          onTap: () {
+                            logoutWidget();
+                          }),
+                    ],
+                  ),
           ),
         )
         ));
@@ -101,7 +119,7 @@ class ProfileView extends GetView<ProfileController> {
         ),
         8.kheightBox,
         Text(
-            'Class | Roll Number',
+            'Class | ${Get.find<GetStorageService>().rollNumber}',
             textAlign: TextAlign.center,
             style: TextStyleUtil.kText14_4(
                 fontWeight: FontWeight.w400,
@@ -125,7 +143,7 @@ class ProfileView extends GetView<ProfileController> {
 
 //
   Widget profileSectionWidget(
-      SvgGenImage image, String title, void Function() onTap) {
+      {required SvgGenImage image, required String title, required void Function() onTap}) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -169,7 +187,7 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  // dialo box for log-out
+  // dialog box for log-out
   logoutWidget() {
     return Get.defaultDialog(
         title: 'Confirm Logout',

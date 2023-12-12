@@ -22,9 +22,12 @@ class APIManager {
   static Future<Response> getStudentDetails({required String id}) async => 
          await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(Endpoints.getStudentDeatils + id);  
 
+  static Future<Response> getEvents() async => await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(Endpoints.getEvents);  
+
+  static Future<Response> getQuizz() async => await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(Endpoints.getQuiz);  
 
 
 //Patch API
-  static Future<Response> updateStudentDetails({required String id, required dynamic body}) async => 
-          await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true).patch(Endpoints.updateStudent + id,data: jsonEncode(body));  
+  static Future<Response> updateStudentDetails({required String id,required dynamic body}) async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true).patch("${Endpoints.updateStudent}/$id",data: jsonEncode(body));
 }

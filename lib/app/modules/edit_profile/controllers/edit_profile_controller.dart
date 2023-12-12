@@ -9,6 +9,7 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:lwp_for_student/app/routes/app_pages.dart';
 import 'package:path/path.dart' as path;
 import 'package:lwp_for_student/app/data/models/student_update_model.dart';
 import 'package:lwp_for_student/app/modules/profile/controllers/profile_controller.dart';
@@ -101,7 +102,8 @@ class EditProfileController extends GetxController {
       updateData.value = StudentUpdateModel.fromJson(responce.data);
       log('student..${responce.data}');
       Utils.showMySnackbar(  title: 'Sucess' ,desc: 'Profile updated Successfully');
-      await Get.find<ProfileController>().getStudent();
+      Get.find<ProfileController>().getStudent();
+      Get.toNamed(Routes.BOTTOM_NAVBAR);
       }else{
         Utils.showMySnackbar(desc: responce.data['message']);
       }
@@ -152,4 +154,4 @@ class EditProfileController extends GetxController {
     dOBController.value.dispose();
     super.onClose();
   }
-}
+}  

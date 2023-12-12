@@ -17,11 +17,15 @@ class Endpoints {
 
   static const String getSubjects = "api/subject/get";
 
-  static const String updateStudent = "user/updateStudent/";
+  static const String updateStudent = "user/updateStudent";
 
   static const String uploadFile = "file-upload/file";
 
   static const String getStudentDeatils = "user/all-students?_id=";
 
   static const String getAllStudent = "user/all-students";
+
+  static const String getEvents = "api/event/get";
+
+  static const String getQuiz = "api/quiz/get";
 }

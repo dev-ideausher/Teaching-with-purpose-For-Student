@@ -9,6 +9,7 @@ import 'package:lwp_for_student/app/modules/profile/controllers/profile_controll
 import 'package:lwp_for_student/app/routes/app_pages.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
+import 'package:lwp_for_student/app/services/storage.dart';
 import 'package:lwp_for_student/app/services/text_style_util.dart';
 import 'package:lwp_for_student/gen/assets.gen.dart';
 import '../controllers/home_controller.dart';
@@ -18,29 +19,29 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: context.kGreyBack,
-      body: Obx(() => 
-      controller.isLoding.value?
-       Center(child: CircularProgressIndicator(color: context.kPrimary)):
-      SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 50),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildStudentSection(),
-                32.kheightBox,
-                buildClockWidget(),
-                32.kheightBox,
-                Text(
-                    'My Subjects',
-                    style:
-                        TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
-                16.kheightBox,
+        // backgroundColor: context.kGreyBack,
+        body: Obx(
+      () => controller.isLoding.value ?
+      Center(child: CircularProgressIndicator(color: context.kPrimary)):
+       SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 50),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildStudentSection(),
+                      32.kheightBox,
+                      buildClockWidget(),
+                      32.kheightBox,
+                      Text('My Subjects',
+                          style: TextStyleUtil.kText18_6(
+                              fontWeight: FontWeight.w600)),
+                      16.kheightBox,
                       InkWell(
                         onTap: () {
-                        Get.toNamed(Routes.SUBJECTS);
+                          Get.toNamed(Routes.SUBJECTS);
                         },
                         child: GridView.builder(
                           shrinkWrap: true,
@@ -51,97 +52,114 @@ class HomeView extends GetView<HomeController> {
                                   crossAxisCount: 3,
                                   crossAxisSpacing: 24,
                                   mainAxisSpacing: 27.5),
-                          itemCount: controller.subjectLists.value.data?.length ?? 0,
+                          itemCount:
+                              controller.subjectLists.value.data?.length ?? 0,
                           itemBuilder: (context, index) {
                             return MySubjectCard(
                               imageWidget: controller.subjectImages[index],
-                              text: controller.subjectLists.value.data?[index]?.subject ?? '',
+                              text: controller.subjectLists.value.data?[index]?.subject ??'',
                             );
-                           // controller.subjectLists.value.data![index]!.icon
+                            // controller.subjectLists.value.data![index]!.icon
                           },
                         ),
                       ),
-                32.kheightBox,
-                buildRowWidget(title: 'Live Quizzes', subtitle: 'See all',onTap: ()=> Get.toNamed(Routes.QUIZZ)),
-                16.kheightBox,
-                StCard(
-                    imagePath: Assets.images.img.path,
-                    height: 93.kh,
-                    width: 72.kw,
-                    title: 'Join Physics Quiz',
-                    text1:'07 July 2023, Friday at 3:00pm',
-                    text2:'Conducted by ',
-                    text3: 'Esther Howard',
-                    text4: 'Topics covered: ',
-                    text5: 'Electric charge, Friction, Newton’s law of motion'),
-                32.kheightBox,
-                buildRowWidget(title: 'Events', subtitle: 'See all',onTap: (){Get.toNamed(Routes.EVENTS);}),
-                16.kheightBox,
-                SizedBox(
-                  height: 156.kh,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    separatorBuilder: (context, index) => 16.kwidthBox,
-                    itemCount: 3,
-                    itemBuilder: (context, index) => StCardVertical(
-                        borderColor: context.kLightred,
-                        title: controller.eventsTitile[index],
-                        text1: controller.time[index],
-                        text2: controller.detailsText[index],
-                        imagePath: controller.eventImages[index]),
-                        
-            ),
-           ),
-         ],
-       )),
-      ),
-      )
+                      32.kheightBox,
+                      buildRowWidget(
+                          title: 'Live Quizzes',
+                          subtitle: 'See all',
+                          onTap: () => Get.toNamed(Routes.QUIZZ)),
+                      16.kheightBox,
+                      StCard(
+                          imagePath: controller.quizModel.value.data?.first?.image!= null ?
+                          CachedNetworkImage(imageUrl: controller.quizModel.value.data?.first!.image?? '',height: 93.kh,width: 72.kw,fit: BoxFit.cover):
+                          Image.asset(Assets.images.img.path,height: 93.kh,width: 72.kw,fit: BoxFit.cover),
+                          height: 93.kh,
+                          width: 72.kw,
+                          title: controller.quizModel.value.data?.first?.subject??'Join Physics Quiz',
+                          text1: '${controller.quizModel.value.data?.first?.date?? '07 July 2023'}, Friday at 3:00pm',
+                          text2: 'Conducted by ',
+                          text3: controller.quizModel.value.data?.first?.conductedBy?.name??'Esther Howard',
+                          text4: 'Topics covered: ',
+                          text5:controller.quizModel.value.data?.first?.topicCover?.join(',')??
+                              'Electric charge, Friction, Newton’s law of motion'),
+                      32.kheightBox,
+                      buildRowWidget(
+                          title: 'Events',
+                          subtitle: 'See all',
+                          onTap: () {
+                            Get.toNamed(Routes.EVENTS);
+                          }),
+                      16.kheightBox,
+                      SizedBox(
+                        height: 156.kh,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) => 16.kwidthBox,
+                          itemCount: controller.eventsModel.value.data?.length?? 0,
+                          itemBuilder: (context, index) => StCardVertical(
+                              borderColor: context.kLightred,
+                              title: controller.eventsModel.value.data?[index]?.name?? '',
+                              text1: controller.eventsModel.value.data?[index]?.date?? '',
+                              text2: controller.eventsModel.value.data?[index]?.desc?? '',
+                              imagePath:controller.eventsModel.value.data?[index]?.image ?? ''
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+            ))
     );
   }
 
 // section for the student details like roll Number and name with img
-Widget buildStudentSection() {
- return Row(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-        child: buildProfileImg()),
-        16.kwidthBox,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+  Widget buildStudentSection() {
+    return Obx(() => 
+        Get.find<ProfileController>().isLoding.value?
+        CircularProgressIndicator(color: Get.context!.kPrimary):
+         Row(
           children: [
-            Text(
-               Get.find<ProfileController>().studentModel?.data?.first?.name ?? '',
-              style: TextStyleUtil.kText20_6(fontWeight: FontWeight.w600),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: buildProfileImg()),
+            16.kwidthBox,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  Get.find<ProfileController>().studentModel?.data?.first?.name ?? '',
+                  style: TextStyleUtil.kText20_6(fontWeight: FontWeight.w600),
+                ),
+                8.kheightBox,
+                Text(
+                  'Class | ${Get.find<GetStorageService>().rollNumber}',
+                  style: TextStyleUtil.kText14_4(
+                      fontWeight: FontWeight.w400,
+                      color: Get.context!.kNeutral),
+                ),
+              ],
             ),
-            8.kheightBox,
-            Text(
-              'Class | Roll Number',
-              style: TextStyleUtil.kText14_4(
-                  fontWeight: FontWeight.w400, color: Get.context!.kNeutral),
-            ),
+            123.kwidthBox,
+            Icon(Icons.notifications, color: Get.context!.kPrimary)
           ],
-        ),
-        123.kwidthBox,
-        Icon(Icons.notifications, color: Get.context!.kPrimary)
-      ],
-    );
+        ));
   }
-
 
 //image logic
   Widget buildProfileImg() {
     if (Get.find<ProfileController>().studentModel?.data?.first?.image !=null) {
       return CachedNetworkImage(
-          imageUrl: Get.find<ProfileController>().studentModel?.data?.first?.image ?? '',
-          width: 48.kw,height: 48.kh,fit: BoxFit.cover);
+          imageUrl:
+              Get.find<ProfileController>().studentModel?.data?.first?.image ??'',
+          width: 48.kw,
+          height: 48.kh,
+          fit: BoxFit.cover);
     }
     return Image.asset(ImageConstant.tempProfileImg,
         height: 48.kh, width: 48.kw, fit: BoxFit.cover);
   }
 
 // custom clock widget
-Widget buildClockWidget() {
+  Widget buildClockWidget() {
     return SizedBox(
       height: 192.kh,
       width: 343.kw,
@@ -163,8 +181,7 @@ Widget buildClockWidget() {
                 child: Column(
                   children: [
                     Obx(() {
-                      final bgColor = controller.isClockIn.value
-                          ? Get.context!.kPrimary
+                      final bgColor = controller.isClockIn.value? Get.context!.kPrimary
                           : Get.context!.kRed;
                       final buttonText =
                           controller.isClockIn.value ? 'Clock In' : 'Clock Out';
@@ -211,7 +228,10 @@ Widget buildClockWidget() {
   }
 
 // insted of use multiple row in  a single tree
-Widget buildRowWidget({required String title, required String subtitle, required void Function() onTap}) {
+  Widget buildRowWidget(
+      {required String title,
+      required String subtitle,
+      required void Function() onTap}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -226,10 +246,9 @@ Widget buildRowWidget({required String title, required String subtitle, required
               textAlign: TextAlign.center,
               subtitle,
               style: TextStyleUtil.kText14_4(
-              fontWeight: FontWeight.w400, color: Get.context!.kPrimary)),
+                  fontWeight: FontWeight.w400, color: Get.context!.kPrimary)),
         )
       ],
     );
   }
-
 }

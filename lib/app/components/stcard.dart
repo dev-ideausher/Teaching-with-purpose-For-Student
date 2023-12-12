@@ -11,7 +11,7 @@ class StCard extends StatelessWidget {
   final String text3;
   final String text4;
   final String text5;
-  final String imagePath;
+  final Widget imagePath;
   final double height;
   final double width;
 
@@ -42,8 +42,7 @@ class StCard extends StatelessWidget {
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(imagePath,
-                        height: height, width: width, fit: BoxFit.cover)),
+                    child: imagePath),
                 16.kwidthBox,
                 Expanded(
                   child: Column(

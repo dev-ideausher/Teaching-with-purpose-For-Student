@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lwp_for_student/app/data/models/events_model.dart';
+import 'package:lwp_for_student/app/data/models/quizz_model.dart';
 import 'package:lwp_for_student/app/data/models/subjects_list_model.dart';
 import 'package:lwp_for_student/app/services/dio/api_service.dart';
 import 'package:lwp_for_student/gen/assets.gen.dart';
@@ -15,6 +17,8 @@ class HomeController extends GetxController {
   Rx<DateTime> startTime = DateTime.now().obs;
   Timer? timer;
   Rx<SubjectsListModel> subjectLists= SubjectsListModel().obs;
+  Rx<EventsModel> eventsModel= EventsModel().obs;
+  Rx<QuizzModel> quizModel = QuizzModel().obs;
 
 
    @override
@@ -76,15 +80,16 @@ class HomeController extends GetxController {
     return '$hours:$minutes:$seconds';
   }
 
-  //-----------------------Get subjects-------------------------------
+  //-----------------------Subjects-------------------------------
 
   Future<void> getSubjects()async{
     isLoding(true);
     try {
       final responce = await APIManager.getSubjects();
       if (responce.statusCode == 200) {
-        log('sub...${responce.data}');
+        log('subject...${responce.data}');
         subjectLists.value = SubjectsListModel.fromJson(responce.data);
+        showEvents();
       }
     } catch (e) {
      log('error..$e');
@@ -92,4 +97,40 @@ class HomeController extends GetxController {
       isLoding(false);
     }
   }
+
+//-----------------------Events-------------------------------
+
+  Future<void> showEvents()async{
+    isLoding(true);
+    try {
+      final responce = await APIManager.getEvents();
+      if (responce.statusCode == 200) {
+        // log('events...${responce.data}');
+        eventsModel.value = EventsModel.fromJson(responce.data);
+        showQuiz();
+      }
+    } catch (e) {
+     log('error..$e');
+    }finally{
+      isLoding(false);
+    }
+  }
+
+  //-----------------------Quizz-------------------------------
+  Future<void> showQuiz()async{
+    isLoding(true);
+    try {
+      final responce = await APIManager.getQuizz();
+      if (responce.statusCode == 200) {
+        log('Quizz...${responce.data}');
+        quizModel.value = QuizzModel.fromJson(responce.data);
+      }
+    } catch (e) {
+     log('error..$e');
+    }finally{
+      isLoding(false);
+    }
+  }
+
+
 }

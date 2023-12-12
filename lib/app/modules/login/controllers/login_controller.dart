@@ -78,9 +78,10 @@ class LoginController extends GetxController with GetSingleTickerProviderStateMi
     Get.find<GetStorageService>().isLoggedIn = true;
     Get.find<GetStorageService>().name = loginModel.user!.name.toString();
     Get.find<GetStorageService>().id = loginModel.user!.Id.toString();
+    Get.find<GetStorageService>().rollNumber = loginModel.user!.rollNumber.toString();
     
 
-    Utils.showMySnackbar(title: responce.data['message'],desc: 'Successfully logged In');
+    Utils.showMySnackbar(desc: 'Successfully logged In');
 
     Get.offAllNamed(Routes.BOTTOM_NAVBAR);
    } else {

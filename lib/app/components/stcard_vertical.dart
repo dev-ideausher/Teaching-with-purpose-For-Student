@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
@@ -8,7 +9,7 @@ class StCardVertical extends StatelessWidget {
   final String title;
   final String text1;
   final String text2;
-  final Image imagePath;
+  final String imagePath;
   final Color borderColor;
 
   const StCardVertical({
@@ -57,7 +58,7 @@ class StCardVertical extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                            image: imagePath.image, fit: BoxFit.fill))),
+                            image: NetworkImage(imagePath), fit: BoxFit.fill))),
                 16.kwidthBox,
                 Expanded(
                   child: Column(
