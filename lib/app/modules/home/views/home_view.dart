@@ -9,7 +9,6 @@ import 'package:lwp_for_student/app/modules/profile/controllers/profile_controll
 import 'package:lwp_for_student/app/routes/app_pages.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
-import 'package:lwp_for_student/app/services/storage.dart';
 import 'package:lwp_for_student/app/services/text_style_util.dart';
 import 'package:lwp_for_student/gen/assets.gen.dart';
 import '../controllers/home_controller.dart';
@@ -65,16 +64,14 @@ class HomeView extends GetView<HomeController> {
                       ),
                       32.kheightBox,
                       buildRowWidget(
-                          title: 'Live Quizzes',
-                          subtitle: 'See all',
-                          onTap: () => Get.toNamed(Routes.QUIZZ)),
+                          title: 'Live Quizzes',subtitle: 'See all',onTap: () => Get.toNamed(Routes.QUIZZ)),
                       16.kheightBox,
                       StCard(
-                          imagePath: controller.quizModel.value.data?.first?.image!= null ?
-                          CachedNetworkImage(imageUrl: controller.quizModel.value.data?.first!.image?? '',height: 93.kh,width: 72.kw,fit: BoxFit.cover):
-                          Image.asset(Assets.images.img.path,height: 93.kh,width: 72.kw,fit: BoxFit.cover),
                           height: 93.kh,
                           width: 72.kw,
+                          imagePath: controller.quizModel.value.data?.first?.image == null ?
+                          Image.asset(Assets.images.img.path,height: 93.kh,width: 72.kw,fit: BoxFit.cover):
+                          CachedNetworkImage(imageUrl: controller.quizModel.value.data?.first?.image??'',height: 93.kh,width: 72.kw,fit: BoxFit.cover),
                           title: controller.quizModel.value.data?.first?.subject??'Join Physics Quiz',
                           text1: '${controller.quizModel.value.data?.first?.date?? '07 July 2023'}, Friday at 3:00pm',
                           text2: 'Conducted by ',
@@ -84,11 +81,7 @@ class HomeView extends GetView<HomeController> {
                               'Electric charge, Friction, Newton’s law of motion'),
                       32.kheightBox,
                       buildRowWidget(
-                          title: 'Events',
-                          subtitle: 'See all',
-                          onTap: () {
-                            Get.toNamed(Routes.EVENTS);
-                          }),
+                          title: 'Events',subtitle: 'See all',onTap: () { Get.toNamed(Routes.EVENTS);}),
                       16.kheightBox,
                       SizedBox(
                         height: 156.kh,
@@ -99,7 +92,7 @@ class HomeView extends GetView<HomeController> {
                           itemBuilder: (context, index) => StCardVertical(
                               borderColor: context.kLightred,
                               title: controller.eventsModel.value.data?[index]?.name?? '',
-                              text1: controller.eventsModel.value.data?[index]?.date?? '',
+                              text1: 'Date:07 July 2023',
                               text2: controller.eventsModel.value.data?[index]?.desc?? '',
                               imagePath:controller.eventsModel.value.data?[index]?.image ?? ''
                           ),
@@ -130,12 +123,12 @@ class HomeView extends GetView<HomeController> {
                   style: TextStyleUtil.kText20_6(fontWeight: FontWeight.w600),
                 ),
                 8.kheightBox,
-                Text(
-                  'Class | ${Get.find<GetStorageService>().rollNumber}',
-                  style: TextStyleUtil.kText14_4(
-                      fontWeight: FontWeight.w400,
-                      color: Get.context!.kNeutral),
-                ),
+                  Text(
+                    '${Get.find<ProfileController>().studentModel?.data?.first?.className ?? 'Class'} | ${Get.find<ProfileController>().studentModel?.data?.first?.rollNumber ?? '123'}',
+                    style: TextStyleUtil.kText14_4(
+                        fontWeight: FontWeight.w400,
+                        color: Get.context!.kNeutral),
+                  ),
               ],
             ),
             123.kwidthBox,
@@ -251,4 +244,6 @@ class HomeView extends GetView<HomeController> {
       ],
     );
   }
+
+
 }

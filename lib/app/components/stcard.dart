@@ -42,7 +42,9 @@ class StCard extends StatelessWidget {
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: imagePath),
+                    child: SizedBox(
+                      child: imagePath
+                      )),
                 16.kwidthBox,
                 Expanded(
                   child: Column(

@@ -19,7 +19,6 @@ class ScheduleWidget extends StatelessWidget {
               border: TableBorder.all(color: Colors.transparent,width: 0),
               showBottomBorder: false,
               columnSpacing: 22,
-              dataRowHeight: 27,
               
               columns: [
                 DataColumn(
@@ -36,8 +35,8 @@ class ScheduleWidget extends StatelessWidget {
                             fontWeight: FontWeight.w400))),
               ],
               rows: [
-                buildDataRow("10:00 AM - 11:00 AM", "English", "Alexander"),
-                buildDataRow("11:00 AM - 12:00 PM", "English", "Alexander"),
+                buildDataRow("10:00 AM - 11:00 AM", "math", "def"),
+                buildDataRow("11:00 AM - 12:00 PM", "physics", "jhon"),
                 buildDataRow("12:00 PM - 01:00 PM", "BREAK", "BREAK"),
                 buildDataRow("01:00 PM - 02:00 PM", "English", "Alexander"),
                 buildDataRow("02:00 PM - 03:00 PM", "English", "Alexander"),

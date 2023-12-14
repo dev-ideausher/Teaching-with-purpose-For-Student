@@ -9,14 +9,16 @@ class StudentModelData {
   "district": "Sample District",
   "districtStudentID": "123456",
   "stateStudentID": "7890",
-  "name": "John nil",
+  "name": "suraj singh",
+  "className": "8-A",
+  "rollNumber": 15,
   "email": "student321@gmail.com",
-  "image": "https://angolazone.s3.amazonaws.com/angolazone-User-Profile-PNG-High-Quality-Image.png.crdownload",
+  "image": "https://angolazone.s3.amazonaws.com/angolazone-teacherimg.png",
   "gender": "Male",
   "firebaseUid": "tRs34G9tTTbDXnm34i2oCdSNgj03",
   "firebaseSignInProvider": "custom",
   "createdAt": "2023-12-06T07:09:43.682Z",
-  "updatedAt": "2023-12-06T07:09:43.682Z"
+  "updatedAt": "2023-12-08T13:43:32.784Z"
 } 
 */
 
@@ -26,6 +28,8 @@ class StudentModelData {
   String? districtStudentID;
   String? stateStudentID;
   String? name;
+  String? className;
+  int? rollNumber;
   String? email;
   String? image;
   String? gender;
@@ -41,6 +45,8 @@ class StudentModelData {
     this.districtStudentID,
     this.stateStudentID,
     this.name,
+    this.className,
+    this.rollNumber,
     this.email,
     this.image,
     this.gender,
@@ -56,6 +62,8 @@ class StudentModelData {
     districtStudentID = json['districtStudentID']?.toString();
     stateStudentID = json['stateStudentID']?.toString();
     name = json['name']?.toString();
+    className = json['className']?.toString();
+    rollNumber = json['rollNumber']?.toInt();
     email = json['email']?.toString();
     image = json['image']?.toString();
     gender = json['gender']?.toString();
@@ -72,6 +80,8 @@ class StudentModelData {
     data['districtStudentID'] = districtStudentID;
     data['stateStudentID'] = stateStudentID;
     data['name'] = name;
+    data['className'] = className;
+    data['rollNumber'] = rollNumber;
     data['email'] = email;
     data['image'] = image;
     data['gender'] = gender;
@@ -94,14 +104,16 @@ class StudentModel {
       "district": "Sample District",
       "districtStudentID": "123456",
       "stateStudentID": "7890",
-      "name": "John nil",
+      "name": "suraj singh",
+      "className": "8-A",
+      "rollNumber": 15,
       "email": "student321@gmail.com",
-      "image": "https://angolazone.s3.amazonaws.com/angolazone-User-Profile-PNG-High-Quality-Image.png.crdownload",
+      "image": "https://angolazone.s3.amazonaws.com/angolazone-teacherimg.png",
       "gender": "Male",
       "firebaseUid": "tRs34G9tTTbDXnm34i2oCdSNgj03",
       "firebaseSignInProvider": "custom",
       "createdAt": "2023-12-06T07:09:43.682Z",
-      "updatedAt": "2023-12-06T07:09:43.682Z"
+      "updatedAt": "2023-12-08T13:43:32.784Z"
     }
   ]
 } 
@@ -139,6 +151,7 @@ class StudentModel {
     return data;
   }
 }
+
 
 
 

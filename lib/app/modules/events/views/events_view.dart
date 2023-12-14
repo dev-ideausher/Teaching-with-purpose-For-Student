@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lwp_for_student/app/components/custom_appbar.dart';
 import 'package:lwp_for_student/app/constants/string_constants.dart';
+import 'package:lwp_for_student/app/modules/home/controllers/home_controller.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
 import 'package:lwp_for_student/app/services/text_style_util.dart';
@@ -25,11 +27,24 @@ class EventsView extends GetView<EventsController> {
             children: [
               selectMonthDropDawn(),
               32.kheightBox,
-              eventCardWidget(Assets.images.football.image()),
-              8.kheightBox,
-              eventCardWidget(Assets.images.football.image()),
-              8.kheightBox,
-              eventCardWidget(Assets.images.football.image()),
+              SizedBox(
+                height: 162.kh,
+                width: 343.kw,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => 8.kheightBox, 
+                  itemCount: Get.find<HomeController>().eventsModel.value.data?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return eventCardWidget(
+                    image: Get.find<HomeController>().eventsModel.value.data?[index]?.image == null?
+                    Image.asset(Assets.images.football.path):
+                    CachedNetworkImage(imageUrl:Get.find<HomeController>().eventsModel.value.data?[index]?.image?? '',height: 55.kh,width: 55.kw,fit: BoxFit.cover),
+                    title: Get.find<HomeController>().eventsModel.value.data?[index]?.name ?? 'Sports Day',
+                    date: Get.find<HomeController>().eventsModel.value.data?[index]?.date ?? 'Date:07 July 2023',
+                    description: Get.find<HomeController>().eventsModel.value.data?[index]?.desc ?? StringConstants.cardText
+                  );
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -72,7 +87,7 @@ class EventsView extends GetView<EventsController> {
   }
 
 // event card Widget
-  Widget eventCardWidget(Image img) {
+  Widget eventCardWidget({ Widget? image,  String? title, String? date, String? description}) {
     return SizedBox(
       height: 162.kh,
       width: 343.kw,
@@ -83,29 +98,25 @@ class EventsView extends GetView<EventsController> {
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image(
-                  image: img.image,
-                  height: 55.kh,
-                  width: 55.kw,
-                  fit: BoxFit.cover,
-                )),
+                child: image
+              ),
             16.kwidthBox,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Sports Day',
+                    title!,
                     style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w600),
                   ),
                   4.kheightBox,
                   Text(
-                    'Date: 07 July 2023',
+                    date!,
                     style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
                   ),
                   8.kheightBox,
                   Text(
-                    StringConstants.cardText,
+                    description!,
                     maxLines: 4,
                     style: TextStyleUtil.kText12_4(
                         fontWeight: FontWeight.w400,

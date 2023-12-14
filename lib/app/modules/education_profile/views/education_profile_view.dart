@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lwp_for_student/app/components/commom_richtext.dart';
 import 'package:lwp_for_student/app/components/custom_appbar.dart';
+import 'package:lwp_for_student/app/modules/profile/controllers/profile_controller.dart';
 import 'package:lwp_for_student/app/routes/app_pages.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
@@ -24,26 +25,22 @@ class EducationProfileView extends GetView<EducationProfileController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ReUsableRichText(
-                  text1: 'Hello,',
-                  text2: ' Leslie !',
-                  style1: TextStyleUtil.kText18_6(fontWeight: FontWeight.w500),
-                  style2: TextStyleUtil.kText18_6(
-                      fontWeight: FontWeight.w500,
-                      color: Get.context!.kPrimary)),
+              text1: 'Hello, ',
+              text2: Get.find<ProfileController>().studentModel?.data?.first?.name??' Leslie !',
+              style1: TextStyleUtil.kText18_6(fontWeight: FontWeight.w500),
+              style2: TextStyleUtil.kText18_6(fontWeight: FontWeight.w500,color: Get.context!.kPrimary)),
               40.kheightBox,
-              rowColumWidget('School', 'Oregon High School', 'District',
-                  'Oregon School District'),
+              rowColumWidget('School', Get.find<ProfileController>().studentModel?.data?.first?.school??'', 
+              'District',Get.find<ProfileController>().studentModel?.data?.first?.district??''),
               16.kheightBox,
-              rowColumWidget('District student id    ', '54646',
-                  'State student id', '499522'),
+              rowColumWidget('District student id    ', Get.find<ProfileController>().studentModel?.data?.first?.districtStudentID??'',
+              'State student id', Get.find<ProfileController>().studentModel?.data?.first?.stateStudentID??''),
               16.kheightBox,
               ReUsableRichText(
-                  text1: 'Date last updated : ',
-                  text2: '15/08/2023',
-                  style1: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
-                  style2: TextStyleUtil.kText14_4(
-                      fontWeight: FontWeight.w400,
-                      color: Get.context!.kLightTextColor)),
+              text1: 'Date last updated : ',
+              text2: Get.find<ProfileController>().studentModel?.data?.first?.updatedAt??'15/08/2023',
+              style1: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
+              style2: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
               48.kheightBox,
               Text(
                 textAlign: TextAlign.center,

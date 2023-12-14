@@ -9,7 +9,6 @@ import 'package:lwp_for_student/app/constants/image_constant.dart';
 import 'package:lwp_for_student/app/routes/app_pages.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
-import 'package:lwp_for_student/app/services/storage.dart';
 import 'package:lwp_for_student/app/services/text_style_util.dart';
 import 'package:lwp_for_student/gen/assets.gen.dart';
 import '../controllers/profile_controller.dart';
@@ -31,7 +30,7 @@ class ProfileView extends GetView<ProfileController> {
             child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      profileImage(),
+                      profile(),
                       32.kheightBox,
                       profileSectionWidget(
                           image: Assets.svg.editProfile,
@@ -92,7 +91,7 @@ class ProfileView extends GetView<ProfileController> {
   }
 
 //
-  Widget profileImage() {
+  Widget profile() {
     return Column(
       children: [
         Stack(
@@ -119,7 +118,7 @@ class ProfileView extends GetView<ProfileController> {
         ),
         8.kheightBox,
         Text(
-            'Class | ${Get.find<GetStorageService>().rollNumber}',
+            '${controller.studentModel?.data?.first?.className ?? 'Class'} | ${controller.studentModel?.data?.first?.rollNumber ?? '123'}',
             textAlign: TextAlign.center,
             style: TextStyleUtil.kText14_4(
                 fontWeight: FontWeight.w400,
