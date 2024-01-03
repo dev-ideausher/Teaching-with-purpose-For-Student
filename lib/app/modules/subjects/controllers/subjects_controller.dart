@@ -1,23 +1,10 @@
 import 'package:get/get.dart';
 
 class SubjectsController extends GetxController {
-  //TODO: Implement SubjectsController
-
-  final count = 0.obs;
-  @override
+@override
   void onInit() {
+    // TODO: implement onInit
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:lwp_for_student/app/components/custom_appbar.dart';
 import 'package:lwp_for_student/app/components/stcard.dart';
 import 'package:lwp_for_student/app/modules/home/controllers/home_controller.dart';
+import 'package:lwp_for_student/app/routes/app_pages.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
 import 'package:lwp_for_student/app/services/text_style_util.dart';
@@ -58,18 +59,19 @@ class QuizzView extends GetView<QuizzController> {
              child: ListView.separated(
              separatorBuilder: (context, index) => 8.kheightBox, 
              itemCount: Get.find<HomeController>().quizModel.value.data?.length?? 0,
-              itemBuilder: (context, index) =>StCard(
-                    title:Get.find<HomeController>().quizModel.value.data?[index]?.subject??'Physics',
-                    text1: '07 July 2023, Friday at 3:00pm',
-                    text2: 'Conducted by ',
-                    imagePath:Get.find<HomeController>().quizModel.value.data?[index]?.image == null ?
-                     Image.asset(Assets.images.quizImg1.path,height: 55.kh,width: 55.kw,fit: BoxFit.cover):
-                     CachedNetworkImage(imageUrl:Get.find<HomeController>().quizModel.value.data?[index]?.image?? '',height: 55.kh,width: 55.kw, fit: BoxFit.cover),
-                    text3:Get.find<HomeController>().quizModel.value.data?[index]?.conductedBy?.name?? 'Esther Howard',
-                    text4: 'Topics covered: ',
-                    text5: Get.find<HomeController>().quizModel.value.data?[index]?.topicCover?.join(',')??'Electric charge, Friction, Newton’s law of motion',
-                    height: 55.kh,
-                    width: 55.kw)),
+              itemBuilder: (context, index) =>InkWell(
+                onTap: ()=> Get.toNamed(Routes.LIVE_QUIZZ),
+                child: StCard(
+                      title:Get.find<HomeController>().quizModel.value.data?[index]?.subject??'Physics',
+                      text1: '07 July 2023, Friday at 3:00pm',
+                      text2: 'Conducted by ',
+                      imagePath:Image.asset(Assets.images.quizImg1.path,height: 55.kh,width: 55.kw,fit: BoxFit.cover),
+                      text3:Get.find<HomeController>().quizModel.value.data?[index]?.conductedBy?.name?? 'Esther Howard',
+                      text4: 'Topics covered: ',
+                      text5: Get.find<HomeController>().quizModel.value.data?[index]?.topicCover?.join(',')??'Electric charge, Friction, Newton’s law of motion',
+                      height: 55.kh,
+                      width: 55.kw),
+              )),
            )
             ],
           ),

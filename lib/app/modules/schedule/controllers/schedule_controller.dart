@@ -7,4 +7,7 @@ class ScheduleController extends GetxController {
   void selectDay(int index) {
     selectedIndex.value = index;
   }
+
+//-----------------------Exam Sheet-------------------------------
+
 }

@@ -87,7 +87,7 @@ class HomeController extends GetxController {
     try {
       final responce = await APIManager.getSubjects();
       if (responce.statusCode == 200) {
-        log('subject...${responce.data}');
+        // log('subject...${responce.data}');
         subjectLists.value = SubjectsListModel.fromJson(responce.data);
         showEvents();
       }
@@ -122,7 +122,7 @@ class HomeController extends GetxController {
     try {
       final responce = await APIManager.getQuizz();
       if (responce.statusCode == 200) {
-        log('Quizz...${responce.data}');
+        // log('Quizz...${responce.data}');
         quizModel.value = QuizzModel.fromJson(responce.data);
       }
     } catch (e) {

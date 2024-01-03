@@ -339,6 +339,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/trophy.svg
   SvgGenImage get trophy => const SvgGenImage('assets/svg/trophy.svg');
 
+  /// File path: assets/svg/upload.svg
+  SvgGenImage get upload => const SvgGenImage('assets/svg/upload.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         person,
@@ -376,7 +379,8 @@ class $AssetsSvgGen {
         plusAdd,
         qA,
         ratingOutline,
-        trophy
+        trophy,
+        upload
       ];
 }
 

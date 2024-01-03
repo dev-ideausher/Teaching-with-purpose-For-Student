@@ -26,7 +26,7 @@ Future<void> getStudent()async{
     var responce = await APIManager.getStudentDetails(id: Get.find<GetStorageService>().id);
     if(responce.statusCode == 200){
     studentModel = StudentModel.fromJson(responce.data);
-    log('profile...${jsonEncode(responce.data)}');
+    // log('profile...${jsonEncode(responce.data)}');
     }
   } catch (e) {
     log('***$e');

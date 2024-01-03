@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lwp_for_student/app/modules/assignment/controllers/assignment_controller.dart';
 
 import '../controllers/subjects_controller.dart';
 
@@ -8,5 +9,9 @@ class SubjectsBinding extends Bindings {
     Get.lazyPut<SubjectsController>(
       () => SubjectsController(),
     );
+    Get.lazyPut<AssignmentController>(
+      () => AssignmentController(),
+    );
+  
   }
 }

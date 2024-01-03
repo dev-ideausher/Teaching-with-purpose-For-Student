@@ -28,4 +28,18 @@ class Endpoints {
   static const String getEvents = "api/event/get";
 
   static const String getQuiz = "api/quiz/get";
+
+  static const String getAssignment = "api/assignment/get";
+
+  static const String submitAssignmnet = "api/assignment/save";
+
+  static const String updateAssignment = "api/assignment/update";
+
+  static const String getChapter = "api/chapter/get";
+
+  static const String getQuestions = "api/question/get";
+
+  static const String examSheet = "api/examdate/get";
+
+  static const String timeTable = "api/timetable/get";
 }

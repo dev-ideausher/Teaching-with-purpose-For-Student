@@ -1,4 +1,5 @@
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
@@ -25,6 +26,23 @@ class Utils{
     );
   } 
 
-  
+  static Future<List<String>> pickMultipleFilesWithFilter(List<String> allowedExtensions) async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        allowMultiple: true,
+        type: FileType.custom,
+        allowedExtensions: allowedExtensions,
+      );
+
+      if (result != null) {
+        return result.paths.map((path) => path!).toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      print('Error picking multiple files: $e');
+      return [];
+    }
+  } 
    
 }

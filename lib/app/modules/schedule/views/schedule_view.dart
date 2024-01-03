@@ -57,11 +57,11 @@ class ScheduleView extends GetView<ScheduleController> {
                           child: TabBarView(
                             physics: NeverScrollableScrollPhysics(),
                               children: [
-                                ScheduleWidget(ishorizontal: true),
-                                ScheduleWidget(ishorizontal: true),
-                                ScheduleWidget(ishorizontal: true),
-                                ScheduleWidget(ishorizontal: true),
-                                ScheduleWidget(ishorizontal: true),
+                                // ScheduleWidget(ishorizontal: true),
+                                // ScheduleWidget(ishorizontal: true),
+                                // ScheduleWidget(ishorizontal: true),
+                                // ScheduleWidget(ishorizontal: true),
+                                // ScheduleWidget(ishorizontal: true),
                               ]),
                         ),
                       ],

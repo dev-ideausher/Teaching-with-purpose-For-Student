@@ -30,6 +30,10 @@ abstract class Routes {
   static const DISCUSSSION_FORM = _Paths.DISCUSSSION_FORM;
   static const SELECTED_DISCUSSION = _Paths.SELECTED_DISCUSSION;
   static const ATTENDANCE = _Paths.ATTENDANCE;
+  static const LIVE_QUIZZ = _Paths.LIVE_QUIZZ;
+  static const START_QUIZZ = _Paths.START_QUIZZ;
+  static const QUIZZ_SUCESS = _Paths.QUIZZ_SUCESS;
+  static const ASSIGNMENT = _Paths.ASSIGNMENT;
 }
 
 abstract class _Paths {
@@ -61,4 +65,8 @@ abstract class _Paths {
   static const DISCUSSSION_FORM = '/discussion-form';
   static const SELECTED_DISCUSSION = '/selected-discussion';
   static const ATTENDANCE = '/attendance';
+  static const LIVE_QUIZZ = '/live-quizz';
+  static const START_QUIZZ = '/start-quizz';
+  static const QUIZZ_SUCESS = '/quizz-suces';
+  static const ASSIGNMENT = '/assignment';
 }

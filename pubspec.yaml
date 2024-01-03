@@ -58,14 +58,10 @@ dependencies:
   dropdown_button2: ^2.3.9
   connectivity_plus: ^5.0.1
   intl: ^0.18.1
-
-
-
-  #Firebase
   firebase_auth: ^4.15.0
   stacked_firebase_auth: ^2.19.6
   firebase_core: ^2.24.0
-
+  file_picker: ^6.1.1
 
 dev_dependencies:
   flutter_test:

@@ -16,8 +16,6 @@ Future<void> main() async {
   return runApp(GestureDetector(
     onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
     child: GetMaterialApp(
-      // theme: AppTheme.light,
-      // darkTheme: AppTheme.dark,
       defaultTransition: Transition.fade,
       smartManagement: SmartManagement.full,
       debugShowCheckedModeBanner: false,

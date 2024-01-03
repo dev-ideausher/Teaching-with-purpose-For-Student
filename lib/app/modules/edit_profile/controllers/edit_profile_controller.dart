@@ -58,25 +58,17 @@ class EditProfileController extends GetxController {
   //-----------------------Upload File-------------------------------
     Future<void> uploadImage() async {
     final File pickedImageFile = File(pickedImagePath.value);
-    String extension = pickedImageFile.path.split('.').last;
-    String mediaType;
+    String extension = path.extension(pickedImageFile.path).replaceAll(".", "");
 
-      if (extension == 'jpg' || extension == 'jpeg') {
-      mediaType = 'image/jpeg';
-    } else if (extension == 'png') {
-      mediaType = 'image/png';
-    } else {
-      mediaType = 'application/octet-stream';
-    }
     final body = FormData.fromMap({
       'file': await MultipartFile.fromFile(
         pickedImageFile.path,
-        contentType: MediaType.parse(mediaType),
+        contentType: MediaType('application', extension),
         filename: path.basename(pickedImageFile.path),
       )});
     try {
        final responce = await APIManager.uploadFile(body: body);
-       if(responce.statusCode == 200){
+       if(responce.data['status'] == true){
         uploadFileModel =  UploadFileModel.fromJson(responce.data);
         log('uploadFileModel....${uploadFileModel!.url}');
         updateProfile();

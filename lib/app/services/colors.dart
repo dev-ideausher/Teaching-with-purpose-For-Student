@@ -57,6 +57,6 @@ extension ColorUtil on BuildContext {
   Color get kLightTextColor =>
       dynamicColour(light: HexColor("#747474"), dark: HexColor("#747474"));
   
-   Color get kAverageMarkColor =>
+  Color get kAverageMarkColor =>
       dynamicColour(light: HexColor("#FFFDDF"), dark: HexColor("#FFFDDF"));
 }

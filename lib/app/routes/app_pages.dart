@@ -1,15 +1,7 @@
 import 'package:get/get.dart';
-import 'package:lwp_for_student/app/modules/education_profile/views/screens/career_bio/personal_achievements_screen.dart';
-import 'package:lwp_for_student/app/modules/education_profile/views/screens/discussion_form/discussion_form_screen.dart';
-import 'package:lwp_for_student/app/modules/education_profile/views/screens/discussion_form/selected_sub_discussion_screen.dart';
-import 'package:lwp_for_student/app/modules/education_profile/views/screens/goals_and%20_plans/goals_plans_screen.dart';
-import 'package:lwp_for_student/app/modules/education_profile/views/screens/self_assessment/self_assessment_screen.dart';
-import 'package:lwp_for_student/app/modules/events/bindings/events_binding.dart';
-import 'package:lwp_for_student/app/modules/events/views/events_view.dart';
-import 'package:lwp_for_student/app/modules/quizz/bindings/quizz_binding.dart';
-import 'package:lwp_for_student/app/modules/quizz/views/quizz_view.dart';
-import 'package:lwp_for_student/app/modules/subjects/bindings/subjects_binding.dart';
-import 'package:lwp_for_student/app/modules/subjects/views/subjects_view.dart';
+
+import '../modules/assignment/bindings/assignment_binding.dart';
+import '../modules/assignment/views/assignment_view.dart';
 import '../modules/attendance/bindings/attendance_binding.dart';
 import '../modules/attendance/views/attendance_view.dart';
 import '../modules/book_marks/bindings/book_marks_binding.dart';
@@ -23,6 +15,13 @@ import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/education_profile/bindings/education_profile_binding.dart';
 import '../modules/education_profile/views/education_profile_view.dart';
+import '../modules/education_profile/views/screens/career_bio/personal_achievements_screen.dart';
+import '../modules/education_profile/views/screens/discussion_form/discussion_form_screen.dart';
+import '../modules/education_profile/views/screens/discussion_form/selected_sub_discussion_screen.dart';
+import '../modules/education_profile/views/screens/goals_and%20_plans/goals_plans_screen.dart';
+import '../modules/education_profile/views/screens/self_assessment/self_assessment_screen.dart';
+import '../modules/events/bindings/events_binding.dart';
+import '../modules/events/views/events_view.dart';
 import '../modules/feedbacks/bindings/feedbacks_binding.dart';
 import '../modules/feedbacks/views/feedbacks_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -31,6 +30,10 @@ import '../modules/help_center/bindings/help_center_binding.dart';
 import '../modules/help_center/views/help_center_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/live_quizz/bindings/live_quizz_binding.dart';
+import '../modules/live_quizz/views/live_quizz_view.dart';
+import '../modules/live_quizz/views/quiz_sucess_view.dart';
+import '../modules/live_quizz/views/start_quizz_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/on_board/bindings/on_board_binding.dart';
@@ -40,10 +43,14 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/progress/bindings/progress_binding.dart';
 import '../modules/progress/views/progress_view.dart';
+import '../modules/quizz/bindings/quizz_binding.dart';
+import '../modules/quizz/views/quizz_view.dart';
 import '../modules/schedule/bindings/schedule_binding.dart';
 import '../modules/schedule/views/schedule_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/subjects/bindings/subjects_binding.dart';
+import '../modules/subjects/views/subjects_view.dart';
 import '../modules/verify/bindings/verify_binding.dart';
 import '../modules/verify/views/verify_view.dart';
 
@@ -110,6 +117,19 @@ class AppPages {
       binding: QuizzBinding(),
     ),
     GetPage(
+      name: _Paths.LIVE_QUIZZ,
+      page: () => const LiveQuizzView(),
+      binding: LiveQuizzBinding(),
+    ),
+    GetPage(
+      name: _Paths.START_QUIZZ,
+      page: () => const StartQuizzView(),
+    ),
+    GetPage(
+      name: _Paths.QUIZZ_SUCESS,
+      page: () => const QuizzSucessView(),
+    ),
+    GetPage(
       name: _Paths.EVENTS,
       page: () => const EventsView(),
       binding: EventsBinding(),
@@ -131,7 +151,7 @@ class AppPages {
     GetPage(
         name: _Paths.BOTTOM_NAVBAR,
         page: () => const BottomNavbarView(),
-        binding:BottomNavbarBinding()),
+        binding: BottomNavbarBinding()),
     GetPage(
       name: _Paths.EDIT_PROFILE,
       page: () => const EditProfileView(),
@@ -173,14 +193,19 @@ class AppPages {
       name: _Paths.DISCUSSSION_FORM,
       page: () => const DiscussionFormScreen(),
     ),
-      GetPage(
+    GetPage(
       name: _Paths.SELECTED_DISCUSSION,
-      page: () =>  SelectedSubDiscussionScreen(),
+      page: () => SelectedSubDiscussionScreen(),
     ),
     GetPage(
       name: _Paths.ATTENDANCE,
       page: () => const AttendanceView(),
       binding: AttendanceBinding(),
-    )
+    ),
+    GetPage(
+      name: _Paths.ASSIGNMENT,
+      page: () => const AssignmentView(),
+      binding: AssignmentBinding(),
+    ),
   ];
 }

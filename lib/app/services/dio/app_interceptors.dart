@@ -25,7 +25,7 @@ class AppInterceptors extends Interceptor {
     await Helpers.validateToken(
         onSuccess: () {
           options.headers = {"firebasetoken": Get.find<GetStorageService>().token};
-          log('token from heders......${Get.find<GetStorageService>().token}');
+          // log('token from heders......${Get.find<GetStorageService>().token}');
           super.onRequest(options, handler);
         },
     );

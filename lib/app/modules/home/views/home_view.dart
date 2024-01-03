@@ -38,29 +38,26 @@ class HomeView extends GetView<HomeController> {
                           style: TextStyleUtil.kText18_6(
                               fontWeight: FontWeight.w600)),
                       16.kheightBox,
-                      InkWell(
-                        onTap: () {
-                          Get.toNamed(Routes.SUBJECTS);
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                                childAspectRatio: 0.84,
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 24,
+                                mainAxisSpacing: 27.5),
+                        itemCount:controller.subjectLists.value.data?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return MySubjectCard(
+                            imageWidget: controller.subjectImages[index],
+                            text: controller.subjectLists.value.data?[index]?.subject ??'',
+                            onTap: (){
+                             final data =controller.subjectLists.value.data?[index];
+                              Get.toNamed(Routes.SUBJECTS,arguments: {});
+                            },
+                          );
+                          // controller.subjectLists.value.data![index]!.icon
                         },
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  childAspectRatio: 0.84,
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing: 24,
-                                  mainAxisSpacing: 27.5),
-                          itemCount:
-                              controller.subjectLists.value.data?.length ?? 0,
-                          itemBuilder: (context, index) {
-                            return MySubjectCard(
-                              imageWidget: controller.subjectImages[index],
-                              text: controller.subjectLists.value.data?[index]?.subject ??'',
-                            );
-                            // controller.subjectLists.value.data![index]!.icon
-                          },
-                        ),
                       ),
                       32.kheightBox,
                       buildRowWidget(
@@ -69,16 +66,14 @@ class HomeView extends GetView<HomeController> {
                       StCard(
                           height: 93.kh,
                           width: 72.kw,
-                          imagePath: controller.quizModel.value.data?.first?.image == null ?
-                          Image.asset(Assets.images.img.path,height: 93.kh,width: 72.kw,fit: BoxFit.cover):
-                          CachedNetworkImage(imageUrl: controller.quizModel.value.data?.first?.image??'',height: 93.kh,width: 72.kw,fit: BoxFit.cover),
-                          title: controller.quizModel.value.data?.first?.subject??'Join Physics Quiz',
+                          imagePath: 
+                          Image.asset(Assets.images.img.path,height: 93.kh,width: 72.kw,fit: BoxFit.cover),
+                          title: controller.quizModel.value.data?.first?.subject??'',
                           text1: '${controller.quizModel.value.data?.first?.date?? '07 July 2023'}, Friday at 3:00pm',
                           text2: 'Conducted by ',
-                          text3: controller.quizModel.value.data?.first?.conductedBy?.name??'Esther Howard',
+                          text3: controller.quizModel.value.data?.first?.conductedBy?.name??'',
                           text4: 'Topics covered: ',
-                          text5:controller.quizModel.value.data?.first?.topicCover?.join(',')??
-                              'Electric charge, Friction, Newton’s law of motion'),
+                          text5:controller.quizModel.value.data?.first?.topicCover?.toString()??''),
                       32.kheightBox,
                       buildRowWidget(
                           title: 'Events',subtitle: 'See all',onTap: () { Get.toNamed(Routes.EVENTS);}),
@@ -244,6 +239,5 @@ class HomeView extends GetView<HomeController> {
       ],
     );
   }
-
 
 }

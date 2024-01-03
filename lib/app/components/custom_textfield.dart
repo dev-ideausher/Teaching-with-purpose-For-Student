@@ -16,6 +16,7 @@ class StTextField extends StatelessWidget {
   final bool isObscure, readOnly, enabled;
   final String? Function(String?)? validator;
   final int? maxLength;
+  final int? minLine;
   final Widget? suffix;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
@@ -33,6 +34,7 @@ class StTextField extends StatelessWidget {
       this.title = "",
       this.isObscure = false,
       this.maxLength,
+      this.minLine,
       this.suffix,
       this.textInputType,
       required this.controller,
@@ -79,6 +81,7 @@ class StTextField extends StatelessWidget {
             controller: controller,
             onFieldSubmitted: onFieldSubmitted,
             maxLength: maxLength,
+            minLines: minLine,
             decoration: StStyle.stInputDecoration(
                 backGroundColor: backGroundColor ?? context.kWhitelight,
                 hint: hint,
