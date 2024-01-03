@@ -42,4 +42,13 @@ class Endpoints {
   static const String examSheet = "api/examdate/get";
 
   static const String timeTable = "api/timetable/get";
+
+
+
+
+
+
+  
+
+  static var temImg = "https://thumbs.dreamstime.com/b/group-school-kids-teacher-classroom-education-elementary-learning-people-concept-sitting-listening-to-57820297.jpg";
 }

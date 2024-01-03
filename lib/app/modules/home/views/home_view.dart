@@ -8,9 +8,9 @@ import 'package:lwp_for_student/app/constants/image_constant.dart';
 import 'package:lwp_for_student/app/modules/profile/controllers/profile_controller.dart';
 import 'package:lwp_for_student/app/routes/app_pages.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
+import 'package:lwp_for_student/app/services/dio/endpoints.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
 import 'package:lwp_for_student/app/services/text_style_util.dart';
-import 'package:lwp_for_student/gen/assets.gen.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -52,7 +52,7 @@ class HomeView extends GetView<HomeController> {
                             imageWidget: controller.subjectImages[index],
                             text: controller.subjectLists.value.data?[index]?.subject ??'',
                             onTap: (){
-                             final data =controller.subjectLists.value.data?[index];
+                            //  final data =controller.subjectLists.value.data?[index];
                               Get.toNamed(Routes.SUBJECTS,arguments: {});
                             },
                           );
@@ -60,23 +60,18 @@ class HomeView extends GetView<HomeController> {
                         },
                       ),
                       32.kheightBox,
-                      buildRowWidget(
-                          title: 'Live Quizzes',subtitle: 'See all',onTap: () => Get.toNamed(Routes.QUIZZ)),
+                      buildRowWidget(title: 'Live Quizzes',subtitle: 'See all',onTap: () => Get.toNamed(Routes.QUIZZ)),
                       16.kheightBox,
                       StCard(
-                          height: 93.kh,
-                          width: 72.kw,
-                          imagePath: 
-                          Image.asset(Assets.images.img.path,height: 93.kh,width: 72.kw,fit: BoxFit.cover),
+                          imagePath:  Endpoints.temImg,
                           title: controller.quizModel.value.data?.first?.subject??'',
                           text1: '${controller.quizModel.value.data?.first?.date?? '07 July 2023'}, Friday at 3:00pm',
                           text2: 'Conducted by ',
                           text3: controller.quizModel.value.data?.first?.conductedBy?.name??'',
                           text4: 'Topics covered: ',
-                          text5:controller.quizModel.value.data?.first?.topicCover?.toString()??''),
+                          text5:controller.quizModel.value.data?.first?.topicCover?.join()??''),
                       32.kheightBox,
-                      buildRowWidget(
-                          title: 'Events',subtitle: 'See all',onTap: () { Get.toNamed(Routes.EVENTS);}),
+                      buildRowWidget(title: 'Events',subtitle: 'See all',onTap: () { Get.toNamed(Routes.EVENTS);}),
                       16.kheightBox,
                       SizedBox(
                         height: 156.kh,

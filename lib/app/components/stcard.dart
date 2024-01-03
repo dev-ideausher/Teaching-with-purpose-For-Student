@@ -11,19 +11,17 @@ class StCard extends StatelessWidget {
   final String text3;
   final String text4;
   final String text5;
-  final Widget imagePath;
-  final double height;
-  final double width;
+  final String imagePath;
 
   const StCard({
     super.key,
     required this.title,
     required this.text1,
     required this.text2,
-    required this.imagePath,
     required this.text3,
-    required this.text4,
-    required this.text5, required this.height, required this.width,
+    required this.text4, 
+    required this.text5, 
+    required this.imagePath,
   });
 
   @override
@@ -40,12 +38,14 @@ class StCard extends StatelessWidget {
             20.kheightBox,
             Row(
               children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: SizedBox(
-                      child: imagePath
-                      )),
-                16.kwidthBox,
+                Container(
+                    width: 72.kw,
+                    height: 93.kh,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                            image: NetworkImage(imagePath), fit: BoxFit.fill))),
+                24.kwidthBox,
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

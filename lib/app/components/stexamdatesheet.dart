@@ -5,18 +5,18 @@ import 'package:lwp_for_student/app/services/text_style_util.dart';
 
 class StExamSheet extends StatelessWidget {
   final String title;
-  final String text1;
-  final String text2;
-  final String text3;
-  final String text4;
+  final String examDate;
+  final String examTime;
+  final String fullMarks;
+  final String passingMarks;
   final Color borderColor;
   const StExamSheet(
       {super.key,
       required this.title,
-      required this.text1,
-      required this.text2,
-      required this.text3,
-      required this.text4,
+      required this.examDate,
+      required this.examTime,
+      required this.fullMarks,
+      required this.passingMarks,
       required this.borderColor});
 
   @override
@@ -43,11 +43,11 @@ class StExamSheet extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(text1,
+                  Text(examDate,
                       style: TextStyleUtil.kText14_4(
                           fontWeight: FontWeight.w400,
                           color: context.kLightTextColor)),
-                  Text(text2,
+                  Text(examTime,
                       style: TextStyleUtil.kText14_4(
                           fontWeight: FontWeight.w400,
                           color: context.kLightTextColor)),
@@ -59,11 +59,11 @@ class StExamSheet extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(text3,
+                  Text(fullMarks,
                       style: TextStyleUtil.kText14_4(
                           fontWeight: FontWeight.w400,
                           color: context.kLightTextColor)),
-                  Text(text4,
+                  Text(passingMarks,
                       style: TextStyleUtil.kText14_4(
                           fontWeight: FontWeight.w400,
                           color: context.kLightTextColor)),

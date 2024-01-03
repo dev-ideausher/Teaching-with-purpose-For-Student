@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lwp_for_student/app/components/custom_appbar.dart';
 import 'package:lwp_for_student/app/components/stexamdatesheet.dart';
-import 'package:lwp_for_student/app/components/sttimetable_data.dart';
 import 'package:lwp_for_student/app/services/colors.dart';
 import 'package:lwp_for_student/app/services/responsive_size.dart';
 import 'package:lwp_for_student/app/services/text_style_util.dart';
@@ -17,7 +16,9 @@ class ScheduleView extends GetView<ScheduleController> {
     return Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(46.kh),
        child: CustomAppBar(title: 'Schedule',isBack: false)),
-      body: SingleChildScrollView(
+      body: Obx(() => controller.isLoding.value?
+      Center(child: CircularProgressIndicator(color: context.kPrimary)):
+        SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
@@ -52,7 +53,6 @@ class ScheduleView extends GetView<ScheduleController> {
                           ],
                           onTap: (index) => controller.selectDay(index),
                         ),
-                        // const Divider(),
                         const Expanded(
                           child: TabBarView(
                             physics: NeverScrollableScrollPhysics(),
@@ -75,49 +75,36 @@ class ScheduleView extends GetView<ScheduleController> {
                 style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
               ),
               16.kheightBox,
-              StExamSheet(
-                  title: 'Physics',
-                  text1: 'Date: 07 July 2023',
-                  text2: 'Time: 9:00 am to 10:30 am',
-                  text3: 'Full marks: 50',
-                  text4: 'Passing marks: 20',
-                  borderColor: context.kLightred),
-              8.kheightBox,
-              StExamSheet(
-                  title: 'Chemistry',
-                  text1: 'Date: 07 July 2023',
-                  text2: 'Time: 9:00 am to 10:30 am',
-                  text3: 'Full marks: 50',
-                  text4: 'Passing marks: 20',
-                  borderColor: context.kPrimary),
-              8.kheightBox,
-              StExamSheet(
-                  title: 'English',
-                  text1: 'Date: 07 July 2023',
-                  text2: 'Time: 9:00 am to 10:30 am',
-                  text3: 'Full marks: 50',
-                  text4: 'Passing marks: 20',
-                  borderColor: context.kNeutral),
-              8.kheightBox,
-              StExamSheet(
-                  title: 'Mathematics',
-                  text1: 'Date: 07 July 2023',
-                  text2: 'Time: 9:00 am to 10:30 am',
-                  text3: 'Full marks: 50',
-                  text4: 'Passing marks: 20',
-                  borderColor: context.kNotActive),
-              8.kheightBox,
-              StExamSheet(
-                  title: 'History',
-                  text1: 'Date: 07 July 2023',
-                  text2: 'Time: 9:00 am to 10:30 am',
-                  text3: 'Full marks: 50',
-                  text4: 'Passing marks: 20',
-                  borderColor: context.kRed),
+              SizedBox(
+                height: 562.kh,
+                width: 343.kw,
+                child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                 separatorBuilder: (context, index) => 8.kheightBox, 
+                 itemCount: controller.examsheetmodel.value.data?.length?? 0,
+                itemBuilder: (context, index) => StExamSheet(
+                      title: controller.examsheetmodel.value.data?[index]?.examTitle?? '',
+                      examDate: 'Date: 07 July 2023',
+                      examTime: "${'Time: '}${controller.examsheetmodel.value.data?[index]?.examTime?? ''}",
+                      fullMarks: "${'Full marks: '}${controller.examsheetmodel.value.data?[index]?.fullMarks.toString()?? ''}",
+                      passingMarks:"${'Passing marks: '}${controller.examsheetmodel.value.data?[index]?.fullMarks.toString()?? ''}",
+                      borderColor: context.kLightred
+                ),
+              ),
+            ),
             ],
           ),
         ),
       ),
+      )
+    );
+  }
+
+
+  Widget buildTimeTableWidget(){
+    return SizedBox(
+      height: 217.kh,
+      width: 343.kw,
     );
   }
 }
