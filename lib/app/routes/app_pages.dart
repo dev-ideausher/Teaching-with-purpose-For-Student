@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lwp_for_student/app/modules/chapters/views/selected_chapter_view.dart';
 
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
@@ -11,6 +12,8 @@ import '../modules/bottom_navbar/views/bottom_navbar_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/change_password/views/change_pwd_success_view.dart';
+import '../modules/chapters/bindings/chapters_binding.dart';
+import '../modules/chapters/views/chapters_view.dart';
 import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/education_profile/bindings/education_profile_binding.dart';
@@ -206,6 +209,15 @@ class AppPages {
       name: _Paths.ASSIGNMENT,
       page: () => const AssignmentView(),
       binding: AssignmentBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAPTERS,
+      page: () => const ChaptersView(),
+      binding: ChaptersBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECTED_CHAPTER,
+      page: () => const SelectedChapterView(),
     ),
   ];
 }

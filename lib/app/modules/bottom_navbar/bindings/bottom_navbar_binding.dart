@@ -12,8 +12,9 @@ class BottomNavbarBinding extends Bindings {
     Get.lazyPut<BottomNavbarController>(
       () => BottomNavbarController(),
     );
-    Get.lazyPut<HomeController>(
-      () => HomeController(),
+    Get.put<HomeController>(
+       HomeController(),
+       permanent: true
     );
     Get.lazyPut<ScheduleController>(
       () => ScheduleController(),
@@ -21,8 +22,9 @@ class BottomNavbarBinding extends Bindings {
     Get.lazyPut<ProgressController>(
       () => ProgressController(),
     );
-    Get.lazyPut<ProfileController>(
-      () => ProfileController(),
+    Get.put<ProfileController>(
+      ProfileController(),
+      permanent: true
     );
   }
 }

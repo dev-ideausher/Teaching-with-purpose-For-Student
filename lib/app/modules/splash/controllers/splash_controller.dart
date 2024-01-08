@@ -9,6 +9,7 @@ class SplashController extends GetxController {
   // RxBool isLogin = false.obs;
 
   String img = ImageConstant.splashImage;
+  String bgImg = ImageConstant.bgImage;
 
   @override
   void onInit() {

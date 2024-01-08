@@ -85,6 +85,11 @@ Future<void> listAssignments()async{
     }
   }
 
+
+//-----------------------Submit Assignment-------------------------------
+
+
+
 void showLoaderAndSubmit() {
     route.Get.dialog(
       const Center(
@@ -95,7 +100,7 @@ void showLoaderAndSubmit() {
     Future.delayed(const Duration(seconds: 2), () {
       route.Get.back();
       Utils.showMySnackbar(desc: 'Assignment submitted successfully');
-      route.Get.toNamed(Routes.HOME);
+      route.Get.toNamed(Routes.BOTTOM_NAVBAR);
     });
   }
 

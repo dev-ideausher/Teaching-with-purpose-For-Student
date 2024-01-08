@@ -52,8 +52,11 @@ class HomeView extends GetView<HomeController> {
                             imageWidget: controller.subjectImages[index],
                             text: controller.subjectLists.value.data?[index]?.subject ??'',
                             onTap: (){
-                            //  final data =controller.subjectLists.value.data?[index];
-                              Get.toNamed(Routes.SUBJECTS,arguments: {});
+                             final data =controller.subjectLists.value.data?[index];
+                              Get.toNamed(Routes.SUBJECTS,arguments: {
+                              'subjectId': data?.Id,
+                              'subjectName':data?.subject
+                              });
                             },
                           );
                           // controller.subjectLists.value.data![index]!.icon

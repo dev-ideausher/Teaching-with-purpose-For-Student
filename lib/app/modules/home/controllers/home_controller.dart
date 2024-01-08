@@ -87,7 +87,7 @@ class HomeController extends GetxController {
     try {
       final responce = await APIManager.getSubjects();
       if (responce.statusCode == 200) {
-        // log('subject...${responce.data}');
+        log('subject...${responce.data}');
         subjectLists.value = SubjectsListModel.fromJson(responce.data);
         showEvents();
       }

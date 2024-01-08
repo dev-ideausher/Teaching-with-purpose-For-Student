@@ -7,6 +7,8 @@ class ImageConstant {
 
   static String splashImage = 'assets/images/splash.png';
 
+  static String bgImage = 'assets/images/Group.png';
+
   static String onBoardImageOne = 'assets/images/onboardone.png';
 
   static String onBoardImagetwo = 'assets/images/onboardtwo.png';

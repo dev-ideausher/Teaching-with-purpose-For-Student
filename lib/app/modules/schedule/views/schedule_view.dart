@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -53,16 +55,53 @@ class ScheduleView extends GetView<ScheduleController> {
                           ],
                           onTap: (index) => controller.selectDay(index),
                         ),
-                        const Expanded(
+                        Expanded(
                           child: TabBarView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                               children: [
-                                // ScheduleWidget(ishorizontal: true),
-                                // ScheduleWidget(ishorizontal: true),
-                                // ScheduleWidget(ishorizontal: true),
-                                // ScheduleWidget(ishorizontal: true),
-                                // ScheduleWidget(ishorizontal: true),
-                              ]),
+                                Column(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child:  Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                          Text('Time',style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400)),
+                                          Text('Subject',style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400)),
+                                          Text('Teacher',style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child: Column(
+                                          children: List.generate(
+                                           controller.getSelectedDayTable().length, 
+                                          (index) {
+                                          // final selectedDayTable = controller.getSelectedDayTable();
+                                          // log('Selected Day Table Length: ${selectedDayTable.length}');
+                                          // for (final item in selectedDayTable) {
+                                          // log('Time: ${item.time}, Subject: ${item.subject}, Teacher: ${item.subjectTeacher}');}
+                                          return Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                          Text('${controller.getSelectedDayTable()[index].time}',style:TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: context.kLightTextColor)),
+                                          Text('${controller.getSelectedDayTable()[index].subject}',style:TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: context.kLightTextColor)),
+                                          Text('${controller.getSelectedDayTable()[index].subjectTeacher}',style:TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: context.kLightTextColor))
+                                          ],
+                                          );
+                                          }),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                          ]),
                         ),
                       ],
                     ),
@@ -87,7 +126,7 @@ class ScheduleView extends GetView<ScheduleController> {
                       examDate: 'Date: 07 July 2023',
                       examTime: "${'Time: '}${controller.examsheetmodel.value.data?[index]?.examTime?? ''}",
                       fullMarks: "${'Full marks: '}${controller.examsheetmodel.value.data?[index]?.fullMarks.toString()?? ''}",
-                      passingMarks:"${'Passing marks: '}${controller.examsheetmodel.value.data?[index]?.fullMarks.toString()?? ''}",
+                      passingMarks:"${'Passing marks: '}${controller.examsheetmodel.value.data?[index]?.passingMarks.toString()?? ''}",
                       borderColor: context.kLightred
                 ),
               ),
@@ -97,14 +136,6 @@ class ScheduleView extends GetView<ScheduleController> {
         ),
       ),
       )
-    );
-  }
-
-
-  Widget buildTimeTableWidget(){
-    return SizedBox(
-      height: 217.kh,
-      width: 343.kw,
     );
   }
 }

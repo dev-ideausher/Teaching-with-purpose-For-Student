@@ -61,6 +61,9 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Group.png
+  AssetGenImage get group => const AssetGenImage('assets/images/Group.png');
+
   /// File path: assets/images/abcent.png
   AssetGenImage get abcent => const AssetGenImage('assets/images/abcent.png');
 
@@ -167,6 +170,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        group,
         abcent,
         addPlus,
         bookmarkImgfst,
@@ -254,6 +258,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/box_effect.svg
   SvgGenImage get boxEffect => const SvgGenImage('assets/svg/box_effect.svg');
+
+  /// File path: assets/svg/chapter.svg
+  SvgGenImage get chapter => const SvgGenImage('assets/svg/chapter.svg');
 
   /// File path: assets/svg/chat.svg
   SvgGenImage get chat => const SvgGenImage('assets/svg/chat.svg');
@@ -354,6 +361,7 @@ class $AssetsSvgGen {
         biology,
         bookmark,
         boxEffect,
+        chapter,
         chat,
         chemistry,
         comment,

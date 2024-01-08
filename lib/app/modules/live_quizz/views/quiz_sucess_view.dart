@@ -41,7 +41,7 @@ class QuizzSucessView extends GetWidget<LiveQuizzController> {
               SizedBox(
                   width: 343.kw,
                   height: 56.kh,
-                  child: StButton(title: 'Continue', onTap: ()=> Get.offNamed(Routes.QUIZZ))),
+                  child: StButton(title: 'Continue', onTap: ()=> Get.offNamed(Routes.BOTTOM_NAVBAR))),
             ],
           ),
         ),
