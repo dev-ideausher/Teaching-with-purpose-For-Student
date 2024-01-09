@@ -14,13 +14,13 @@ class ChaptersView extends GetView<ChaptersController> {
   const ChaptersView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    String chapter = controller.chapterName;
+    final data = controller.chapterDetailsModel.value;
     return DefaultTabController(
       initialIndex: controller.selectedTabIndex.value,
       length: 2, 
       child: Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(100.kh),
-      child: CustomAppBar(title: chapter, isBack: true,
+      child: CustomAppBar(title: data.chapterName?? '', isBack: true,
       bottom: TabBar(
               controller: controller.tabController,
               indicatorWeight: 3,
@@ -44,7 +44,7 @@ class ChaptersView extends GetView<ChaptersController> {
   }
 
  Widget buildBody(){
-  String concept = controller.concept;
+ 
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 39),
     child: SingleChildScrollView(
@@ -53,7 +53,7 @@ class ChaptersView extends GetView<ChaptersController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-          concept,
+          controller.chapterDetailsModel.value.chapterName?? '',
           style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
          4.kheightBox,
           Text(
@@ -69,7 +69,7 @@ class ChaptersView extends GetView<ChaptersController> {
                 children: [
                   Center(
                     child:Text(
-                    'Odered Pair',
+                    controller.chapterDetailsModel.value.concept?? '',
                     style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
                   ),
                   Align(

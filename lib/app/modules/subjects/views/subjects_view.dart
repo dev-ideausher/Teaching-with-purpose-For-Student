@@ -46,12 +46,7 @@ class SubjectsView extends GetView<SubjectsController> {
                 concepts: controller.chapterModel.value.data?[index]?.concept?? '',
                 onTap: (){
                   final chapter = controller.chapterModel.value.data?[index];
-                  Get.toNamed(Routes.CHAPTERS,
-                  arguments: {
-                   'chapterName' : chapter?.chapterName,
-                   'concept': chapter?.concept,
-                  }
-                );
+                  Get.toNamed(Routes.CHAPTERS,arguments: chapter);
                 }),
               )       
             ],
@@ -99,3 +94,9 @@ class SubjectsView extends GetView<SubjectsController> {
   );
  }
 }
+
+//  {
+//                    'chapterName' : chapter?.chapterName,
+//                    'concept': chapter?.concept,
+                   
+//                   }

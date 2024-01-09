@@ -168,6 +168,10 @@ class $AssetsImagesGen {
   AssetGenImage get tempProfile =>
       const AssetGenImage('assets/images/temp_profile.png');
 
+  /// File path: assets/images/temp_videoImg.png
+  AssetGenImage get tempVideoImg =>
+      const AssetGenImage('assets/images/temp_videoImg.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         group,
@@ -200,7 +204,8 @@ class $AssetsImagesGen {
         qaImg,
         quizImg1,
         splash,
-        tempProfile
+        tempProfile,
+        tempVideoImg
       ];
 }
 

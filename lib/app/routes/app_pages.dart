@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:lwp_for_student/app/modules/chapters/views/selected_chapter_view.dart';
 
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
@@ -14,6 +13,7 @@ import '../modules/change_password/views/change_password_view.dart';
 import '../modules/change_password/views/change_pwd_success_view.dart';
 import '../modules/chapters/bindings/chapters_binding.dart';
 import '../modules/chapters/views/chapters_view.dart';
+import '../modules/chapters/views/selected_chapter_view.dart';
 import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/education_profile/bindings/education_profile_binding.dart';
@@ -46,6 +46,8 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/progress/bindings/progress_binding.dart';
 import '../modules/progress/views/progress_view.dart';
+import '../modules/questions/bindings/questions_binding.dart';
+import '../modules/questions/views/questions_view.dart';
 import '../modules/quizz/bindings/quizz_binding.dart';
 import '../modules/quizz/views/quizz_view.dart';
 import '../modules/schedule/bindings/schedule_binding.dart';
@@ -218,6 +220,11 @@ class AppPages {
     GetPage(
       name: _Paths.SELECTED_CHAPTER,
       page: () => const SelectedChapterView(),
+    ),
+    GetPage(
+      name: _Paths.QUESTIONS,
+      page: () => const QuestionsView(),
+      binding: QuestionsBinding(),
     ),
   ];
 }

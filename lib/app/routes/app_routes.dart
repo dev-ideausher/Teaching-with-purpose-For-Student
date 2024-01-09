@@ -36,6 +36,7 @@ abstract class Routes {
   static const ASSIGNMENT = _Paths.ASSIGNMENT;
   static const CHAPTERS = _Paths.CHAPTERS;
   static const SELECTED_CHAPTER = _Paths.SELECTED_CHAPTER;
+  static const QUESTIONS = _Paths.QUESTIONS;
 }
 
 abstract class _Paths {
@@ -73,4 +74,5 @@ abstract class _Paths {
   static const ASSIGNMENT = '/assignment';
   static const CHAPTERS = '/chapters';
   static const SELECTED_CHAPTER = '/selected-chapter';
+  static const QUESTIONS = '/questions';
 }
