@@ -180,8 +180,7 @@ class ProfileView extends GetView<ProfileController> {
         onTap: () => Get.back(),
         bottomSheetImg: Lottie.asset('assets/lottiefiles/rating.json'),
         title: 'Enjoying Teaching With Purpose ?',
-        text1:
-            'Support us by giving rate and your precious review !It will take few seconds only.',
+        text1:'Support us by giving rate and your precious review !It will take few seconds only.',
         text2: 'Maybe Later',
       ),
     );
@@ -195,12 +194,8 @@ class ProfileView extends GetView<ProfileController> {
         middleText: 'Are you sure you want to logout ?',
         middleTextStyle: TextStyleUtil.kText14_4(
             fontWeight: FontWeight.w400, color: Get.context!.kLightTextColor),
-        cancel:
-            TextButton(onPressed: () => Get.back(), child: const Text('No')),
-        confirm:
-            TextButton(onPressed: (){
-              controller.logout();
-            }, child: const Text('Logout'))
+        cancel:TextButton(onPressed: () => Get.back(), child: const Text('No')),
+        confirm:TextButton(onPressed: (){controller.logout();}, child: const Text('Logout'))
         );
   }
 }

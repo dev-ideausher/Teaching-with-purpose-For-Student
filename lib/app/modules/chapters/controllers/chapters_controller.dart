@@ -67,54 +67,52 @@ void chapterVideoInitialize() {
   } 
 }
 
- 
+
 void downloadPdf() async {
-    try {
-      final data = chapterDetailsModel.value;
-      if (data.uploadPdf != null && data.uploadPdf!.isNotEmpty) {
+  try {
+    final data = chapterDetailsModel.value;
+    if (data.uploadPdf != null && data.uploadPdf!.isNotEmpty) {
 
-        var status = await Permission.storage.request();
+      var status = await Permission.storage.request();
 
-        if (status.isGranted) {
-          String pdfUrl = data.uploadPdf!;
+      if (status.isGranted) {
+        String pdfUrl = data.uploadPdf!;
 
-          String fileName = '${data.chapterName}.pdf';
+        String fileName = '${data.chapterName}.pdf';
 
-          final downlodDir = await getDownloadsDirectory();
+        final downloadDir = await getDownloadsDirectory();
 
-          if (downlodDir == null) return;
+        if (downloadDir == null) return;
 
-          if (!(await downlodDir.exists())) {
-            await downlodDir.create();
-          }
-          final downloadPath = '${downlodDir.path}/$fileName';
+        final downloadPath = '${downloadDir.path}/$fileName';
 
-          log('path..$downloadPath');
+        log('path..$downloadPath');
 
-          isDownloadStarted(true);
-          await APIManager.downloadFile(
-            pdfUrl,
-            downloadPath: downloadPath,
-            onReceiveProgress: (progress) {
-              downloadProgress.value = progress;
-              log('Download progress: ${downloadProgress.value}%');
-            },
-          );
+        isDownloadStarted(true);
+        await APIManager.downloadFile(
+          pdfUrl,
+          downloadPath: downloadPath,
+          onReceiveProgress: (progress) {
+            downloadProgress.value = progress;
+            log('Download progress: ${downloadProgress.value}%');
+          },
+        );
 
-          Utils.showMySnackbar(desc: 'PDF downloaded successfully');
-        } else {
-          Utils.showMySnackbar(desc: 'Permission denied for storage');
-        }
+        Utils.showMySnackbar(desc: 'PDF downloaded successfully');
       } else {
-        Utils.showMySnackbar(desc: 'PDF is not available');
+        Utils.showMySnackbar(desc: 'Permission denied for storage');
       }
-    } catch (e) {
-      log('Error downloading PDF: $e');
-      Utils.showMySnackbar(desc: 'Error downloading PDF: $e');
-    } finally {
-      isDownloadStarted(false);
+    } else {
+      Utils.showMySnackbar(desc: 'PDF is not available');
     }
+  } catch (e) {
+    log('Error downloading PDF: $e');
+    Utils.showMySnackbar(desc: 'Error downloading PDF: $e');
+  } finally {
+    isDownloadStarted(false);
   }
+}
+
 
 
 

@@ -24,7 +24,7 @@ class HomeView extends GetView<HomeController> {
       () => controller.isLoding.value ?
       Center(child: CircularProgressIndicator(color: context.kPrimary)):
        SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 50),
@@ -35,9 +35,9 @@ class HomeView extends GetView<HomeController> {
                       32.kheightBox,
                       buildClockWidget(),
                       32.kheightBox,
-                      Text('My Subjects',
-                          style: TextStyleUtil.kText18_6(
-                              fontWeight: FontWeight.w600)),
+                      Text( 
+                        'My Subjects',
+                          style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
                       16.kheightBox,
                       GridView.builder(
                         shrinkWrap: true,
@@ -69,7 +69,7 @@ class HomeView extends GetView<HomeController> {
                       StCard(
                           imagePath:  Endpoints.temImg,
                           title: controller.quizModel.value.data?.first?.subject??'',
-                          text1: '${controller.quizModel.value.data?.first?.date?? '07 July 2023'}, Friday at 3:00pm',
+                          text1: '${controller.quizModel.value.data?.first?.date?? ''}, Friday at 3:00pm',
                           text2: 'Conducted by ',
                           text3: controller.quizModel.value.data?.first?.conductedBy?.name??'',
                           text4: 'Topics covered: ',
