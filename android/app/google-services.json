@@ -1,0 +1,170 @@
+{
+  "project_info": {
+    "project_number": "807755555915",
+    "project_id": "learning-with-purpose-adc7e",
+    "storage_bucket": "learning-with-purpose-adc7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807755555915:android:4e9a74494054a771ce99ce",
+        "android_client_info": {
+          "package_name": "com.example.teaching_with_purpose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807755555915-f3n5c2ifa26pi1hd99p9et6mmlt5vpc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-GSvfVE7ndVIuGHSkczpgxuIxRY8ukgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807755555915-f3n5c2ifa26pi1hd99p9et6mmlt5vpc6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807755555915-otlvefv1451rm64qaf2fiv7m20be1td6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.teachingWithPurpose"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807755555915:android:80b9098933da3642ce99ce",
+        "android_client_info": {
+          "package_name": "com.example.teaching_with_purpose_parent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807755555915-r228d2aurjs8j886tqnabau60vujoan6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.teaching_with_purpose_parent",
+            "certificate_hash": "109ce543e001fe02478edcef920db80a7e8da8aa"
+          }
+        },
+        {
+          "client_id": "807755555915-f3n5c2ifa26pi1hd99p9et6mmlt5vpc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-GSvfVE7ndVIuGHSkczpgxuIxRY8ukgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807755555915-f3n5c2ifa26pi1hd99p9et6mmlt5vpc6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807755555915-otlvefv1451rm64qaf2fiv7m20be1td6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.teachingWithPurpose"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807755555915:android:8588ec2c895e0c08ce99ce",
+        "android_client_info": {
+          "package_name": "com.example.teaching_with_purpose_student"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807755555915-f3n5c2ifa26pi1hd99p9et6mmlt5vpc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-GSvfVE7ndVIuGHSkczpgxuIxRY8ukgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807755555915-f3n5c2ifa26pi1hd99p9et6mmlt5vpc6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807755555915-otlvefv1451rm64qaf2fiv7m20be1td6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.teachingWithPurpose"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807755555915:android:c42bf253cc0efbacce99ce",
+        "android_client_info": {
+          "package_name": "com.iu.lwp_for_student.lwp_for_student"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807755555915-q3oiencj36er4g6s366b6hjcmo2pk5hc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iu.lwp_for_student.lwp_for_student",
+            "certificate_hash": "109ce543e001fe02478edcef920db80a7e8da8aa"
+          }
+        },
+        {
+          "client_id": "807755555915-f3n5c2ifa26pi1hd99p9et6mmlt5vpc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-GSvfVE7ndVIuGHSkczpgxuIxRY8ukgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807755555915-f3n5c2ifa26pi1hd99p9et6mmlt5vpc6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807755555915-otlvefv1451rm64qaf2fiv7m20be1td6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.teachingWithPurpose"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

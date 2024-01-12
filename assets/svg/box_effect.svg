@@ -1,0 +1,18 @@
+<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_3296_3454)">
+<rect width="72" height="72" rx="3.73077" fill="white"/>
+<ellipse cx="5.5" cy="77" rx="30.5" ry="29" fill="#FFFDDF"/>
+<g style="mix-blend-mode:multiply">
+<ellipse cx="21.8205" cy="90.5161" rx="28.5" ry="27.5" transform="rotate(-32.559 21.8205 90.5161)" fill="#FBE0E1"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<ellipse cx="-10" cy="64" rx="24" ry="23" fill="#DDF7E6"/>
+</g>
+</g>
+<rect x="0.5" y="0.5" width="71" height="71" rx="3.23077" stroke="#F5F5F5"/>
+<defs>
+<clipPath id="clip0_3296_3454">
+<rect width="72" height="72" rx="3.73077" fill="white"/>
+</clipPath>
+</defs>
+</svg>
