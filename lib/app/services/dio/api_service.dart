@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -50,23 +51,26 @@ class APIManager {
 
 
 // Dawnload File
- static  Future<File> downloadFile(String url,{required String downloadPath, Map<String, dynamic>? parameters,Function(double progress)? onReceiveProgress}) async {
-    try {
-      final dio = Dio();
-      dio.options.responseType = ResponseType.bytes;
-      dio.options.followRedirects = false;
-      final response = await dio.get(url,queryParameters: parameters,onReceiveProgress: (count, total) {onReceiveProgress?.call(count / total);});
-      Directory(downloadPath).createSync(recursive: true);
+  static Future<File> downloadFile(String url, {required String downloadPath,Map<String, dynamic>? parameters,Function(double progress)? onReceiveProgress}) async {
+  try {
+    final dio = Dio();
+    dio.options.responseType = ResponseType.bytes;
+    dio.options.followRedirects = false;
 
-      File file = File(downloadPath);
-      await file.writeAsBytes(response.data, flush: true);
-      dio.close();
+    await dio.download(
+      url,
+      downloadPath,
+      queryParameters: parameters,
+      onReceiveProgress: (count, total) {
+        onReceiveProgress?.call(count / total);
+      },
+    );
 
-      return file;
-    } catch (e) {
-      print('Error downloading file: $e');
+    return File(downloadPath);
+  } catch (e) {
+    log('Error downloading file: $e');
+    throw Exception('Error downloading file: $e');
+  }
+}
 
-      throw Exception('Error downloading file: $e');
-    }
-    }
 }

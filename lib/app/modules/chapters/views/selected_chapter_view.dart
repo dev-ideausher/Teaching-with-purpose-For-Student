@@ -125,23 +125,6 @@ Widget build(BuildContext context){
           WidgetsConstants.buildUploadButton(text: 'Download', onTap: (){
             controller.downloadPdf();
           }),
-          16.kheightBox,
-          Center(
-            child: Visibility(
-              visible: controller.isDownloadStarted.value,
-              child: Obx(() => Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                 Text('Dawnloading...    ',
-                  style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: context.kLightTextColor)),                 
-                  CircularProgressIndicator(
-                      value: controller.downloadProgress.value,
-                      color: context.kPrimary,
-                  ),
-                ],
-              ))
-            ),
-          ),
           32.kheightBox,
             Text(
             'Questions',

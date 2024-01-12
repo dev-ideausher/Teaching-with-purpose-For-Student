@@ -18,7 +18,7 @@ class ScheduleView extends GetView<ScheduleController> {
     return Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(46.kh),
        child: CustomAppBar(title: 'Schedule',isBack: false)),
-      body: Obx(() => controller.isLoding.value?
+      body: Obx(() => controller.isLoading.value?
       Center(child: CircularProgressIndicator(color: context.kPrimary)):
         SingleChildScrollView(
         physics: const BouncingScrollPhysics(),

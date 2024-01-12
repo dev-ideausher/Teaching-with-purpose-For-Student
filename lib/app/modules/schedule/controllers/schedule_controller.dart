@@ -10,7 +10,7 @@ import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 
 class ScheduleController extends GetxController {
   var selectedIndex = 0.obs;
-  RxBool isLoding = false.obs;
+  RxBool isLoading = false.obs;
   Rx<ExamSheetModel> examsheetmodel= ExamSheetModel().obs;
   Rx<ClassScheduleModel> classScheduleModel= ClassScheduleModel().obs;
   final RxList<DaysTableModel> mondayTable =  <DaysTableModel>[].obs;
@@ -51,7 +51,7 @@ class ScheduleController extends GetxController {
 //-----------------------Exam Sheet-------------------------------
 
   Future<void> examSheet()async{
-    isLoding(true);
+    isLoading(true);
     try {
       final responce = await APIManager.getExamSheet();
       if (responce.data['status'] == true) {
@@ -63,14 +63,14 @@ class ScheduleController extends GetxController {
     } catch (e) {
      log('error..$e');
     }finally{
-      isLoding(false);
+      isLoading(false);
     }
   }
 
 //-----------------------Time table-------------------------------
 
    Future<void> scheduledTimetable() async {
-    isLoding(true);
+    isLoading(true);
     try {
       final response = await APIManager.getTimeTable();
 
@@ -106,7 +106,7 @@ class ScheduleController extends GetxController {
     } catch (e) {
       log('Error: $e');
     } finally {
-      isLoding(false);
+      isLoading(false);
     }
   }
 
