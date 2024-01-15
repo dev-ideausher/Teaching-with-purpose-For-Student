@@ -92,7 +92,7 @@ class EditProfileController extends GetxController {
   log('$body');
   log(Get.find<GetStorageService>().id.toString());
     try {
-      final responce = await APIManager.updateStudentDetails( body: body, id: Get.find<GetStorageService>().id);
+      final responce = await APIManager.updateUser( body: body, id: Get.find<GetStorageService>().id);
       if (responce.statusCode == 200) {
       updateData.value = StudentUpdateModel.fromJson(responce.data);
       log('student..${responce.data}');

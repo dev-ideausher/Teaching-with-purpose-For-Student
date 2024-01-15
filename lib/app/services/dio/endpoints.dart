@@ -43,6 +43,8 @@ class Endpoints {
 
   static const String timeTable = "api/timetable/get";
 
+  static const String feedbacks = "api/feedback/save";
+
 
 
 
