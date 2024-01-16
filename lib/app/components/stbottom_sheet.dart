@@ -11,24 +11,28 @@ class ResponseBottomSheet extends StatefulWidget {
   final String title;
   final String text1;
   final String text2;
-  // final Widget ratingWidget;
-  void Function() onTap;
-  ResponseBottomSheet(
+  final void Function(double) onTap;
+  
+  const ResponseBottomSheet(
       {super.key,
       required this.bottomSheetImg,
       required this.title,
       required this.text1,
       required this.onTap,
-      required this.text2});
+      required this.text2,
+});
 
   @override
   State<ResponseBottomSheet> createState() => _ResponseBottomSheetState();
 }
 
 class _ResponseBottomSheetState extends State<ResponseBottomSheet> {
+  
   Future<bool> onWillPop() async {
     return false;
   }
+
+  double selectedRating = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +44,7 @@ class _ResponseBottomSheetState extends State<ResponseBottomSheet> {
             width: double.infinity,
             padding: MediaQuery.of(context).viewInsets,
             decoration: BoxDecoration(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(30)),
+              borderRadius:const BorderRadius.vertical(top: Radius.circular(30)),
               color: context.kWhite,
             ),
             child: Padding(
@@ -50,7 +53,6 @@ class _ResponseBottomSheetState extends State<ResponseBottomSheet> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    textAlign: TextAlign.center,
                     widget.title,
                     style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
                   ),
@@ -62,11 +64,8 @@ class _ResponseBottomSheetState extends State<ResponseBottomSheet> {
                   ),
                   8.kheightBox,
                   Text(
-                    textAlign: TextAlign.center,
                     widget.text1,
-                    style: TextStyleUtil.kText14_4(
-                        fontWeight: FontWeight.w500,
-                        color: context.kLightTextColor),
+                    style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500,color: context.kLightTextColor),
                   ),
                   24.kheightBox,
                   RatingBar.builder(
@@ -80,18 +79,20 @@ class _ResponseBottomSheetState extends State<ResponseBottomSheet> {
                       Icons.star,
                       color: Colors.amber,
                     ),
-                    onRatingUpdate: (rating) {},
+                    onRatingUpdate: (rating) {
+                     setState(() {
+                       selectedRating = rating;
+                     });
+                    },
                   ),
                   48.kheightBox,
                   InkWell(
-                    onTap: widget.onTap,
+                    onTap: (){
+                    widget.onTap(selectedRating);
+                    },
                     child: Text(
-                      textAlign: TextAlign.center,
                       widget.text2,
-                      style: TextStyleUtil.kText18_6(
-                          fontWeight: FontWeight.w600,
-                          color: context.kPrimary,
-                          textDecoration: TextDecoration.underline),
+                      style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600,color: context.kPrimary,textDecoration: TextDecoration.underline),
                     ),
                   ),
                   36.kheightBox,

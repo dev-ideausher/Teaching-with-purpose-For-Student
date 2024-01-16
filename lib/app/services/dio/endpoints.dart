@@ -45,6 +45,8 @@ class Endpoints {
 
   static const String feedbacks = "api/feedback/save";
 
+  static const String ratings = "api/rating/save";
+
 
 
 

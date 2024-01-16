@@ -101,7 +101,7 @@ class FeedbacksView extends GetView<FeedbacksController> {
             child: StButton(
               title: StringConstants.submit,
               onTap: () {
-                // controller.sendFeedbacks();
+                controller.sendFeedbacks();
               },
             ),
           ),
@@ -164,7 +164,7 @@ Widget ratingNumbers(String text, int questionIndex) {
         onTap: () {
           controller.changeRating(questionIndex, text);
         },
-        child: Container(
+        child: Obx(() => Container(
           height: 40.kh,
           width: 40.kw,
           decoration: BoxDecoration(
@@ -187,7 +187,7 @@ Widget ratingNumbers(String text, int questionIndex) {
               ),
             ),
           ),
-        ),
+        ),)
       );
 }
 

@@ -14,7 +14,7 @@ class FeedbacksController extends GetxController {
 
   List<String> ratingNumbers = ['1','2','3','4','5'];
 
-  List<String> selectedRatings = ['', '', '', '', ''];
+  RxList<String> selectedRatings = <String>['', '', '', '', ''].obs;
 
 
   void changeRating(int questionIndex, String rating) {

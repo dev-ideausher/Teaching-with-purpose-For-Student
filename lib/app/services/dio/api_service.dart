@@ -19,6 +19,8 @@ class APIManager {
 
   static Future<Response> sendFeedback({required dynamic body}) async => await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true).post(Endpoints.feedbacks, data: body);
 
+  static Future<Response> giveRating({required dynamic body}) async => await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true).post(Endpoints.ratings, data: body);
+
 
 
 //Get API

@@ -10,6 +10,7 @@ import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
+import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 import 'package:teaching_with_purpose_student/gen/assets.gen.dart';
 
 import '../controllers/profile_controller.dart';
@@ -107,7 +108,7 @@ class ProfileView extends GetView<ProfileController> {
                 bottom: 12,
                 right: 120,
                 child: InkWell(
-                    onTap: (){},
+                    onTap: () {},
                     child: Assets.svg.addPlus.svg(height: 29.kh, width: 29.kw)))
           ],
         ),
@@ -119,11 +120,9 @@ class ProfileView extends GetView<ProfileController> {
         ),
         8.kheightBox,
         Text(
-            '${controller.studentModel?.data?.first?.className ?? 'Class'} | ${controller.studentModel?.data?.first?.rollNumber ?? '123'}',
+            'Class: ${controller.studentModel?.data?.first?.className ?? ''} | RollNumber: ${controller.studentModel?.data?.first?.rollNumber ?? ''}',
             textAlign: TextAlign.center,
-            style: TextStyleUtil.kText14_4(
-                fontWeight: FontWeight.w400,
-                color: Get.context!.kLightTextColor))
+            style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor))
       ],
     );
   }
@@ -133,9 +132,7 @@ class ProfileView extends GetView<ProfileController> {
     if (controller.studentModel?.data?.first?.image != null) {
       return CachedNetworkImage(
           imageUrl: controller.studentModel?.data?.first?.image ?? '',
-          width: 100.kw,
-          height: 100.kh,
-          fit: BoxFit.cover);
+          width: 100.kw, height: 100.kh, fit: BoxFit.cover);
     }
     return Image.asset(ImageConstant.tempProfileImg,
         height: 100.kh, width: 100.kw, fit: BoxFit.cover);
@@ -157,7 +154,6 @@ class ProfileView extends GetView<ProfileController> {
             image.svg(),
             16.kwidthBox,
             Text(
-                textAlign: TextAlign.center,
                 title,
                 style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500)),
             const Spacer(),
@@ -173,15 +169,28 @@ class ProfileView extends GetView<ProfileController> {
     return showModalBottomSheet(
       enableDrag: false,
       isScrollControlled: true,
-      isDismissible: false,
+      isDismissible: true,
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => ResponseBottomSheet(
-        onTap: () => Get.back(),
+
+        onTap: (double selectedRating){
+
+        if(selectedRating > 0){
+
+        controller.giveRating(selectedRating.toString());
+
+        Get.back();
+
+          }else{
+
+        Utils.showMySnackbar(desc: 'Please select rating, Before Submitting');
+          }
+        },
         bottomSheetImg: Lottie.asset('assets/lottiefiles/rating.json'),
         title: 'Enjoying Teaching With Purpose ?',
         text1:'Support us by giving rate and your precious review !It will take few seconds only.',
-        text2: 'Maybe Later',
+        text2: 'Submit',
       ),
     );
   }
