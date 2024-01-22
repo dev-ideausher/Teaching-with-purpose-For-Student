@@ -108,20 +108,18 @@ class ProfileView extends GetView<ProfileController> {
                 bottom: 12,
                 right: 120,
                 child: InkWell(
-                    onTap: () {},
-                    child: Assets.svg.addPlus.svg(height: 29.kh, width: 29.kw)))
+                onTap: () {},
+                child: Assets.svg.addPlus.svg(height: 29.kh, width: 29.kw)))
           ],
         ),
         8.kheightBox,
         Text(
           'Hi, ${controller.studentModel?.data?.first?.name?? ''}',
-          textAlign: TextAlign.center,
           style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
         ),
         8.kheightBox,
         Text(
             'Class: ${controller.studentModel?.data?.first?.className ?? ''} | RollNumber: ${controller.studentModel?.data?.first?.rollNumber ?? ''}',
-            textAlign: TextAlign.center,
             style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor))
       ],
     );
@@ -130,8 +128,7 @@ class ProfileView extends GetView<ProfileController> {
 //
   Widget profileImg() {
     if (controller.studentModel?.data?.first?.image != null) {
-      return CachedNetworkImage(
-          imageUrl: controller.studentModel?.data?.first?.image ?? '',
+      return CachedNetworkImage(imageUrl: controller.studentModel?.data?.first?.image ?? '',
           width: 100.kw, height: 100.kh, fit: BoxFit.cover);
     }
     return Image.asset(ImageConstant.tempProfileImg,
@@ -139,8 +136,7 @@ class ProfileView extends GetView<ProfileController> {
   }
 
 //
-  Widget profileSectionWidget(
-      {required SvgGenImage image, required String title, required void Function() onTap}) {
+  Widget profileSectionWidget({required SvgGenImage image, required String title, required void Function() onTap}) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -182,7 +178,7 @@ class ProfileView extends GetView<ProfileController> {
 
         Get.back();
 
-          }else{
+       } else{
 
         Utils.showMySnackbar(desc: 'Please select rating, Before Submitting');
           }

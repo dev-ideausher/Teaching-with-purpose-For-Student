@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart';
+import 'package:teaching_with_purpose_student/app/constants/widget_constants.dart';
 import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
@@ -80,8 +81,11 @@ class ChaptersView extends GetView<ChaptersController> {
                 ],
               ),
             ),
-          )
-        
+          ), 
+        16.kheightBox,
+        WidgetsConstants.buildRowWidget(title: 'Assignments', subtitle: 'See all', onTap: (){
+          Get.toNamed(Routes.ASSIGNMENTS_LIST);
+        })
         ],
       ),
     ),

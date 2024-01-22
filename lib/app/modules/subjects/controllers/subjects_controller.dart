@@ -37,13 +37,17 @@ Rx<ChaptersModel> chapterModel = ChaptersModel().obs;
     isLoding(true);
     try {
       final response = await APIManager.getChapter(subjectId:subjectId);
+      
       if (response.data['status'] == true) {
         
-        // log('Chapters...${response.data}');
+      //log('Chapters...${response.data}');
 
-        chapterModel.value = ChaptersModel.fromJson(response.data);
+      chapterModel.value = ChaptersModel.fromJson(response.data);
 
-        Get.find<GlobalData>().id = chapterModel.value.data![0]?.subjectId?? '';
+      String id = chapterModel.value.data?[0]?.Id ?? '';
+
+      Get.find<GlobalData>().id = id;
+
       } else {
         Utils.showMySnackbar(desc: response.data['message']);
       }

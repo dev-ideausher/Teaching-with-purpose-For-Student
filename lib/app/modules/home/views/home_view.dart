@@ -73,7 +73,7 @@ class HomeView extends GetView<HomeController> {
                           text2: 'Conducted by ',
                           text3: controller.quizModel.value.data?.first?.conductedBy?.name??'',
                           text4: 'Topics covered: ',
-                          text5:controller.quizModel.value.data?.first?.topicCover?.join()??''),
+                          text5:''),
                       32.kheightBox,
                       buildRowWidget(title: 'Events',subtitle: 'See all',onTap: () { Get.toNamed(Routes.EVENTS);}),
                       16.kheightBox,

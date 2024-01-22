@@ -19,7 +19,7 @@ class HomeController extends GetxController {
   Timer? timer;
   Rx<SubjectsListModel> subjectLists= SubjectsListModel().obs;
   Rx<EventsModel> eventsModel= EventsModel().obs;
-  Rx<QuizzModel> quizModel = QuizzModel().obs;
+  Rx<QuizModel> quizModel = QuizModel().obs;
 
 
    @override
@@ -28,19 +28,8 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-// list of images and texts for the cards  in Listview
-  List<String> eventsTitile = [
-    'Sports Day',
-    'Annual Day',
-    'Parent-Teacher Meeting',
-  ];
   List<String> time = ['Friday, 3:00 pm', 'Friday, 3:00 pm', 'Friday, 3:00 pm'];
 
-  List<String> detailsText = [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  ];
 
   List<Image> eventImages = [
     Assets.images.football.image(),
@@ -90,7 +79,7 @@ class HomeController extends GetxController {
       if (responce.statusCode == 200) {
         // log('subject...${responce.data}');
         subjectLists.value = SubjectsListModel.fromJson(responce.data);
-        showEvents();
+        await showEvents();
       }
     } catch (e) {
      log('error..$e');
@@ -108,7 +97,7 @@ class HomeController extends GetxController {
       if (responce.statusCode == 200) {
         // log('events...${responce.data}');
         eventsModel.value = EventsModel.fromJson(responce.data);
-        showQuiz();
+       await showQuiz();
       }
     } catch (e) {
      log('error..$e');
@@ -124,7 +113,7 @@ class HomeController extends GetxController {
       final responce = await APIManager.getQuizz();
       if (responce.statusCode == 200) {
         // log('Quizz...${responce.data}');
-        quizModel.value = QuizzModel.fromJson(responce.data);
+        quizModel.value = QuizModel.fromJson(responce.data);
       }
     } catch (e) {
      log('error..$e');

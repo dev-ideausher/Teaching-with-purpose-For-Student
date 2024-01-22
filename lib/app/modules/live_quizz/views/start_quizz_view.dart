@@ -8,7 +8,6 @@ import 'package:teaching_with_purpose_student/app/services/custom_button.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
 
-
 class StartQuizzView extends GetWidget<LiveQuizzController> {
   const StartQuizzView({Key? key}) : super(key: key);
 
@@ -24,24 +23,28 @@ class StartQuizzView extends GetWidget<LiveQuizzController> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
           child: Column(
             children: [
+                  buildQuizzCard(
+                      question: controller.questions[0].questionText ?? '',
+                      options: controller.questions[0].options ?? []),
+                  40.kheightBox,
+              Obx(() => Text(
+                    'Time Remaining: ${controller.timerSeconds.value} seconds',
+                    style: TextStyleUtil.kText16_5(
+                      fontWeight: FontWeight.w600,
+                      color: context.kPrimary,
+                    ),
+                  )),
+              20.kheightBox,
               SizedBox(
-                height: 420.kh,
-                width: 345.kw,
-                child: ListView.separated(
-                  separatorBuilder: (context, index) => 16.kheightBox,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return buildQuizzCard();
+                width: 343.kw,
+                height: 56.kh,
+                child: StButton(
+                  title: 'Submit',
+                  onTap: () {
+                    Get.toNamed(Routes.QUIZZ_SUCESS);
                   },
                 ),
               ),
-              40.kheightBox,
-                SizedBox(
-                    width: 343.kw,
-                    height: 56.kh,
-                  child: StButton(
-                      title: 'Submit',
-                      onTap: () {Get.toNamed(Routes.QUIZZ_SUCESS);})),            
             ],
           ),
         ),
@@ -49,7 +52,10 @@ class StartQuizzView extends GetWidget<LiveQuizzController> {
     );
   }
 
-  Widget buildQuizzCard() {
+  Widget buildQuizzCard(
+      {required String question, required List<dynamic> options}) {
+    List<String> stringOptions =
+        options.map((option) => option.toString()).toList();
     return SizedBox(
       height: 420.kh,
       width: 345.kw,
@@ -59,61 +65,83 @@ class StartQuizzView extends GetWidget<LiveQuizzController> {
           Row(
             children: [
               Text(
-                'Question 1 of 1',
+                'Question 1 ',
                 style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w600),
               ),
               151.kwidthBox,
               Text(
                 '10 points',
                 style: TextStyleUtil.kText16_5(
-                    fontWeight: FontWeight.w400,
-                    color: Get.context!.kLightTextColor),
+                  fontWeight: FontWeight.w400,
+                  color: Get.context!.kLightTextColor,
+                ),
               ),
             ],
           ),
           24.kheightBox,
+          //show question here
           Text(
-            ' What is the past tense of "sleep"?',
+            question,
             maxLines: 3,
             style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400),
           ),
           24.kheightBox,
+          //options here
           SizedBox(
             height: 260.kw,
             width: 343.kw,
             child: ListView.separated(
               separatorBuilder: (context, index) => 8.kheightBox,
-              itemCount: 4,
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  controller.selectOption(index);
-                },
-                child: Obx(() => Container(
+              itemCount: controller.questions[0].options?.length ?? 0,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                    onTap: () {
+                      controller.selectOption(index);
+                    },
+                    child: Container(
                       height: 56,
                       width: 343.kw,
                       decoration: BoxDecoration(
-                        color: controller.selectedOptionIndex.value == index
-                            ? Get.context!.kPrimary
-                            : Get.context!.kWhitelight,
+                        color: getOptionColor(index),
+                        border: Border.all(
+                            color: Get.context!.kNeutral, width: 0.5),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: Text(
-                          controller.answer[index],
+                          stringOptions[index],
                           style: TextStyleUtil.kText14_4(
                             fontWeight: FontWeight.w400,
-                            color: controller.selectedOptionIndex.value == index
-                                ? Colors.white
-                                : Colors.black,
+                            color: getOptionTextColor(index),
                           ),
                         ),
                       ),
-                    )),
-              ),
+                    ));
+              },
             ),
-          )
+          ),
         ],
       ),
     );
+  }
+
+  Color getOptionColor(int index) {
+    if (controller.selectedOption != null) {
+      bool isCorrectOption =
+          (controller.selectedOption == controller.questions[0].answer! - 1);
+      return (controller.selectedOption == index)
+          ? (isCorrectOption ? Colors.green : Colors.red)
+          : Colors.white;
+    }
+
+    return Colors.white;
+  }
+
+  Color getOptionTextColor(int index) {
+    if (controller.selectedOption != null) {
+      return (controller.selectedOption == index) ? Colors.white : Colors.black;
+    }
+
+    return Colors.black;
   }
 }

@@ -7,7 +7,6 @@ import 'package:teaching_with_purpose_student/app/services/custom_button.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
 
-
 import '../controllers/live_quizz_controller.dart';
 
 class LiveQuizzView extends GetView<LiveQuizzController> {
@@ -15,71 +14,75 @@ class LiveQuizzView extends GetView<LiveQuizzController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  PreferredSize(
+      appBar: PreferredSize(
           preferredSize: Size.fromHeight(46.kh),
           child: CustomAppBar(title: 'Live Quizzes', isBack: true)),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 69),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 69),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [ 
-               Text(
+            children: [
+              Text(
                 'Quizz',
-                style: TextStyleUtil.kText16_5(
-                    fontWeight: FontWeight.w500),
-              ),
-            8.kheightBox,
-               Text(
-                '1 Question',
-                style: TextStyleUtil.kText14_4(
-                    fontWeight: FontWeight.w400,color: context.kLightTextColor),
-              ),
-            16.kheightBox,
-               Text(
-                'Conducted by:',
-                style: TextStyleUtil.kText16_5(
-                    fontWeight: FontWeight.w500),
-              ),
-            8.kheightBox,
-               Text(
-                'John Doe',
-                style: TextStyleUtil.kText14_4(
-                    fontWeight: FontWeight.w400,color: context.kLightTextColor),
-              ),
-            16.kheightBox,
-               Text(
-                'Topics Covered',
-                style: TextStyleUtil.kText16_5(
-                    fontWeight: FontWeight.w500),
-              ),
-            8.kheightBox,
-               Text(
-                '',
-                style: TextStyleUtil.kText14_4(
-                    fontWeight: FontWeight.w400,color: context.kLightTextColor),
-              ),
-             16.kheightBox,
-               Text(
-                'Instructions',
-                style: TextStyleUtil.kText16_5(
-                    fontWeight: FontWeight.w500),
+                style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500),
               ),
               8.kheightBox,
-               Text(
-                'Read instructions carefully',
+              Text(
+                '1 Question',
                 style: TextStyleUtil.kText14_4(
-                    fontWeight: FontWeight.w400,color: context.kLightTextColor),
+                    fontWeight: FontWeight.w400,
+                    color: Get.context!.kLightTextColor),
+              ),
+              16.kheightBox,
+              Text(
+                'Conducted by:',
+                style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500),
+              ),
+              8.kheightBox,
+              Text(
+                controller.conductedBy ?? '',
+                style: TextStyleUtil.kText14_4(
+                    fontWeight: FontWeight.w400,
+                    color: Get.context!.kLightTextColor),
+              ),
+              16.kheightBox,
+              //    Text(
+              //     'Topics Covered',
+              //     style: TextStyleUtil.kText16_5(
+              //         fontWeight: FontWeight.w500),
+              //   ),
+              // 8.kheightBox,
+              //    Text(
+              //     '',
+              //     style: TextStyleUtil.kText14_4(
+              //         fontWeight: FontWeight.w400,color: context.kLightTextColor),
+              //   ),
+              //  16.kheightBox,
+              Text(
+                'Instructions',
+                style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500),
+              ),
+              8.kheightBox,
+              Text(
+                controller.quizInstructions ?? '',
+                style: TextStyleUtil.kText14_4(
+                    fontWeight: FontWeight.w400,
+                    color: Get.context!.kLightTextColor),
               ),
               137.kheightBox,
-                SizedBox(
-                    width: 343.kw,
-                    height: 56.kh,
-                    child: StButton(title: 'Starts Quizz', onTap: () {Get.offAllNamed(Routes.START_QUIZZ);})),                                                             
+              SizedBox(
+                  width: 343.kw,
+                  height: 56.kh,
+                  child: StButton(
+                      title: 'Starts Quizz',
+                      onTap: () {
+                        Get.offAllNamed(Routes.START_QUIZZ);
+                      })),
             ],
           ),
-        ), 
+        ),
       ),
     );
   }

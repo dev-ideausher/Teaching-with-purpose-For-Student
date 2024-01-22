@@ -69,23 +69,26 @@ class SubjectsView extends GetView<SubjectsController> {
         borderRadius: BorderRadius.circular(15)
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: Row(
           children: [
          Assets.svg.chapter.svg(height: 24.kh,width: 24.kw),
          15.kwidthBox,
-         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-           children: [
-             Text(
-               title,
-               style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w600),
-             ),
-             Text(
-               concepts,
-               style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
-             ),
-           ],
+         Expanded(
+           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+             children: [
+               Text(
+                 title,
+                 style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w600),
+               ),
+               Text(
+                 concepts,
+                 maxLines: 2,
+                 style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
+               ),
+             ],
+           ),
          )  
           ],
         ),
@@ -94,9 +97,3 @@ class SubjectsView extends GetView<SubjectsController> {
   );
  }
 }
-
-//  {
-//                    'chapterName' : chapter?.chapterName,
-//                    'concept': chapter?.concept,
-                   
-//                   }

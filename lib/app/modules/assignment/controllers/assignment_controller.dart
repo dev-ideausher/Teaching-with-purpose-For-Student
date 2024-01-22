@@ -10,6 +10,7 @@ import 'package:path/path.dart' as path;
 import 'package:teaching_with_purpose_student/app/data/models/assignments_list_model.dart';
 import 'package:teaching_with_purpose_student/app/data/models/upload_file_model.dart';
 import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
+import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
 import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 
@@ -90,8 +91,8 @@ Future<void> listAssignments()async{
 
 void showLoaderAndSubmit() {
     route.Get.dialog(
-      const Center(
-        child: CircularProgressIndicator(color: Colors.green),
+       Center(
+        child: CircularProgressIndicator(color: route.Get.context!.kPrimary),
       ),
     );
 

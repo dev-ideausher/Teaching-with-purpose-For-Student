@@ -54,7 +54,7 @@ class EditProfileController extends GetxController {
     if(pickedImagePath.isNotEmpty){
       await uploadImage();
     }else{
-      updateProfile();
+      Utils.showMySnackbar(desc: 'Choose a image to Update Profile');
     }
   }
 
@@ -84,10 +84,7 @@ class EditProfileController extends GetxController {
  //-----------------------update Profile-------------------------------
   Future<void> updateProfile() async {  
   var body = {
-    "name" : nameController.value.text,
-    "Image": uploadFileModel?.url,
-    "gender": genderController.value.text,
-    "dob": dOBController.value.text
+    "Image": uploadFileModel?.url
   };
   log('$body');
   log(Get.find<GetStorageService>().id.toString());

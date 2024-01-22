@@ -11,6 +11,7 @@ class FeedbacksController extends GetxController {
   var  nameController = TextEditingController();
   var  subjectController = TextEditingController();
   var classController = TextEditingController();
+  var suggestionController = TextEditingController();
 
   List<String> ratingNumbers = ['1','2','3','4','5'];
 
@@ -42,7 +43,7 @@ Future<void> sendFeedbacks() async {
         "visualConnectivity": selectedRatings[2],
         "coordinate": selectedRatings[3],
         "learningMaterial": selectedRatings[4],
-        "desc": "The class was informative and engaging."
+        "desc": subjectController.text
       };
 
       log('body..$body');
@@ -68,6 +69,7 @@ Future<void> sendFeedbacks() async {
   nameController.dispose() ;
   subjectController.dispose() ;
   classController.dispose() ;
+  suggestionController.dispose();
   super.onClose();
   }
 }

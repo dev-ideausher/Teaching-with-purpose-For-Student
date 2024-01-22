@@ -35,4 +35,23 @@ class WidgetsConstants{
     ),
   );
 }
+
+ static  Widget buildRowWidget({required String title,required String subtitle,required void Function() onTap}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+            title,
+            style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
+        149.kwidthBox,
+        InkWell(
+          onTap: onTap,
+          child: Text(
+              subtitle,
+              style: TextStyleUtil.kText14_4(
+            fontWeight: FontWeight.w400, color: Get.context!.kPrimary)),
+        )
+      ],
+    );
+  }
 }

@@ -94,7 +94,14 @@ class FeedbacksView extends GetView<FeedbacksController> {
             textAlign: TextAlign.left,
             style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400),
           ),
-          40.kheightBox,
+          8.kheightBox,
+          StTextField(
+            hint: 'Enter Suggestions', 
+            controller: controller.suggestionController,
+            minLine: 4,
+            maxLines: 8,
+          ),
+          32.kheightBox,
           SizedBox(
             width: 343.kw,
             height: 56.kh,
