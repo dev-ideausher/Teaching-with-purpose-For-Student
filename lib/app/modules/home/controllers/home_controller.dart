@@ -20,7 +20,9 @@ class HomeController extends GetxController {
   Rx<SubjectsListModel> subjectLists= SubjectsListModel().obs;
   Rx<EventsModel> eventsModel= EventsModel().obs;
   Rx<QuizModel> quizModel = QuizModel().obs;
-
+  
+  RxList<SubjectsListModelData?> subjectItems = <SubjectsListModelData?>[].obs;
+  RxString selectedSubject = 'English'.obs;
 
    @override
   void onInit() {
@@ -86,6 +88,10 @@ class HomeController extends GetxController {
     }finally{
       isLoding(false);
     }
+  }
+
+void updateSubjectItems() {
+    subjectItems.assignAll(subjectLists.value.data ?? []);
   }
 
 //-----------------------Events-------------------------------

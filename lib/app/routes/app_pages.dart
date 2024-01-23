@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:teaching_with_purpose_student/app/modules/assignment/views/assignment_list_view.dart';
 
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
@@ -212,10 +211,6 @@ class AppPages {
       name: _Paths.ASSIGNMENT,
       page: () => const AssignmentView(),
       binding: AssignmentBinding(),
-    ),
-    GetPage(
-      name: _Paths.ASSIGNMENTS_LIST,
-      page: () => const AssignmentListView(),
     ),
     GetPage(
       name: _Paths.CHAPTERS,

@@ -9,15 +9,14 @@ import 'package:teaching_with_purpose_student/app/services/responsive_size.dart'
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
 
 class StartQuizzView extends GetWidget<LiveQuizzController> {
-  const StartQuizzView({Key? key}) : super(key: key);
+const StartQuizzView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.kh),
-        child: CustomAppBar(title: 'Live Quizzes', isBack: true),
-      ),
+        child: CustomAppBar(title: 'Live Quizzes', isBack: true)),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
@@ -52,10 +51,8 @@ class StartQuizzView extends GetWidget<LiveQuizzController> {
     );
   }
 
-  Widget buildQuizzCard(
-      {required String question, required List<dynamic> options}) {
-    List<String> stringOptions =
-        options.map((option) => option.toString()).toList();
+  Widget buildQuizzCard({required String question, required List<dynamic> options}) {
+    List<String> stringOptions = options.map((option) => option.toString()).toList();
     return SizedBox(
       height: 420.kh,
       width: 345.kw,

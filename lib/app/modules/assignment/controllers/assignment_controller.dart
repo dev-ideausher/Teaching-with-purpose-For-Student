@@ -10,23 +10,27 @@ import 'package:path/path.dart' as path;
 import 'package:teaching_with_purpose_student/app/data/models/assignments_list_model.dart';
 import 'package:teaching_with_purpose_student/app/data/models/upload_file_model.dart';
 import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
-import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
 import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 
 class AssignmentController extends GetxController {
   RxBool isLoding = false.obs;
   RxString selectedFile = ''.obs;
-  var assignmentAsnwerController = TextEditingController();
-  Rx<AssignmentsListModel> assignmentList = AssignmentsListModel().obs;
+  var asnwerController = TextEditingController();
   Rx<UploadFileModel> fileUpload = UploadFileModel().obs;
+  Rx<AssignmentsListModelData> assignment = AssignmentsListModelData().obs;
 
 @override
   void onInit() {
-    listAssignments();
-    super.onInit();
+  getArguments();
+  super.onInit();
   }
 
+
+
+void getArguments(){
+assignment.value = route.Get.arguments;
+}
 
 
 Future<String?> pickFile() async {
@@ -39,24 +43,6 @@ Future<String?> pickFile() async {
   }
   return null;
 }
-
-//-----------------------List-Assignments-------------------------------
-
-Future<void> listAssignments()async{
-  isLoding(true);
-  try {
-    final responce = await APIManager.getAssignment();
-      if (responce.data['status'] == true) {
-        log('assignment...${responce.data}');
-        assignmentList.value = AssignmentsListModel.fromJson(responce.data);
-      }
-  } catch (e) {
-    Utils.showMySnackbar(desc:'$e' );
-  }finally{
-    isLoding(false);
-  }
-}
-
 
 //-----------------------File upload-------------------------------
 
@@ -89,25 +75,45 @@ Future<void> listAssignments()async{
 
 //-----------------------Submit Assignment-------------------------------
 
-void showLoaderAndSubmit() {
-    route.Get.dialog(
-       Center(
-        child: CircularProgressIndicator(color: route.Get.context!.kPrimary),
-      ),
-    );
+ Future<void> submitAssignment() async {
+    if (asnwerController.text.isEmpty || selectedFile.value.isEmpty) {
+      Utils.showMySnackbar(desc: 'Answer required');
+      return;
+    }
+    String? pdfUrl = '';
+    String? id = assignment.value.Id;
 
-    Future.delayed(const Duration(seconds: 2), () {
-      route.Get.back();
-      Utils.showMySnackbar(desc: 'Assignment submitted successfully');
-      route.Get.toNamed(Routes.BOTTOM_NAVBAR);
-    });
+    if (selectedFile.value.isNotEmpty) {
+      await uploadFile(selectedFile.value);
+      pdfUrl = fileUpload.value.url;
+    }
+
+    var body = {
+      "assignmentId": id,
+      "answers": asnwerController.text,
+      "uploadPdf": pdfUrl
+    };
+
+    try {
+      final responce = await APIManager.submitAssignment(body: body);
+
+      if (responce.data['status'] == true) {
+        log('responce ..${responce.data}');
+
+        Utils.showMySnackbar(desc: 'Submitted successfully');
+
+        route.Get.toNamed(Routes.BOTTOM_NAVBAR);
+      } else {
+        Utils.showMySnackbar(desc: responce.data['message']);
+      }
+    } catch (e) {
+      log('submittError..$e');
+    }
   }
-
-
 
 @override
   void onClose() {
-   assignmentAsnwerController.dispose();
-    super.onClose();
+  asnwerController.dispose();
+  super.onClose();
   }
 }

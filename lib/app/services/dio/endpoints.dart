@@ -31,8 +31,6 @@ class Endpoints {
 
   static const String getAssignment = "api/assignment/get";
 
-  static const String submitAssignmnet = "api/assignment/save";
-
   static const String updateAssignment = "api/assignment/update";
 
   static const String getChapter = "api/chapter/get?subjectId=";
@@ -46,6 +44,12 @@ class Endpoints {
   static const String feedbacks = "api/feedback/save";
 
   static const String ratings = "api/rating/save";
+
+  static const String sumbmitAssignment = "api/assigmentsubmit/save";
+
+
+
+
 
 
 

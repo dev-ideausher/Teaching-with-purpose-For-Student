@@ -20,16 +20,16 @@ class LiveQuizzController extends GetxController {
     super.onInit();
   }
 
-  void getArguments() {
+  void getArguments() async{
     final Map<String, dynamic> args = Get.arguments;
     conductedBy = args['conductedBy'];
     quizInstructions = args['instructions'];
     questions = args['questions'];
-    startTimer();
+     await startTimer();
   }
 
 
-  void startTimer() {
+ Future <void> startTimer()async {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_timerSeconds.value > 0) {
         _timerSeconds.value--;
@@ -50,7 +50,6 @@ class LiveQuizzController extends GetxController {
 
 
   void selectOption(int optionIndex) {
-    resetTimer();
     selectedOption = optionIndex;
     update();
   }
@@ -88,4 +87,7 @@ class LiveQuizzController extends GetxController {
       ),
     );
   }
+
+
+//-----------------------Submit Mark-------------------------------
 }

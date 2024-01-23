@@ -34,7 +34,6 @@ abstract class Routes {
   static const START_QUIZZ = _Paths.START_QUIZZ;
   static const QUIZZ_SUCESS = _Paths.QUIZZ_SUCESS;
   static const ASSIGNMENT = _Paths.ASSIGNMENT;
-  static const ASSIGNMENTS_LIST = _Paths.ASSIGNMENTS_LIST;
   static const CHAPTERS = _Paths.CHAPTERS;
   static const SELECTED_CHAPTER = _Paths.SELECTED_CHAPTER;
   static const QUESTIONS = _Paths.QUESTIONS;
@@ -73,7 +72,6 @@ abstract class _Paths {
   static const START_QUIZZ = '/start-quizz';
   static const QUIZZ_SUCESS = '/quizz-suces';
   static const ASSIGNMENT = '/assignment';
-  static const ASSIGNMENTS_LIST = '/assignments-list';
   static const CHAPTERS = '/chapters';
   static const SELECTED_CHAPTER = '/selected-chapter';
   static const QUESTIONS = '/questions';

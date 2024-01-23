@@ -16,67 +16,68 @@ class AssignmentView extends GetView<AssignmentController> {
   const AssignmentView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final assignment = controller.assignment.value;
     return Scaffold(
-      appBar: PreferredSize( preferredSize: Size.fromHeight(46.kh),
-      child: CustomAppBar(title: 'Assignments', isBack: true)),
-      body: Obx(() => controller.isLoding.value?
-      Center(child: CircularProgressIndicator(color: context.kPrimary)):
-      SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 39),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                controller.assignmentList.value.data?.first?.title?? '',
-                style: TextStyleUtil.kText16_5(
-                    fontWeight: FontWeight.w500),
-              ),
-              4.kheightBox,  
-              Text(
-                controller.assignmentList.value.data?.first?.desc?? '',
-                maxLines: 7,
-                style: TextStyleUtil.kText16_5(
-                    fontWeight: FontWeight.w400,color: context.kLightTextColor),
-              ),
-            32.kheightBox,
-              Text(
-                'Your answer',
-                style: TextStyleUtil.kText16_5(
-                    fontWeight: FontWeight.w500),
-              ),
-            16.kheightBox,
-              StTextField(
-                hint: 'Enter Description',
-                controller: controller.assignmentAsnwerController,
-                minLine: 6,
-                maxLines: 8,
-              ),
-            24.kheightBox,
-              Center(
-                child: Text(
-                  'Or',
-                  style: TextStyleUtil.kText16_5(
-                      fontWeight: FontWeight.w500),
+        appBar: PreferredSize(
+        preferredSize: Size.fromHeight(46.kh),
+        child: CustomAppBar(title: 'Assignments', isBack: true)),
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 39),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  assignment.title?? '',
+                  style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500),
                 ),
-              ),
-            24.kheightBox,
-            buildAddButton(text: 'Upload Assignment', onTap: ()async{
-              controller.pickFile();
-            }),
-            24.kheightBox,
+                4.kheightBox,
+                Text(
+                  assignment.desc ?? '',
+                  maxLines: 7,
+                  style: TextStyleUtil.kText16_5(
+                      fontWeight: FontWeight.w400,
+                      color: context.kLightTextColor),
+                ),
+                32.kheightBox,
+                Text(
+                  'Your answer',
+                  style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500),
+                ),
+                16.kheightBox,
+                StTextField(
+                  hint: 'Type your answer.',
+                  controller: controller.asnwerController,
+                  minLine: 6,
+                  maxLines: 8,
+                ),
+                24.kheightBox,
+                Center(
+                  child: Text(
+                    'Or',
+                    style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500),
+                  ),
+                ),
+                24.kheightBox,
+                buildAddButton(
+                    text: 'Upload Assignment',
+                    onTap: () async {
+                      controller.pickFile();
+                    }),
+                24.kheightBox,
                 SizedBox(
                     width: 343.kw,
                     height: 56.kh,
-                    child: StButton(title: 'Submit', onTap: (){controller.showLoaderAndSubmit();}))
-            ],
+                    child: StButton(
+                        title: 'Submit',
+                        onTap: () {
+                          controller.submitAssignment();
+                        }))
+              ],
+            ),
           ),
-        ),
-      ),
-
-      )
-    );
+        ));
   }
 
 Widget buildAddButton({required String text,required void Function() onTap}){

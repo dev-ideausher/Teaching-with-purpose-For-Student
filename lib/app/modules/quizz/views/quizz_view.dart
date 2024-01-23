@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/components/commom_richtext.dart';
 import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart';
+import 'package:teaching_with_purpose_student/app/data/models/subjects_list_model.dart';
 import 'package:teaching_with_purpose_student/app/modules/home/controllers/home_controller.dart';
 import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
@@ -21,41 +22,19 @@ class QuizzView extends GetView<QuizzController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(46.kh),
-          child: CustomAppBar(title: 'Live Quizzes', isBack: true)),
-      body: SingleChildScrollView(
+      preferredSize: Size.fromHeight(46.kh),
+      child: CustomAppBar(title: 'Live Quizzes', isBack: true)),
+      body: Obx(() => Get.find<HomeController>().isLoding.value?
+      CircularProgressIndicator(color: context.kPrimary,):
+      SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Obx(() => Container(
-                    decoration: BoxDecoration(
-                      color: context.kWhite,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Get.context!.kNeutral,width: 0.5),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                        child: DropdownButton2<String>(
-                      isExpanded: true,
-                      hint: Text(
-                        'Select subject',
-                        style: TextStyleUtil.kText14_4(
-                            fontWeight: FontWeight.w400,
-                            color: Get.context!.kLightTextColor),
-                      ),
-                      items: controller.subjects
-                          .map((String item) => DropdownMenuItem<String>(
-                              value: item, child: Text(item,style: TextStyleUtil.kText16_5(
-                            fontWeight: FontWeight.w400,
-                            color: Get.context!.kLightTextColor))))
-                          .toList(),
-                      value: controller.sub.value,
-                      onChanged: (String? value) =>controller.selectSubjects(value!),
-                    )),
-                  )),
-              32.kheightBox,
+           buildSubjectDropdawn(),
+           32.kheightBox,
            SizedBox(
             height: 184.kh,
              child: ListView.separated(
@@ -71,7 +50,7 @@ class QuizzView extends GetView<QuizzController> {
                     t1: '',
                     t2: 'Conducted by ',
                     t3: conductedBy,
-                    t4: 'Topics covered: ',
+                    t4: '',
                     t5: '',
                     onTap: (){
                       log('onPressed');
@@ -88,6 +67,7 @@ class QuizzView extends GetView<QuizzController> {
           ),
         ),
       ),
+      )
     );
   }
 
@@ -157,5 +137,42 @@ class QuizzView extends GetView<QuizzController> {
         ),
       ),
     );
+  }
+
+Widget buildSubjectDropdawn() {
+    return Obx(() => Container(
+          decoration: BoxDecoration(
+              color: Get.context!.kWhite,
+              borderRadius: BorderRadius.circular(8)),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton2<SubjectsListModelData?>(
+              isExpanded: true,
+              hint: Text('Select Subject',
+                  style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400)),
+              items: controller.home.subjectItems
+                  .map((SubjectsListModelData? item) =>
+                      DropdownMenuItem<SubjectsListModelData?>(
+                        value: item,
+                        child: Text(item?.subject ?? '',
+                            style: TextStyleUtil.kText16_5(
+                                fontWeight: FontWeight.w400)),
+                      ))
+                  .toList(),
+              value: controller.home.selectedSubject.value == ''
+                  ? null
+                  : controller.home.subjectItems.firstWhere(
+                      (SubjectsListModelData? item) =>
+                          item?.subject ==
+                          controller.home.selectedSubject.value),
+              onChanged: (SubjectsListModelData? value) {
+                log('Selected Subject: ${value?.subject}');
+                Future.delayed(Duration.zero, () {
+                  controller.home.selectedSubject.value =
+                      value?.subject ?? '';
+                });
+              },
+            ),
+          ),
+        ));
   }
 }

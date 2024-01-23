@@ -1,19 +1,20 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:teaching_with_purpose_student/app/modules/home/controllers/home_controller.dart';
 
 class QuizzController extends GetxController {
-  var sub = 'Physics'.obs;
-  final List<String> subjects = [
-    'Physics',
-    'English',
-    'Mathematics',
-    'Chemistry',
-    'Biology',
-    'history',
-    'Geography'
-  ];
 
+  final home = Get.find<HomeController>();
 
-  void selectSubjects(String subjects) {
-    sub.value = subjects;
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      initilizeSubjects();
+    });
+  }
+
+  void initilizeSubjects(){
+    home.updateSubjectItems();
   }
 }

@@ -15,11 +15,11 @@ class APIManager {
 
   static Future<Response> uploadFile({required dynamic body}) async =>await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true).post(Endpoints.uploadFile, data: body, options: Options(headers: {'Content-Type': 'multipart/form-data'}));
 
-  static Future<Response> submitAssignment({required dynamic body}) async => await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true).post(Endpoints.submitAssignmnet, data: body);
-
   static Future<Response> sendFeedback({required dynamic body}) async => await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true).post(Endpoints.feedbacks, data: body);
 
   static Future<Response> giveRating({required dynamic body}) async => await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true).post(Endpoints.ratings, data: body);
+
+  static Future<Response> submitAssignment({required dynamic body}) async => await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true).post(Endpoints.sumbmitAssignment, data: body);
 
 
 

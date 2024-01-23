@@ -7,6 +7,7 @@ import 'package:open_file/open_file.dart';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:teaching_with_purpose_student/app/data/models/assignments_list_model.dart';
 import 'package:teaching_with_purpose_student/app/data/models/chapters_model_data.dart';
 import 'package:teaching_with_purpose_student/app/data/models/questions_model.dart';
 import 'package:teaching_with_purpose_student/app/data/models/questions_model_data.dart';
@@ -29,6 +30,7 @@ class ChaptersController extends GetxController with GetSingleTickerProviderStat
   Rx<QuestionsModel> questionsModel = QuestionsModel().obs;
   Rx<QuestionsModelData> questionsModelData = QuestionsModelData().obs;
   Rx<ChaptersModelData> chapterDetailsModel = ChaptersModelData().obs;
+  Rx<AssignmentsListModel> assignmentList = AssignmentsListModel().obs;
   Rx<VideoPlayerController?> videoController = VideoPlayerController.network('').obs;
 
 
@@ -45,6 +47,7 @@ class ChaptersController extends GetxController with GetSingleTickerProviderStat
     chapterDetailsModel.value = Get.arguments;
     chapterVideoInitialize();
     await getQuestions();
+    await getAssignments();
 
   }
 
@@ -177,6 +180,25 @@ void downloadPdf() async {
   }
 
 
+//-----------------------List-Assignments-------------------------------
+
+Future<void> getAssignments() async {
+    isLoding(true);
+    try {
+      final responce = await APIManager.getAssignment();
+
+      if (responce.data['status'] == true) {
+
+        log('assignment...${responce.data}');
+        
+        assignmentList.value = AssignmentsListModel.fromJson(responce.data);
+      }
+    } catch (e) {
+      Utils.showMySnackbar(desc: '$e');
+    } finally {
+      isLoding(false);
+    }
+  }
 
   @override
   void onClose() {
