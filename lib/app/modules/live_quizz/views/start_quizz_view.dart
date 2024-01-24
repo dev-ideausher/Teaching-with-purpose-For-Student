@@ -21,16 +21,15 @@ const StartQuizzView({Key? key}) : super(key: key);
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                  buildQuizzCard(
-                      question: controller.questions[0].questionText ?? '',
-                      options: controller.questions[0].options ?? []),
-                  40.kheightBox,
+              buildQuizzCard(
+              question: controller.questions[0].questionText ?? '',
+              options: controller.questions[0].options ?? []),
+              40.kheightBox,
               Obx(() => Text(
                     'Time Remaining: ${controller.timerSeconds.value} seconds',
-                    style: TextStyleUtil.kText16_5(
-                      fontWeight: FontWeight.w600,
-                      color: context.kPrimary,
+                    style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w600,color: context.kPrimary,
                     ),
                   )),
               20.kheightBox,
@@ -68,22 +67,18 @@ const StartQuizzView({Key? key}) : super(key: key);
               151.kwidthBox,
               Text(
                 '10 points',
-                style: TextStyleUtil.kText16_5(
-                  fontWeight: FontWeight.w400,
-                  color: Get.context!.kLightTextColor,
+                style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor,
                 ),
               ),
             ],
           ),
           24.kheightBox,
-          //show question here
           Text(
             question,
             maxLines: 3,
             style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400),
           ),
           24.kheightBox,
-          //options here
           SizedBox(
             height: 260.kw,
             width: 343.kw,
@@ -100,16 +95,13 @@ const StartQuizzView({Key? key}) : super(key: key);
                       width: 343.kw,
                       decoration: BoxDecoration(
                         color: getOptionColor(index),
-                        border: Border.all(
-                            color: Get.context!.kNeutral, width: 0.5),
+                        border: Border.all(color: Get.context!.kNeutral, width: 0.5),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: Text(
                           stringOptions[index],
-                          style: TextStyleUtil.kText14_4(
-                            fontWeight: FontWeight.w400,
-                            color: getOptionTextColor(index),
+                          style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: getOptionTextColor(index),
                           ),
                         ),
                       ),
@@ -124,8 +116,7 @@ const StartQuizzView({Key? key}) : super(key: key);
 
   Color getOptionColor(int index) {
     if (controller.selectedOption != null) {
-      bool isCorrectOption =
-          (controller.selectedOption == controller.questions[0].answer! - 1);
+      bool isCorrectOption = (controller.selectedOption == controller.questions[0].answer! - 1);
       return (controller.selectedOption == index)
           ? (isCorrectOption ? Colors.green : Colors.red)
           : Colors.white;

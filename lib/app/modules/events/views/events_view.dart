@@ -39,8 +39,8 @@ class EventsView extends GetView<EventsController> {
                     image: Get.find<HomeController>().eventsModel.value.data?[index]?.image == null?
                     Image.asset(Assets.images.football.path):
                     CachedNetworkImage(imageUrl:Get.find<HomeController>().eventsModel.value.data?[index]?.image?? '',height: 55.kh,width: 55.kw,fit: BoxFit.cover),
-                    title: Get.find<HomeController>().eventsModel.value.data?[index]?.name ?? 'Sports Day',
-                    date: Get.find<HomeController>().eventsModel.value.data?[index]?.date ?? 'Date:07 July 2023',
+                    title: Get.find<HomeController>().eventsModel.value.data?[index]?.name ?? '',
+                    date: 'Date:${Get.find<HomeController>().eventsModel.value.data?[index]?.date ?? ''}',
                     description: Get.find<HomeController>().eventsModel.value.data?[index]?.desc ?? StringConstants.cardText
                   );
                   },

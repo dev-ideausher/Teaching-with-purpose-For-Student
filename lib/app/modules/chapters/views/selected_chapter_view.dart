@@ -7,6 +7,7 @@ import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/custom_button.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
+import 'package:teaching_with_purpose_student/app/services/storage.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
 import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 
@@ -18,27 +19,25 @@ const SelectedChapterView ({Key? key}) : super(key: key);
 @override
 Widget build(BuildContext context){
   final data = controller.chapterDetailsModel.value;
+  Get.find<GetStorageService>().chapter = data.chapterName.toString();
+  Get.find<GetStorageService>().concept = data.concept.toString();
   return Scaffold(
    appBar: PreferredSize(preferredSize: Size.fromHeight(46.kh),
    child: CustomAppBar(title: data.chapterName?? '', isBack: true)),
    body: SingleChildScrollView(
     physics: const BouncingScrollPhysics(),
      child: Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 16),
+       padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
               Center(
                 child: Container(
-                  height: 37.kh,
-                  width: 102.kw,
                   color: context.kAverageMarkColor,
-                  child: Center(
-                    child: Text(
-                      data.concept?? '',
-                      maxLines: 1,
-                      style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
-                    ),
+                  child: Text(
+                    data.concept?? '',
+                    maxLines: 1,
+                    style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
                   ),
                 ),
               ),
@@ -136,8 +135,9 @@ Widget build(BuildContext context){
           shrinkWrap: true,
           separatorBuilder: (context, index) => 8.kheightBox, 
           itemCount: controller.questionsModel.value.data?.length?? 0,
-          itemBuilder: (context, index) => InkWell(
-                  onTap: () {
+          itemBuilder: (context, index) => buildquestionWidget(
+            questions: controller.questionsModel.value.data?[index]?.question?? '',
+            onTap: (){
                     if (controller.isVideoWatched) {
                       final data = controller.questionsModel.value.data?[index];
                       Get.toNamed(Routes.QUESTIONS, arguments: data);
@@ -145,19 +145,14 @@ Widget build(BuildContext context){
                        Utils.showMySnackbar(title: 'Attention',desc: 'Please watch the video first');
                     }
                   },
-            child: Text(
-              controller.questionsModel.value.data?[index]?.question?? '',
-              maxLines: 2,
-              style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: context.kLightTextColor),
-              ),
           ) ,
         ),
-          40.kheightBox,
-            SizedBox(
-              width: 343.kw,
-              height: 56.kh,
-              child: StButton(title:'Proceed', onTap: (){}),
-           ),          
+          // 40.kheightBox,
+          //   SizedBox(
+          //     width: 343.kw,
+          //     height: 56.kh,
+          //     child: StButton(title:'Proceed', onTap: (){}),
+          //  ),          
         ],
        ),
      ),
@@ -165,4 +160,24 @@ Widget build(BuildContext context){
   );
 }
 
+
+Widget buildquestionWidget({String? questions, void Function()? onTap}){
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+     Text(
+          questions!,
+          maxLines: 2,
+          style: TextStyleUtil.kText14_4(
+              fontWeight: FontWeight.w400, color: Get.context!.kLightTextColor),
+        ),
+      40.kheightBox,
+        SizedBox(
+          width: 343.kw,
+          height: 56.kh,
+          child: StButton(title: 'Proceed', onTap:onTap),
+        ),
+    ],
+  );
+}
 }

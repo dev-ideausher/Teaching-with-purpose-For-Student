@@ -31,9 +31,7 @@ class LiveQuizzView extends GetView<LiveQuizzController> {
               8.kheightBox,
               Text(
                 '1 Question',
-                style: TextStyleUtil.kText14_4(
-                    fontWeight: FontWeight.w400,
-                    color: Get.context!.kLightTextColor),
+                style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
               ),
               16.kheightBox,
               Text(
@@ -43,9 +41,7 @@ class LiveQuizzView extends GetView<LiveQuizzController> {
               8.kheightBox,
               Text(
                 controller.conductedBy ?? '',
-                style: TextStyleUtil.kText14_4(
-                    fontWeight: FontWeight.w400,
-                    color: Get.context!.kLightTextColor),
+                style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
               ),
               16.kheightBox,
               //    Text(
@@ -67,9 +63,7 @@ class LiveQuizzView extends GetView<LiveQuizzController> {
               8.kheightBox,
               Text(
                 controller.quizInstructions ?? '',
-                style: TextStyleUtil.kText14_4(
-                    fontWeight: FontWeight.w400,
-                    color: Get.context!.kLightTextColor),
+                style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
               ),
               137.kheightBox,
               SizedBox(

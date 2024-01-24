@@ -69,10 +69,10 @@ class HomeView extends GetView<HomeController> {
                       StCard(
                           imagePath:  Endpoints.temImg,
                           title: controller.quizModel.value.data?.first?.subject??'',
-                          text1: '${controller.quizModel.value.data?.first?.date?? ''}, Friday at 3:00pm',
+                          text1: 'Date: ${controller.quizModel.value.data?.first?.date?? ''}',
                           text2: 'Conducted by ',
                           text3: controller.quizModel.value.data?.first?.conductedBy?.name??'',
-                          text4: 'Topics covered: ',
+                          text4: '',
                           text5:''),
                       32.kheightBox,
                       buildRowWidget(title: 'Events',subtitle: 'See all',onTap: () { Get.toNamed(Routes.EVENTS);}),

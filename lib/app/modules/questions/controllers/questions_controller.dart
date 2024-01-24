@@ -9,6 +9,8 @@ class QuestionsController extends GetxController {
   
   Rx<QuestionsModel> questionsModel = QuestionsModel().obs;
   Rx<QuestionsModelData> questionsModelData = QuestionsModelData().obs;
+  RxBool isSolutionVisible = false.obs;
+  List<String> alphabets = ['A)','B)','C)', 'D)'];
 
 @override
   void onInit() {
@@ -17,5 +19,8 @@ class QuestionsController extends GetxController {
     super.onInit();
   }
 
- 
+  void toggleSolutionVisibility() {
+    isSolutionVisible.toggle();
+  }
+
 }

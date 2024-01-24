@@ -29,6 +29,15 @@ class GetStorageService extends GetxService {
 
   set uId(String uId) => _runData.write('firebaseUid', uId);  
 
+  String get chapter => _runData.read('chapter') ?? '';
+
+  set chapter(String chapter) => _runData.write('chapter', chapter);  
+
+  String get concept => _runData.read('concept') ?? '';
+
+  set concept(String concept) => _runData.write('concept', concept); 
+
+
 
 
 

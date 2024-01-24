@@ -45,9 +45,9 @@ class ChaptersController extends GetxController with GetSingleTickerProviderStat
     tabController = TabController(length: 2, vsync: this);
     tabController.addListener(() => selectedTabIndex.value = tabController.index);
     chapterDetailsModel.value = Get.arguments;
+    await getAssignments();
     chapterVideoInitialize();
     await getQuestions();
-    await getAssignments();
 
   }
 
@@ -189,7 +189,7 @@ Future<void> getAssignments() async {
 
       if (responce.data['status'] == true) {
 
-        log('assignment...${responce.data}');
+        //log('assignment...${responce.data}');
         
         assignmentList.value = AssignmentsListModel.fromJson(responce.data);
       }

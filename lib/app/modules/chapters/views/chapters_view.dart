@@ -88,23 +88,29 @@ class ChaptersView extends GetView<ChaptersController> {
          Text('Rorem ipsum dolor sit amet, consectetur',
           style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
         16.kheightBox,
-        ListView.separated(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        separatorBuilder: (context, index) => 8.kheightBox, 
-        itemCount: controller.assignmentList.value.data?.length ?? 0,
-        itemBuilder: (context, index) {
-          return buildAssignments(
-            title: controller.assignmentList.value.data?[index]?.title?? '', 
-            marks: 'marks: ${controller.assignmentList.value.data?[index]?.totalMarks?? ''}', 
-            dueDate: controller.assignmentList.value.data?[index]?.dueDate?? '',
-            onTap: (){
-              final data = controller.assignmentList.value.data?[index];
-              Get.toNamed(Routes.ASSIGNMENT, arguments: data);
-            }
-          );
-        }, 
-      )  
+         Obx(() => controller.isLoding.value?
+          Center(child: CircularProgressIndicator(color: Get.context!.kPrimary)):
+          SizedBox(
+          height: Get.height,
+          child: ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          separatorBuilder: (context, index) => 8.kheightBox, 
+          itemCount: controller.assignmentList.value.data?.length ?? 0,
+          itemBuilder: (context, index) {
+            return buildAssignments(
+              title: controller.assignmentList.value.data?[index]?.title?? '', 
+              marks: 'marks: ${controller.assignmentList.value.data?[index]?.totalMarks?? ''}', 
+              dueDate: controller.assignmentList.value.data?[index]?.dueDate?? '',
+              onTap: (){
+                final data = controller.assignmentList.value.data?[index];
+                Get.toNamed(Routes.ASSIGNMENT, arguments: data);
+              }
+            );
+          }, 
+                ),
+        )
+         )  
 
         ],
       ),

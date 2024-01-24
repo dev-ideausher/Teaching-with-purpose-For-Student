@@ -65,6 +65,15 @@ class AssignmentView extends GetView<AssignmentController> {
                     onTap: () async {
                       controller.pickFile();
                     }),
+                16.kheightBox,
+                Obx(() => Visibility(
+                  visible: controller.selectedFile.value.isNotEmpty,
+                  replacement: const SizedBox.shrink(),
+                  child: Text(
+                    'File:${controller.selectedFile}',
+                    style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500),
+                  ),
+                ),),
                 24.kheightBox,
                 SizedBox(
                     width: 343.kw,

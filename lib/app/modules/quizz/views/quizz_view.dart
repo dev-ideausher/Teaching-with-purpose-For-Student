@@ -25,7 +25,7 @@ class QuizzView extends GetView<QuizzController> {
       preferredSize: Size.fromHeight(46.kh),
       child: CustomAppBar(title: 'Live Quizzes', isBack: true)),
       body: Obx(() => Get.find<HomeController>().isLoding.value?
-      CircularProgressIndicator(color: context.kPrimary,):
+      CircularProgressIndicator(color: context.kPrimary):
       SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -47,9 +47,8 @@ class QuizzView extends GetView<QuizzController> {
                 return buildQuizCard(
                     imgPath: Endpoints.temImg, 
                     title:Get.find<HomeController>().quizModel.value.data?[index]?.subject??'',
-                    t1: '',
-                    t2: 'Conducted by ',
-                    t3: conductedBy,
+                    date: 'Date: ${Get.find<HomeController>().quizModel.value.data?[index]?.date??''}',
+                    conducted: conductedBy,
                     t4: '',
                     t5: '',
                     onTap: (){
@@ -72,65 +71,61 @@ class QuizzView extends GetView<QuizzController> {
   }
 
   Widget buildQuizCard({
-  required String title, required String imgPath, required String t1, 
-  required String t2,required String t3, required String t4, required String t5, void Function()? onTap}){
+  required String title, required String imgPath, required String date,required String conducted, required String t4, required String t5, void Function()? onTap}){
     return InkWell(
       onTap: onTap,
       child: SizedBox(
         height: 184.kh,
-        child: Container(
+        width: 343.kw,
+        child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title,
-                  style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500)),
-              20.kheightBox,
-              Row(
-                children: [
-                  Container(
-                      width: 55.kw,
-                      height: 55.kh,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
-                              image: NetworkImage(imgPath), fit: BoxFit.fill))),
-                  24.kwidthBox,
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          t1,
-                          style: TextStyleUtil.kText14_4(
-                              fontWeight: FontWeight.w400,
-                              color: Get.context!.kLightTextColor),
-                        ),
-                        8.kheightBox,
-                        ReUsableRichText(
-                            text1: t2,
-                            text2: t3,
-                            style1: TextStyleUtil.kText14_4(
-                              fontWeight: FontWeight.w400,
-                            ),
-                            style2: TextStyleUtil.kText14_4(
-                                fontWeight: FontWeight.w400,
-                                color: Get.context!.kLightTextColor)),
-                        16.kheightBox,
-                        ReUsableRichText(
-                            text1: t4,
-                            text2: t5,
-                            style1: TextStyleUtil.kText14_4(
-                              fontWeight: FontWeight.w400,
-                            ),
-                            style2: TextStyleUtil.kText14_4(
-                                fontWeight: FontWeight.w400,
-                                color: Get.context!.kLightTextColor)),
-                      ],
+              Container(
+                  width: 55.kw,
+                  height: 55.kh,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(
+                          image: NetworkImage(imgPath), fit: BoxFit.fill))),
+              24.kwidthBox,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title,
+                        style: TextStyleUtil.kText16_5(
+                            fontWeight: FontWeight.w500)),
+                    4.kheightBox,
+                    Text(
+                      date,
+                      style: TextStyleUtil.kText14_4(
+                          fontWeight: FontWeight.w400,
+                          color: Get.context!.kLightTextColor),
                     ),
-                  ),
-                ],
+                    8.kheightBox,
+                    ReUsableRichText(
+                        text1: 'Conducted by ',
+                        text2: conducted,
+                        style1: TextStyleUtil.kText14_4(
+                          fontWeight: FontWeight.w400,
+                        ),
+                        style2: TextStyleUtil.kText14_4(
+                            fontWeight: FontWeight.w400,
+                            color: Get.context!.kLightTextColor)),
+                    16.kheightBox,
+                    ReUsableRichText(
+                        text1: t4,
+                        text2: t5,
+                        style1: TextStyleUtil.kText14_4(
+                          fontWeight: FontWeight.w400,
+                        ),
+                        style2: TextStyleUtil.kText14_4(
+                            fontWeight: FontWeight.w400,
+                            color: Get.context!.kLightTextColor)),
+                  ],
+                ),
               ),
             ],
           ),
@@ -154,22 +149,13 @@ Widget buildSubjectDropdawn() {
                       DropdownMenuItem<SubjectsListModelData?>(
                         value: item,
                         child: Text(item?.subject ?? '',
-                            style: TextStyleUtil.kText16_5(
-                                fontWeight: FontWeight.w400)),
-                      ))
-                  .toList(),
-              value: controller.home.selectedSubject.value == ''
-                  ? null
-                  : controller.home.subjectItems.firstWhere(
-                      (SubjectsListModelData? item) =>
-                          item?.subject ==
-                          controller.home.selectedSubject.value),
+                            style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400)),)).toList(),
+              value: controller.home.selectedSubject.value == '' ? null
+                  : controller.home.subjectItems.firstWhere((SubjectsListModelData? item) =>
+                          item?.subject == controller.home.selectedSubject.value),
               onChanged: (SubjectsListModelData? value) {
-                log('Selected Subject: ${value?.subject}');
-                Future.delayed(Duration.zero, () {
-                  controller.home.selectedSubject.value =
-                      value?.subject ?? '';
-                });
+              log('Selected Subject: ${value?.subject}');
+              controller.home.selectedSubject.value = value?.subject ?? ''; 
               },
             ),
           ),

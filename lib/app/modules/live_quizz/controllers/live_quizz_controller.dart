@@ -13,6 +13,7 @@ class LiveQuizzController extends GetxController {
 
   late Timer _timer;
   final RxInt _timerSeconds = 20.obs;
+  //final RxList<String> stringOptions = <String>[].obs;
 
   @override
   void onInit() {
@@ -34,7 +35,7 @@ class LiveQuizzController extends GetxController {
       if (_timerSeconds.value > 0) {
         _timerSeconds.value--;
       } else {
-        showTimeoutDialog();
+        // showTimeoutDialog();
         timer.cancel();
       }
     });
@@ -90,4 +91,5 @@ class LiveQuizzController extends GetxController {
 
 
 //-----------------------Submit Mark-------------------------------
+
 }
