@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart';
 import 'package:teaching_with_purpose_student/app/modules/live_quizz/controllers/live_quizz_controller.dart';
-import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/custom_button.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
@@ -17,29 +16,43 @@ const StartQuizzView({Key? key}) : super(key: key);
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.kh),
         child: CustomAppBar(title: 'Live Quizzes', isBack: true)),
-      body: SingleChildScrollView(
+        body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+               Text(
+                'Time left',
+                style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
+                16.kheightBox,
+                Center(
+                  child: Container(
+                  height: 96.kh,
+                  width: 96.kw,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                  color: context.kPrimary,
+                  shape: BoxShape.circle),
+                  child: Obx(() => Text(
+                  '0.${controller.timerSeconds.value}:sec',
+                    style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w600, color: Get.context!.kWhite),
+                  ),)
+                ),
+                ),
+              40.kheightBox,
               buildQuizzCard(
+              marks:controller.questions[0].points.toString() ,
               question: controller.questions[0].questionText ?? '',
               options: controller.questions[0].options ?? []),
               40.kheightBox,
-              Obx(() => Text(
-                    'Time Remaining: ${controller.timerSeconds.value} seconds',
-                    style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w600,color: context.kPrimary,
-                    ),
-                  )),
-              20.kheightBox,
               SizedBox(
                 width: 343.kw,
                 height: 56.kh,
                 child: StButton(
                   title: 'Submit',
                   onTap: () {
-                    Get.toNamed(Routes.QUIZZ_SUCESS);
+                    controller.submitQuizz();
                   },
                 ),
               ),
@@ -50,7 +63,7 @@ const StartQuizzView({Key? key}) : super(key: key);
     );
   }
 
-  Widget buildQuizzCard({required String question, required List<dynamic> options}) {
+  Widget buildQuizzCard({required String question, required String marks, required List<dynamic> options}) {
     List<String> stringOptions = options.map((option) => option.toString()).toList();
     return SizedBox(
       height: 420.kh,
@@ -61,12 +74,12 @@ const StartQuizzView({Key? key}) : super(key: key);
           Row(
             children: [
               Text(
-                'Question 1 ',
+                'Question',
                 style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w600),
               ),
               151.kwidthBox,
               Text(
-                '10 points',
+                'Points : $marks',
                 style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor,
                 ),
               ),

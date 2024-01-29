@@ -21,6 +21,8 @@ class APIManager {
 
   static Future<Response> submitAssignment({required dynamic body}) async => await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true).post(Endpoints.sumbmitAssignment, data: body);
 
+  static Future<Response> submitQuizz({required dynamic body}) async => await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true).post(Endpoints.submitQuizz, data: body);
+
 
 
 //Get API

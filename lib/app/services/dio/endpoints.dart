@@ -47,6 +47,8 @@ class Endpoints {
 
   static const String sumbmitAssignment = "api/assigmentsubmit/save";
 
+  static const String submitQuizz = "api/quizsubmit/attend";
+
 
 
 

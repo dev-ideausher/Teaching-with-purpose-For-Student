@@ -59,7 +59,6 @@ class EventsView extends GetView<EventsController> {
           decoration: BoxDecoration(
             color: Get.context!.kWhite,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Get.context!.kNeutral, width: 0.5),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<String>(

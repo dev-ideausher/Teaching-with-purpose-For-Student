@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:teaching_with_purpose_student/app/components/commom_richtext.dart';
 import 'package:teaching_with_purpose_student/app/components/common_table.dart';
+import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart';
 import 'package:teaching_with_purpose_student/app/components/stsubject_vertical.dart';
 import 'package:teaching_with_purpose_student/app/constants/image_constant.dart';
+import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
@@ -19,19 +21,11 @@ class ProgressView extends GetView<ProgressController> {
       initialIndex: controller.selectedTabIndex.value,
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: context.kGreyBack,
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          title: Text(
-            textAlign: TextAlign.center,
-            'Progress',
-            style: TextStyleUtil.kText20_6(fontWeight: FontWeight.w600),
-          ),
-          centerTitle: true,
-          bottom: TabBar(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(100.kh),
+            child: CustomAppBar(title: 'Progress', isBack: false,
+            bottom: TabBar(
               controller: controller.tabController,
-              indicatorPadding: const EdgeInsets.symmetric(horizontal: 16),
               indicatorWeight: 3,
               indicatorColor: context.kPrimary,
               labelColor: context.kPrimary,
@@ -39,9 +33,9 @@ class ProgressView extends GetView<ProgressController> {
               tabs: const [
                 Tab(text: 'Progress'),
                 Tab(text: 'Performance'),
-              ]),
-        ),
-        body: TabBarView(
+          ]) ,
+        )),
+           body: TabBarView(
             controller: controller.tabController,
             physics: const NeverScrollableScrollPhysics(),
             children: [
@@ -108,7 +102,6 @@ Widget overallTrackingWidget() {
       Text(
         'Overall Tracking',
         style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
-        textAlign: TextAlign.center, // Move textAlign to the style property
       ),
       16.kheightBox,
       GridView(
@@ -121,10 +114,10 @@ Widget overallTrackingWidget() {
           mainAxisSpacing: 16,
         ),
         children: [
-          percentageIndicater(0.75, '75%', 'Assignment completion tracking'),
-          percentageIndicater(0.75, '75%', 'Homework completion tracking'),
-          percentageIndicater(0.75, '75%', 'Exam score tracking'),
-          percentageIndicater(1, 'View', 'Student Behavior'),
+          percentageIndicater(0.75, '75%', 'Assignment completion tracking',() => Get.toNamed(Routes.ASSIGNMENT_COMPLETION)),
+          percentageIndicater(0.75, '75%', 'Homework completion tracking',()=> Get.toNamed(Routes.COURSE_COMPLETION)),
+          percentageIndicater(0.75, '75%', 'Exam score tracking',()=>Get.toNamed(Routes.EXAM_SCORE)),
+          percentageIndicater(1, 'View', 'Student Behavior',()=>Get.toNamed(Routes.STUDENT_BEHAVIOR)),
         ],
       ),
       32.kheightBox,
@@ -169,7 +162,7 @@ Widget overallTrackingWidget() {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Teacher’s Feedback',style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
+        'Teacher’s Feedback',style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
         24.kheightBox,
         feedback(ImageConstant.profileImg, 'Esther Howard','It’s good to see improvement in English so far.', '01:50 pm'),
         8.kheightBox,
@@ -185,40 +178,43 @@ Widget overallTrackingWidget() {
       children: [
         Text('Key Focus Areas',style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
         24.kheightBox,
-        keyFocus(ImageConstant.focousIcon,'Mathematics : ', 'Relations and Functions I', 'Performance : ', 'Average'),
+        keyFocus(ImageConstant.focousIcon,'Mathematics : ', 'Relations and Functions I', 'Average'),
         8.kheightBox,
-        keyFocus(ImageConstant.focousIcon,'Mathematics : ', 'Relations and Functions I', 'Performance : ', 'Average'),
+        keyFocus(ImageConstant.focousIcon,'Mathematics : ', 'Relations and Functions I', 'Average'),
       ],
     );
   }
 
   // prcentage progress indiacater for marks and all
-Widget percentageIndicater(double percent, String text1, String text2) {
-  return SizedBox(
-    width: 165.kw,
-    height: 122.kh,
-    child: Padding(
-      padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-      child: Column(
-        children: [
-          CircularPercentIndicator(
-            radius: 30,
-            lineWidth: 8,
-            progressColor: Get.context!.kPrimary,
-            animation: true,
-            percent: percent,
-            center: Text( text1,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
-          ),
-          8.kheightBox,
-          Text( text2, textAlign: TextAlign.center,style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400)),
-        ],
+Widget percentageIndicater(double percent, String text1, String text2,void Function () onTap) {
+  return InkWell(
+    onTap: onTap,
+    child: SizedBox(
+      width: 165.kw,
+      height: 122.kh,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+        child: Column(
+          children: [
+            CircularPercentIndicator(
+              radius: 30,
+              lineWidth: 8,
+              progressColor: Get.context!.kPrimary,
+              animation: true,
+              percent: percent,
+              center: Text( text1,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+            ),
+            8.kheightBox,
+            Text( text2, textAlign: TextAlign.center,style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400)),
+          ],
+        ),
       ),
     ),
   );
 }
 
 //Widget for feedback section by teachers
-  Widget feedback(String feebackimg, String text1, String text2, String time) {
+  Widget feedback(String feebackimg, String teacherName, String statement, String time) {
     return SizedBox(
       height: 79.kh,
       width: 343.kw,
@@ -234,9 +230,9 @@ Widget percentageIndicater(double percent, String text1, String text2) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text( text1,textAlign: TextAlign.center,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500)),
+                  Text( teacherName,textAlign: TextAlign.center,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500)),
                   4.kheightBox,
-                  Text( text2, maxLines: 2,
+                  Text( statement, maxLines: 2,
                     style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
                 ],
               ),
@@ -251,7 +247,7 @@ Widget percentageIndicater(double percent, String text1, String text2) {
   }
 
   //widget for key-focus
-  Widget keyFocus(String focusImg, String title1, String title2, String title3,String title4) {
+  Widget keyFocus(String focusImg, String subject, String area,String performance) {
     return SizedBox(
       width: 343.kw,
       height: 60.kh,
@@ -266,14 +262,14 @@ Widget percentageIndicater(double percent, String text1, String text2) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ReUsableRichText(
-                    text1: title1,
-                    text2: title2,
+                    text1: subject,
+                    text2: area,
                     style1:TextStyleUtil.kText14_4(fontWeight: FontWeight.w600),
                     style2: TextStyleUtil.kText14_4(fontWeight: FontWeight.w600,color: Get.context!.kLightTextColor)),
                 8.kheightBox,
                 ReUsableRichText(
-                    text1: title3,
-                    text2: title4,
+                    text1: 'Performance : ',
+                    text2: performance,
                     style1:TextStyleUtil.kText12_4(fontWeight: FontWeight.w400),
                     style2: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
               ],
@@ -283,3 +279,5 @@ Widget percentageIndicater(double percent, String text1, String text2) {
       ),
     );
   }
+
+

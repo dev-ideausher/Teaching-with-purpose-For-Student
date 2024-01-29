@@ -37,6 +37,10 @@ abstract class Routes {
   static const CHAPTERS = _Paths.CHAPTERS;
   static const SELECTED_CHAPTER = _Paths.SELECTED_CHAPTER;
   static const QUESTIONS = _Paths.QUESTIONS;
+  static const ASSIGNMENT_COMPLETION = _Paths.ASSIGNMENT_COMPLETION;
+  static const COURSE_COMPLETION = _Paths.COURSE_COMPLETION;
+  static const STUDENT_BEHAVIOR = _Paths.STUDENT_BEHAVIOR;
+  static const EXAM_SCORE = _Paths.EXAM_SCORE;
 }
 
 abstract class _Paths {
@@ -75,4 +79,8 @@ abstract class _Paths {
   static const CHAPTERS = '/chapters';
   static const SELECTED_CHAPTER = '/selected-chapter';
   static const QUESTIONS = '/questions';
+  static const ASSIGNMENT_COMPLETION = '/assignment-completion';
+  static const COURSE_COMPLETION = '/course-completion';
+  static const STUDENT_BEHAVIOR = '/student-behavior';
+  static const EXAM_SCORE = '/exam-score';
 }

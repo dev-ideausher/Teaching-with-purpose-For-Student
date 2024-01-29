@@ -5,7 +5,6 @@ import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart'
 import 'package:teaching_with_purpose_student/app/modules/chapters/controllers/chapters_controller.dart';
 import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
-import 'package:teaching_with_purpose_student/app/services/custom_button.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 import 'package:teaching_with_purpose_student/app/services/storage.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
@@ -162,22 +161,19 @@ Widget build(BuildContext context){
 
 
 Widget buildquestionWidget({String? questions, void Function()? onTap}){
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-     Text(
-          questions!,
-          maxLines: 2,
-          style: TextStyleUtil.kText14_4(
-              fontWeight: FontWeight.w400, color: Get.context!.kLightTextColor),
-        ),
-      40.kheightBox,
-        SizedBox(
-          width: 343.kw,
-          height: 56.kh,
-          child: StButton(title: 'Proceed', onTap:onTap),
-        ),
-    ],
+  return InkWell(
+    onTap: onTap,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+       Text(
+            questions!,
+            maxLines: 2,
+            style: TextStyleUtil.kText14_4(
+                fontWeight: FontWeight.w400, color: Get.context!.kLightTextColor),
+          ),
+      ],
+    ),
   );
 }
 }

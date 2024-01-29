@@ -24,9 +24,7 @@ class QuizzView extends GetView<QuizzController> {
       appBar: PreferredSize(
       preferredSize: Size.fromHeight(46.kh),
       child: CustomAppBar(title: 'Live Quizzes', isBack: true)),
-      body: Obx(() => Get.find<HomeController>().isLoding.value?
-      CircularProgressIndicator(color: context.kPrimary):
-      SingleChildScrollView(
+      body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
@@ -35,37 +33,42 @@ class QuizzView extends GetView<QuizzController> {
             children: [
            buildSubjectDropdawn(),
            32.kheightBox,
-           SizedBox(
-            height: 184.kh,
-             child: ListView.separated(
-             separatorBuilder: (context, index) => 8.kheightBox, 
-             itemCount: Get.find<HomeController>().quizModel.value.data?.length?? 0,
-              itemBuilder: (context, index) {
-              String conductedBy = Get.find<HomeController>().quizModel.value.data?[index]?.conductedBy?.name ?? '';
-              String instructions = Get.find<HomeController>().quizModel.value.data?[index]?.instructions ?? '';
-              final data = Get.find<HomeController>().quizModel.value.data?[index]?.question;
-                return buildQuizCard(
-                    imgPath: Endpoints.temImg, 
-                    title:Get.find<HomeController>().quizModel.value.data?[index]?.subject??'',
-                    date: 'Date: ${Get.find<HomeController>().quizModel.value.data?[index]?.date??''}',
-                    conducted: conductedBy,
-                    t4: '',
-                    t5: '',
-                    onTap: (){
-                      log('onPressed');
-                      Get.toNamed(Routes.LIVE_QUIZZ, arguments: {
-                      'conductedBy': conductedBy,
-                      'instructions': instructions,
-                      'questions': data,
-                    }
-                    );}
+            Obx(() { 
+                  final selectedSubject = controller.home.selectedSubject.value;
+                  final quizzes = Get.find<HomeController>().quizModel.value.data ?? [];
+                  final filteredQuizzes = selectedSubject.isEmpty?
+                  quizzes: quizzes.where((quiz) => quiz?.subject == selectedSubject).toList();
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    separatorBuilder: (context, index) => 8.kheightBox,
+                    itemCount: filteredQuizzes.length,
+                    itemBuilder: (context, index) {
+                      String conductedBy = filteredQuizzes[index]?.conductedBy?.name ?? '';
+                      String instructions = filteredQuizzes[index]?.instructions ?? '';
+                      final data = filteredQuizzes[index]?.question;
+                      return buildQuizCard(
+                        imgPath: Endpoints.temImg,
+                        title: filteredQuizzes[index]?.subject ?? '',
+                        date: 'Date: ${filteredQuizzes[index]?.date ?? ''}',
+                        conducted: conductedBy,
+                        t4: '',
+                        t5: '',
+                        onTap: () {
+                          log('onPressed');
+                          Get.toNamed(Routes.LIVE_QUIZZ, arguments: {
+                            'conductedBy': conductedBy,
+                            'instructions': instructions,
+                            'questions': data,
+                          });
+                        },
+                      );
+                    },
                   );
-              }),
-           )
+                })
             ],
           ),
         ),
-      ),
       )
     );
   }
@@ -88,42 +91,31 @@ class QuizzView extends GetView<QuizzController> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       image: DecorationImage(
-                          image: NetworkImage(imgPath), fit: BoxFit.fill))),
+                      image: NetworkImage(imgPath), fit: BoxFit.fill))),
               24.kwidthBox,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(title,
-                        style: TextStyleUtil.kText16_5(
-                            fontWeight: FontWeight.w500)),
+                        style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500)),
                     4.kheightBox,
                     Text(
                       date,
-                      style: TextStyleUtil.kText14_4(
-                          fontWeight: FontWeight.w400,
-                          color: Get.context!.kLightTextColor),
+                      style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
                     ),
                     8.kheightBox,
                     ReUsableRichText(
                         text1: 'Conducted by ',
+                        style1: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
                         text2: conducted,
-                        style1: TextStyleUtil.kText14_4(
-                          fontWeight: FontWeight.w400,
-                        ),
-                        style2: TextStyleUtil.kText14_4(
-                            fontWeight: FontWeight.w400,
-                            color: Get.context!.kLightTextColor)),
+                        style2: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
                     16.kheightBox,
                     ReUsableRichText(
                         text1: t4,
+                        style1: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
                         text2: t5,
-                        style1: TextStyleUtil.kText14_4(
-                          fontWeight: FontWeight.w400,
-                        ),
-                        style2: TextStyleUtil.kText14_4(
-                            fontWeight: FontWeight.w400,
-                            color: Get.context!.kLightTextColor)),
+                        style2: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
                   ],
                 ),
               ),

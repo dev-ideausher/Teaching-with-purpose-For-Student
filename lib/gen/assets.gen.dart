@@ -99,6 +99,14 @@ class $AssetsImagesGen {
   AssetGenImage get getstartedimg =>
       const AssetGenImage('assets/images/getstartedimg.png');
 
+  /// File path: assets/images/gpd_ellips_largeleft.png
+  AssetGenImage get gpdEllipsLargeleft =>
+      const AssetGenImage('assets/images/gpd_ellips_largeleft.png');
+
+  /// File path: assets/images/gpd_ellips_largeright.png
+  AssetGenImage get gpdEllipsLargeright =>
+      const AssetGenImage('assets/images/gpd_ellips_largeright.png');
+
   /// File path: assets/images/img.png
   AssetGenImage get img => const AssetGenImage('assets/images/img.png');
 
@@ -184,6 +192,8 @@ class $AssetsImagesGen {
         focusFilled,
         football,
         getstartedimg,
+        gpdEllipsLargeleft,
+        gpdEllipsLargeright,
         img,
         onboardone,
         onboardthree,
@@ -280,6 +290,12 @@ class $AssetsSvgGen {
   SvgGenImage get discusionDec =>
       const SvgGenImage('assets/svg/discusion_dec.svg');
 
+  /// File path: assets/svg/download.svg
+  SvgGenImage get download => const SvgGenImage('assets/svg/download.svg');
+
+  /// File path: assets/svg/edit_pencil.svg
+  SvgGenImage get editPencil => const SvgGenImage('assets/svg/edit_pencil.svg');
+
   /// File path: assets/svg/edit_profile.svg
   SvgGenImage get editProfile =>
       const SvgGenImage('assets/svg/edit_profile.svg');
@@ -291,6 +307,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/ellipse_light.svg
   SvgGenImage get ellipseLight =>
       const SvgGenImage('assets/svg/ellipse_light.svg');
+
+  /// File path: assets/svg/eye.svg
+  SvgGenImage get eye => const SvgGenImage('assets/svg/eye.svg');
 
   /// File path: assets/svg/feedback_outline.svg
   SvgGenImage get feedbackOutline =>
@@ -371,9 +390,12 @@ class $AssetsSvgGen {
         chemistry,
         comment,
         discusionDec,
+        download,
+        editPencil,
         editProfile,
         educationProfile,
         ellipseLight,
+        eye,
         feedbackOutline,
         geography,
         helpCircle,

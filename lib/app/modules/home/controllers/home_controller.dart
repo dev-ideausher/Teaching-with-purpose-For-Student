@@ -118,7 +118,7 @@ void updateSubjectItems() {
     try {
       final responce = await APIManager.getQuizz();
       if (responce.statusCode == 200) {
-        // log('Quizz...${responce.data}');
+        //log('Quizz...${responce.data}');
         quizModel.value = QuizModel.fromJson(responce.data);
       }
     } catch (e) {

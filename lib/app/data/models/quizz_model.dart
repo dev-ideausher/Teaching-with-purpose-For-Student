@@ -4,13 +4,13 @@
 class QuizModelDataQuestion {
 /*
 {
-  "questionText": "Which of the following is a noun? ",
+  "questionText": "Which of the following is a synonym for benevolent",
   "answer": 2,
   "points": 10,
   "options": [
-    "Run"
+    "Malevolent "
   ],
-  "_id": "65ae2164797fd61e0e063d3b"
+  "_id": "65b2784d2ea2c9ecd2012732"
 } 
 */
 
@@ -40,22 +40,6 @@ class QuizModelDataQuestion {
     options = arr0;
     }
     Id = json['_id']?.toString();
-  }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['questionText'] = questionText;
-    data['answer'] = answer;
-    data['points'] = points;
-    if (options != null) {
-      final v = options;
-      final arr0 = [];
-  for (var v in v!) {
-  arr0.add(v);
-  }
-      data['options'] = arr0;
-    }
-    data['_id'] = Id;
-    return data;
   }
 }
 
@@ -94,30 +78,33 @@ class QuizModelDataConductedBy {
 class QuizModelData {
 /*
 {
-  "_id": "65ae2164797fd61e0e063d3a",
+  "_id": "65b2784d2ea2c9ecd2012731",
   "subject": "English",
   "conductedBy": {
     "_id": "657021118c2337e8d3e2e307",
     "name": "John Doe",
     "__t": "Teachers"
   },
-  "date": "2024-01-22",
+  "date": "2024-01-25",
   "image": "",
-  "instructions": "Choose the correct answer from the options given",
+  "topicCover": [
+    ""
+  ],
+  "instructions": "Understand the Question and then only answer ",
   "question": [
     {
-      "questionText": "Which of the following is a noun? ",
+      "questionText": "Which of the following is a synonym for benevolent",
       "answer": 2,
       "points": 10,
       "options": [
-        "Run"
+        "Malevolent "
       ],
-      "_id": "65ae2164797fd61e0e063d3b"
+      "_id": "65b2784d2ea2c9ecd2012732"
     }
   ],
   "isDeleted": false,
-  "createdAt": "2024-01-22T08:03:48.531Z",
-  "updatedAt": "2024-01-22T08:03:48.531Z",
+  "createdAt": "2024-01-25T15:03:41.178Z",
+  "updatedAt": "2024-01-25T15:03:41.178Z",
   "__v": 0
 } 
 */
@@ -127,6 +114,7 @@ class QuizModelData {
   QuizModelDataConductedBy? conductedBy;
   String? date;
   String? image;
+  List<String?>? topicCover;
   String? instructions;
   List<QuizModelDataQuestion?>? question;
   bool? isDeleted;
@@ -140,6 +128,7 @@ class QuizModelData {
     this.conductedBy,
     this.date,
     this.image,
+    this.topicCover,
     this.instructions,
     this.question,
     this.isDeleted,
@@ -153,6 +142,14 @@ class QuizModelData {
     conductedBy = (json['conductedBy'] != null) ? QuizModelDataConductedBy.fromJson(json['conductedBy']) : null;
     date = json['date']?.toString();
     image = json['image']?.toString();
+  if (json['topicCover'] != null) {
+  final v = json['topicCover'];
+  final arr0 = <String>[];
+  v.forEach((v) {
+  arr0.add(v.toString());
+  });
+    topicCover = arr0;
+    }
     instructions = json['instructions']?.toString();
   if (json['question'] != null) {
   final v = json['question'];
@@ -167,63 +164,43 @@ class QuizModelData {
     updatedAt = json['updatedAt']?.toString();
     V = json['__v']?.toInt();
   }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['_id'] = Id;
-    data['subject'] = subject;
-    if (conductedBy != null) {
-      data['conductedBy'] = conductedBy!.toJson();
-    }
-    data['date'] = date;
-    data['image'] = image;
-    data['instructions'] = instructions;
-    if (question != null) {
-      final v = question;
-      final arr0 = [];
-  for (var v in v!) {
-  arr0.add(v!.toJson());
-  }
-      data['question'] = arr0;
-    }
-    data['isDeleted'] = isDeleted;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
-    data['__v'] = V;
-    return data;
-  }
+
 }
 
 class QuizModel {
 /*
 {
   "status": true,
-  "result": 1,
+  "result": 2,
   "data": [
     {
-      "_id": "65ae2164797fd61e0e063d3a",
+      "_id": "65b2784d2ea2c9ecd2012731",
       "subject": "English",
       "conductedBy": {
         "_id": "657021118c2337e8d3e2e307",
         "name": "John Doe",
         "__t": "Teachers"
       },
-      "date": "2024-01-22",
+      "date": "2024-01-25",
       "image": "",
-      "instructions": "Choose the correct answer from the options given",
+      "topicCover": [
+        ""
+      ],
+      "instructions": "Understand the Question and then only answer ",
       "question": [
         {
-          "questionText": "Which of the following is a noun? ",
+          "questionText": "Which of the following is a synonym for benevolent",
           "answer": 2,
           "points": 10,
           "options": [
-            "Run"
+            "Malevolent "
           ],
-          "_id": "65ae2164797fd61e0e063d3b"
+          "_id": "65b2784d2ea2c9ecd2012732"
         }
       ],
       "isDeleted": false,
-      "createdAt": "2024-01-22T08:03:48.531Z",
-      "updatedAt": "2024-01-22T08:03:48.531Z",
+      "createdAt": "2024-01-25T15:03:41.178Z",
+      "updatedAt": "2024-01-25T15:03:41.178Z",
       "__v": 0
     }
   ]
@@ -248,22 +225,11 @@ class QuizModel {
   v.forEach((v) {
   arr0.add(QuizModelData.fromJson(v));
   });
-    data = arr0;
+    this.data = arr0;
     }
   }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['status'] = status;
-    data['result'] = result;
-    if (this.data != null) {
-      final v = this.data;
-      final arr0 = [];
-  for (var v in v!) {
-  arr0.add(v!.toJson());
-  }
-      data['data'] = arr0;
-    }
-    return data;
-  }
+
 }
+
+
 

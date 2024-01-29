@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:flutter/material.dart';
 
@@ -126,10 +126,6 @@ class ScheduleView extends GetView<ScheduleController> {
             child: Column(
               children: List.generate(controller.getSelectedDayTable().length,
                   (index) {
-                // final selectedDayTable = controller.getSelectedDayTable();
-                // log('Selected Day Table Length: ${selectedDayTable.length}');
-                // for (final item in selectedDayTable) {
-                // log('Time: ${item.time}, Subject: ${item.subject}, Teacher: ${item.subjectTeacher}');}
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -151,3 +147,83 @@ class ScheduleView extends GetView<ScheduleController> {
     );
   }
 }
+
+//   Widget buildTimeTable() {
+//     return Column(
+//       children: [
+//       16.kheightBox,
+//       Table(
+//         children: [
+//           TableRow(
+//             children: [
+//               TableCell(
+//                 child: Center(
+//                   child: Text(
+//                     'Time',
+//                     style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400),
+//                   ),
+//                 ),
+//               ),
+//               TableCell(
+//                 child: Center(
+//                   child: Text(
+//                     'Subject',
+//                     style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400),
+//                   ),
+//                 ),
+//               ),
+//               TableCell(
+//                 child: Center(
+//                   child: Text(
+//                     'Teacher',
+//                     style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400),
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//      8.kheightBox,
+//       Expanded(
+//         child: ListView.builder(
+//           itemCount: controller.getSelectedDayTable().length,
+//           itemBuilder: (context, index) {
+//             return Table( 
+//               children: [
+//                 TableRow(
+//                   children: [
+//                     TableCell(
+//                       child: Center(
+//                         child: Text(
+//                           '${controller.getSelectedDayTable()[index].time}',
+//                           style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
+//                         ),
+//                       ),
+//                     ),
+//                     TableCell(
+//                       child: Center(
+//                         child: Text(
+//                           '${controller.getSelectedDayTable()[index].subject}',
+//                           style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
+//                         ),
+//                       ),
+//                     ),
+//                     TableCell(
+//                       child: Center(
+//                         child: Text(
+//                           '${controller.getSelectedDayTable()[index].subjectTeacher}',
+//                           style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ],
+//             );
+//           },
+//         ),
+//       ),
+//     ],
+//   );
+// }

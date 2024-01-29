@@ -1,19 +1,23 @@
 import 'dart:async';
-
-import 'package:flutter/material.dart';
+import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/data/models/quizz_model.dart';
 import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
+import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
+import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 
 class LiveQuizzController extends GetxController {
   String? conductedBy = '';
   String? quizInstructions = '';
+
   int? selectedOption;
+  RxInt selectedOptionIndex = RxInt(-1);
+
   List<QuizModelDataQuestion> questions = <QuizModelDataQuestion>[];
+
 
   late Timer _timer;
   final RxInt _timerSeconds = 20.obs;
-  //final RxList<String> stringOptions = <String>[].obs;
 
   @override
   void onInit() {
@@ -21,21 +25,37 @@ class LiveQuizzController extends GetxController {
     super.onInit();
   }
 
-  void getArguments() async{
+  void getArguments() async {
     final Map<String, dynamic> args = Get.arguments;
     conductedBy = args['conductedBy'];
     quizInstructions = args['instructions'];
     questions = args['questions'];
-     await startTimer();
+    await startTimer();
   }
 
+  void selectOption(int optionIndex) {
+    selectedOption = optionIndex;
+    selectedOptionIndex.value = optionIndex;
+    log('index..${selectedOptionIndex.value}');
+  }
 
- Future <void> startTimer()async {
+  void showResults() {
+    _timer.cancel();
+    int correctAnswerNumber = questions[0].answer ?? 0;
+    int correctAnswerIndex = correctAnswerNumber - 1;
+
+    bool isCorrect = selectedOption == correctAnswerIndex;
+
+    if (isCorrect) {
+      
+    } else {}
+  }
+
+  Future<void> startTimer() async {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_timerSeconds.value > 0) {
         _timerSeconds.value--;
       } else {
-        // showTimeoutDialog();
         timer.cancel();
       }
     });
@@ -50,46 +70,37 @@ class LiveQuizzController extends GetxController {
   RxInt get timerSeconds => _timerSeconds;
 
 
-  void selectOption(int optionIndex) {
-    selectedOption = optionIndex;
-    update();
+//-----------------------Submit QuizMark-------------------------------
+  Future<void> submitQuizz() async {
+    if (selectedOptionIndex.value == -1) {
+      Utils.showMySnackbar(desc: "Please select an answer before submitting.");
+      return;
+    }
+
+    var body = {
+      "quizId": "65ae2164797fd61e0e063d3b",
+      "answers": [1],
+      "duration": 300
+    };
+
+    try {
+      final responce = await APIManager.submitQuizz(body: body);
+
+      if (responce.data['status'] == true) {
+        log('quizzSubmit..${responce.data}');
+
+        Get.toNamed(Routes.BOTTOM_NAVBAR);
+      } else {
+        Utils.showMySnackbar(desc: responce.data['message']);
+      }
+    } catch (e) {
+      log('quzzsbmtError..$e');
+    }
   }
-
-
-  void showResults() {
-    _timer.cancel();
-    int correctAnswerNumber = questions[0].answer ?? 0;
-    int correctAnswerIndex = correctAnswerNumber - 1;
-
-    bool isCorrect = selectedOption == correctAnswerIndex;
-
-    if (isCorrect) {
-      Get.toNamed(Routes.QUIZZ_SUCESS);
-    } else {}
-  }
-
-
-  void showTimeoutDialog() {
-    Get.dialog(
-      AlertDialog(
-        title: const Text('Time Out'),
-        content:
-            const Text('You did not select an answer within the given time.'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Get.back();
-
-              Get.offNamed(Routes.BOTTOM_NAVBAR);
-            },
-            child: const Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
-
-
-//-----------------------Submit Mark-------------------------------
-
 }
+
+// {
+//       "quizId": questions[0].Id,
+//       "answers": [selectedOptionIndex.value + 1],
+//       "duration": 20 - timerSeconds.value,
+//     };

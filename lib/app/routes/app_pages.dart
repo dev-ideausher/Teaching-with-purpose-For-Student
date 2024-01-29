@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
+import '../modules/assignment_completion/bindings/assignment_completion_binding.dart';
+import '../modules/assignment_completion/views/assignment_completion_view.dart';
 import '../modules/attendance/bindings/attendance_binding.dart';
 import '../modules/attendance/views/attendance_view.dart';
 import '../modules/book_marks/bindings/book_marks_binding.dart';
@@ -14,6 +16,8 @@ import '../modules/change_password/views/change_pwd_success_view.dart';
 import '../modules/chapters/bindings/chapters_binding.dart';
 import '../modules/chapters/views/chapters_view.dart';
 import '../modules/chapters/views/selected_chapter_view.dart';
+import '../modules/course_completion/bindings/course_completion_binding.dart';
+import '../modules/course_completion/views/course_completion_view.dart';
 import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/education_profile/bindings/education_profile_binding.dart';
@@ -25,6 +29,8 @@ import '../modules/education_profile/views/screens/goals_and%20_plans/goals_plan
 import '../modules/education_profile/views/screens/self_assessment/self_assessment_screen.dart';
 import '../modules/events/bindings/events_binding.dart';
 import '../modules/events/views/events_view.dart';
+import '../modules/exam_score/bindings/exam_score_binding.dart';
+import '../modules/exam_score/views/exam_score_view.dart';
 import '../modules/feedbacks/bindings/feedbacks_binding.dart';
 import '../modules/feedbacks/views/feedbacks_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -54,6 +60,8 @@ import '../modules/schedule/bindings/schedule_binding.dart';
 import '../modules/schedule/views/schedule_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/student_behavior/bindings/student_behavior_binding.dart';
+import '../modules/student_behavior/views/student_behavior_view.dart';
 import '../modules/subjects/bindings/subjects_binding.dart';
 import '../modules/subjects/views/subjects_view.dart';
 import '../modules/verify/bindings/verify_binding.dart';
@@ -225,6 +233,26 @@ class AppPages {
       name: _Paths.QUESTIONS,
       page: () => const QuestionsView(),
       binding: QuestionsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ASSIGNMENT_COMPLETION,
+      page: () => const AssignmentCompletionView(),
+      binding: AssignmentCompletionBinding(),
+    ),
+    GetPage(
+      name: _Paths.COURSE_COMPLETION,
+      page: () => const CourseCompletionView(),
+      binding: CourseCompletionBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENT_BEHAVIOR,
+      page: () => const StudentBehaviorView(),
+      binding: StudentBehaviorBinding(),
+    ),
+    GetPage(
+      name: _Paths.EXAM_SCORE,
+      page: () => const ExamScoreView(),
+      binding: ExamScoreBinding(),
     ),
   ];
 }

@@ -23,8 +23,6 @@ class FeedbacksController extends GetxController {
     log('Rating changed for question $questionIndex: $rating');
   }
 
-
-
 //-----------------------Send feedback-------------------------------
 
 Future<void> sendFeedbacks() async {
@@ -46,7 +44,7 @@ Future<void> sendFeedbacks() async {
         "desc": subjectController.text
       };
 
-      log('body..$body');
+      //log('body..$body');
 
       final responce = await APIManager.sendFeedback(body: body);
 
