@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget {
       leading: isBack == true? IconButton(
       onPressed: () {Get.back();},
       icon: Icon(iconData,color: context.kPrimary)): Container(),
-      backgroundColor:context.kWhite,
+      backgroundColor:context.kGreyBack,
       centerTitle: true,
       elevation: 0,
       actions: actions,

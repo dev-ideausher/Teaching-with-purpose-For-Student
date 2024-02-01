@@ -38,11 +38,11 @@ class ExamScoreView extends GetView<ExamScoreController> {
                             0.75, '75%', 'Exam Score', () {})),
                     Align(
                       alignment: Alignment.topRight,
-                      child: Assets.images.gpdEllipsLargeright.image(),
+                      child:Assets.svg.bigDarkVersionRight.svg(),
                     ),
                     Align(
                       alignment: Alignment.bottomLeft,
-                      child: Assets.images.gpdEllipsLargeleft.image(),
+                      child:Assets.svg.bigDarkVersionLeft.svg(),
                     )
                   ],
                 ),

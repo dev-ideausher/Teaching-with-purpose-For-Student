@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart';
@@ -22,15 +24,48 @@ class SubjectsView extends GetView<SubjectsController> {
         SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
          child: Padding(
-           padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 39),
+           padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
            child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            StTextField(hint: 'Search for courses', 
+            Center(
+              child: Container(
+              height: 37.kh,
+              width: 113.kw,
+              color: context.kconceptColor,
+              child: Center(
+              child: Text(
+              ' Chapters',
+              style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+              ),
+              ),
+            ),
+           40.kheightBox,
+            StTextField(hint: 'Search for chapter,concepts...', 
             controller: controller.searchController,
             prefixIcon: const Icon(Icons.search),
             suffixIcon: const Icon(Icons.arrow_forward),
           ),
+          32.kheightBox,
+          Text(
+          'Resume Chapter',
+          style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),  
+          16.kheightBox,
+          Container(
+          width: double.infinity,
+          height: 192.kh,
+          decoration: BoxDecoration(
+          image: DecorationImage(
+          image: Assets.images.resumeImg.image(
+          filterQuality: FilterQuality.high,
+          fit: BoxFit.cover).image
+        )
+      ),
+    ),
+          8.kheightBox,
+          Text(
+          'Resume the video from where you left.',
+          style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
           32.kheightBox,
           Text(
           'Chapters',
@@ -46,7 +81,12 @@ class SubjectsView extends GetView<SubjectsController> {
                 concepts: controller.chapterModel.value.data?[index]?.concept?? '',
                 onTap: (){
                   final chapter = controller.chapterModel.value.data?[index];
-                  Get.toNamed(Routes.CHAPTERS,arguments: chapter);
+                  String chapterId = controller.chapterModel.value.data?[index]?.Id ?? '';
+                  //log('id......$chapterId');
+                  Get.toNamed(Routes.CHAPTERS,arguments:{
+                    'chapter': chapter,
+                    'chapterId': chapterId,
+                  });
                 }),
               )       
             ],
@@ -80,16 +120,22 @@ class SubjectsView extends GetView<SubjectsController> {
              children: [
                Text(
                  title,
+                 overflow: TextOverflow.ellipsis,
                  style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w600),
                ),
                Text(
                  concepts,
-                 maxLines: 2,
+                 overflow: TextOverflow.ellipsis,
                  style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor),
                ),
              ],
            ),
-         )  
+         ),
+        const Spacer(),
+              Text(
+                '1 Hrs',
+                style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500),
+              ),        
           ],
         ),
       ),

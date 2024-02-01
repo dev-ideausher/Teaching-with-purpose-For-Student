@@ -19,7 +19,6 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: context.kGreyBack,
         body: Obx(
       () => controller.isLoding.value ?
       Center(child: CircularProgressIndicator(color: context.kPrimary)):
@@ -66,14 +65,18 @@ class HomeView extends GetView<HomeController> {
                       32.kheightBox,
                       buildRowWidget(title: 'Live Quizzes',subtitle: 'See all',onTap: () => Get.toNamed(Routes.QUIZZ)),
                       16.kheightBox,
-                      StCard(
-                          imagePath:  Endpoints.temImg,
-                          title: controller.quizModel.value.data?.first?.subject??'',
-                          text1: 'Date: ${controller.quizModel.value.data?.first?.date?? ''}',
-                          text2: 'Conducted by ',
-                          text3: controller.quizModel.value.data?.first?.conductedBy?.name??'',
-                          text4: '',
-                          text5:''),
+                      InkWell(
+                        onTap: () => Get.toNamed(Routes.QUIZZ),
+                        child: StCard(
+                            imagePath:  Endpoints.temImg,
+                            title: controller.quizModel.value.data?.first?.subject??'',
+                            text1: 'Date: ${controller.quizModel.value.data?.first?.date?? ''}',
+                            text2: 'Conducted by ',
+                            text3: controller.quizModel.value.data?.first?.conductedBy?.name??'',
+                            text4: '',
+                            text5:'',
+                            ),
+                      ),
                       32.kheightBox,
                       buildRowWidget(title: 'Events',subtitle: 'See all',onTap: () { Get.toNamed(Routes.EVENTS);}),
                       16.kheightBox,
@@ -160,7 +163,6 @@ class HomeView extends GetView<HomeController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                textAlign: TextAlign.center,
                 'Mark your attendance !',
                 style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
               ),
@@ -172,7 +174,7 @@ class HomeView extends GetView<HomeController> {
                       final bgColor = controller.isClockIn.value? Get.context!.kPrimary
                           : Get.context!.kRed;
                       final buttonText =
-                          controller.isClockIn.value ? 'Clock In' : 'Clock Out';
+                          controller.isClockIn.value ? 'Present' : 'Clock Out';
                       return InkWell(
                         onTap: () => controller.toggleClock(),
                         child: Container(
@@ -187,7 +189,6 @@ class HomeView extends GetView<HomeController> {
                                       ? Get.context!.kLightgreen
                                       : Get.context!.kLightred)),
                           child: Text(
-                            textAlign: TextAlign.center,
                             buttonText,
                             style: TextStyleUtil.kText14_4(
                                 fontWeight: FontWeight.w600,
@@ -199,10 +200,9 @@ class HomeView extends GetView<HomeController> {
                     16.kheightBox,
                     Obx(
                       () => Text(
-                        textAlign: TextAlign.center,
                         controller.timerText.value,
                         style: TextStyleUtil.kText12_4(
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w500,color: Get.context!.kWhite),
                       ),
                     )
                   ],

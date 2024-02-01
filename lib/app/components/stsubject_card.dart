@@ -14,7 +14,6 @@ class MySubjectCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: SizedBox(
-        // color: Colors.amber,
         height: 113.kh,
         width: 96.kw,
         child: Column(
@@ -26,13 +25,12 @@ class MySubjectCard extends StatelessWidget {
                     Center(child: imageWidget),
                     Align(
                      alignment: Alignment.bottomLeft,
-                     child: Assets.svg.ellipseLight.svg(),
+                     child: Assets.svg.smallLightVersion.svg(),
                     )
                   ],
                 )),
             7.kheightBox,
             Text(
-              textAlign: TextAlign.center,
               text,
               style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
             ),

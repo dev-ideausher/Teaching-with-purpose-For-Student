@@ -49,6 +49,8 @@ class Endpoints {
 
   static const String submitQuizz = "api/quizsubmit/attend";
 
+  static const String completeChapter = "api/completechapter/save";
+
 
 
 

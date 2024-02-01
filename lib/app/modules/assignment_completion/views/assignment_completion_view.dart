@@ -26,6 +26,7 @@ class AssignmentCompletionView extends GetView<AssignmentCompletionController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+            //
              subjectsWidget(),
              32.kheightBox,
               SizedBox(
@@ -34,15 +35,15 @@ class AssignmentCompletionView extends GetView<AssignmentCompletionController> {
                 child: Stack(
                   children: [
                     Center(
-                        child: percentageIndicater(
-                            0.75, '75%', 'Assignment Performance', () {})),
+                    child: percentageIndicater(
+                    0.75, '75%', 'Assignment Performance', (){})),
                     Align(
                       alignment: Alignment.topRight,
-                      child: Assets.images.gpdEllipsLargeright.image(),
+                      child:Assets.svg.bigDarkVersionRight.svg(),
                     ),
                     Align(
                       alignment: Alignment.bottomLeft,
-                      child: Assets.images.gpdEllipsLargeleft.image(),
+                      child: Assets.svg.bigDarkVersionLeft.svg(),
                     )
                   ],
                 ),
@@ -77,7 +78,7 @@ class AssignmentCompletionView extends GetView<AssignmentCompletionController> {
                   text1: 'Marks obtained: ',
                   text2: '23/30',
                   svg2: Assets.svg.eye,
-                  svg3: Assets.svg.download),                    
+                  svg3: Assets.svg.download),  
             ],
           ),
         ),
@@ -91,7 +92,6 @@ class AssignmentCompletionView extends GetView<AssignmentCompletionController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          textAlign: TextAlign.center,
           'Subjects',
           style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
         ),
@@ -103,11 +103,9 @@ class AssignmentCompletionView extends GetView<AssignmentCompletionController> {
               separatorBuilder: (context, index) => 16.kwidthBox,
               itemCount: controller.subjectImage.length,
               itemBuilder: (context, index) => Obx(() {
-                    final isSelected =
-                        controller.selectedSubjectIndex.value == index;
+                    final isSelected = controller.selectedSubjectIndex.value == index;
                     return InkWell(
-                      onTap: () =>
-                          controller.selectedSubjectIndex.value = index,
+                      onTap: () => controller.selectedSubjectIndex.value = index,
                       child: CustomSubjectCardVertical(
                         text: controller.subjectText[index],
                         color: isSelected ? context.kRed : context.kWhite,
@@ -120,8 +118,7 @@ class AssignmentCompletionView extends GetView<AssignmentCompletionController> {
     );
   }
 
-  Widget percentageIndicater(
-      double percent, String text1, String text2, void Function() onTap) {
+  Widget percentageIndicater(double percent, String text1, String text2, void Function() onTap) {
     return InkWell(
       onTap: onTap,
       child: SizedBox(
@@ -137,13 +134,12 @@ class AssignmentCompletionView extends GetView<AssignmentCompletionController> {
                 progressColor: Get.context!.kPrimary,
                 animation: true,
                 percent: percent,
-                center: Text(text1,
-                    style:
-                        TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+                center: Text(
+                text1,
+                style:TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
               ),
               8.kheightBox,
               Text(
-                textAlign: TextAlign.center,
                 text2,
                 style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400),
               ),

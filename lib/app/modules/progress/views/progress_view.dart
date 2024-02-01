@@ -21,6 +21,7 @@ class ProgressView extends GetView<ProgressController> {
       initialIndex: controller.selectedTabIndex.value,
       length: 2,
       child: Scaffold(
+        backgroundColor: context.kGreyBack,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(100.kh),
             child: CustomAppBar(title: 'Progress', isBack: false,
@@ -30,9 +31,13 @@ class ProgressView extends GetView<ProgressController> {
               indicatorColor: context.kPrimary,
               labelColor: context.kPrimary,
               unselectedLabelColor: context.kLightTextColor,
-              tabs: const [
-                Tab(text: 'Progress'),
-                Tab(text: 'Performance'),
+              tabs: [
+                SizedBox(
+                  width: 170.kw,
+                  child: const Tab(text: 'Progress')),
+                SizedBox(
+                  width: 170.kw,
+                  child: const Tab(text: 'Performance')),
           ]) ,
         )),
            body: TabBarView(
@@ -59,7 +64,7 @@ class ProgressView extends GetView<ProgressController> {
               ],
             ),
           ),
-        ));
+    ));
   }
 
   // display subjects
@@ -116,8 +121,8 @@ Widget overallTrackingWidget() {
         children: [
           percentageIndicater(0.75, '75%', 'Assignment completion tracking',() => Get.toNamed(Routes.ASSIGNMENT_COMPLETION)),
           percentageIndicater(0.75, '75%', 'Homework completion tracking',()=> Get.toNamed(Routes.COURSE_COMPLETION)),
-          percentageIndicater(0.75, '75%', 'Exam score tracking',()=>Get.toNamed(Routes.EXAM_SCORE)),
-          percentageIndicater(1, 'View', 'Student Behavior',()=>Get.toNamed(Routes.STUDENT_BEHAVIOR)),
+          percentageIndicater(0.75, '75%', 'Exam score tracking',()=> Get.toNamed(Routes.EXAM_SCORE)),
+          percentageIndicater(1, 'View', 'Student Behavior',()=> Get.toNamed(Routes.STUDENT_BEHAVIOR)),
         ],
       ),
       32.kheightBox,
@@ -136,21 +141,22 @@ Widget overallTrackingWidget() {
         ),
         16.kheightBox,
         SizedBox(
-          height: 248.kh,width: 343.kw,
+          height: 248.kh,
+          width: 343.kw,
           child: const CommoncardTable(),
         ),
-      Container(
-      height: 37.kh,width: 343.kw,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Get.context!.kAverageMarkColor),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-        Text('Average marks',style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
-        Text('A', style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)), 
-        Text('86',style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),         
-        ],
-      ),
-      ),
+      // Container(
+      // height: 37.kh,width: 343.kw,
+      // decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Get.context!.kAverageMarkColor),
+      // child: Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //   children: [
+      //   Text('Average marks',style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+      //   Text('A', style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)), 
+      //   Text('86',style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),         
+      //   ],
+      // ),
+      // ),
     32.kheightBox
       ],
     );
@@ -200,6 +206,7 @@ Widget percentageIndicater(double percent, String text1, String text2,void Funct
               radius: 30,
               lineWidth: 8,
               progressColor: Get.context!.kPrimary,
+              backgroundColor: Get.context!.kLightSkyBlue,
               animation: true,
               percent: percent,
               center: Text( text1,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),

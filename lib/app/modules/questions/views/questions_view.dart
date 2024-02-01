@@ -32,7 +32,7 @@ class QuestionsView extends GetView<QuestionsController> {
             children: [
               Center(
                 child: Container(
-                  color: context.kAverageMarkColor,
+                  color: context.kconceptColor,
                   child: Text(
                     concept,
                     maxLines: 1,
@@ -55,19 +55,28 @@ class QuestionsView extends GetView<QuestionsController> {
                 child: Obx(() => Visibility(
                 visible: controller.isSolutionVisible.value,
                 replacement: const SizedBox.shrink(),
-                child:ReUsableRichText(
-                text1: 'Solution: ', 
-                style1: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500),
-                text2: controller.questionsModelData.value.solution?? ''  ,
-                style2: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500,color: context.kPrimary),
-              ) 
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                 Text(
+                'Solution', 
+                style:TextStyleUtil.kText18_6(fontWeight: FontWeight.w500)),
+               16.kheightBox,
+                 Text(
+                controller.questionsModelData.value.solution?? '', 
+                style:TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+                ],
+                ) 
               ))
             ),
             30.kheightBox,
             SizedBox(
               width: 343.kw,
               height: 56.kh,
-              child: StButton(title:'Finish', onTap: ()=> Get.toNamed(Routes.BOTTOM_NAVBAR)),
+              child: StButton(
+                title:'Finish', onTap: () {
+                Get.offAllNamed(Routes.BOTTOM_NAVBAR);
+              }),
            ),
             ],
           ),

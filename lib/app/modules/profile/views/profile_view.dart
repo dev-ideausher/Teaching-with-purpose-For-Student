@@ -20,9 +20,10 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Get.context!.kWhite,
         appBar: PreferredSize(
-            preferredSize: Size.fromHeight(46.kh),
-            child: CustomAppBar(title: 'Profile', isBack: false)),
+        preferredSize: Size.fromHeight(46.kh),
+        child: CustomAppBar(title: 'Profile', isBack: false)),
         body: Obx(() => controller.isLoding.value?
        Center(child: CircularProgressIndicator(color: context.kPrimary,)):
         SingleChildScrollView(

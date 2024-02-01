@@ -1,0 +1,9 @@
+<svg width="94" height="80" viewBox="0 0 94 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="21" cy="60" r="40" fill="#FFFDDF"/>
+<g style="mix-blend-mode:multiply">
+<circle cx="40" cy="40" r="40" transform="matrix(0.840229 -0.542231 0.534109 0.845415 -16.1797 77.6758)" fill="#FBE0E1"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<circle cx="-11" cy="40" r="40" fill="#DDF7E6"/>
+</g>
+</svg>

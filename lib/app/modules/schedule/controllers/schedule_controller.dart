@@ -46,7 +46,48 @@ class ScheduleController extends GetxController {
     selectedIndex.value = index;
   }
 
+//-----------------------Time table-------------------------------
 
+   Future<void> scheduledTimetable() async {
+    isLoading(true);
+    try {
+      final response = await APIManager.getTimeTable();
+
+      if (response.data['status'] == true) {
+
+        classScheduleModel.value = ClassScheduleModel.fromJson(response.data);
+
+        for (final element in classScheduleModel.value.data!) {
+          for (final data in element!.timeTable!) {
+            switch (data.day!.toLowerCase()) {
+              case 'monday':
+                mondayTable.add(data);
+                break;
+              case 'tuesday':
+                tuesdayTable.add(data);
+                break;
+              case 'wednesday':
+                wednesdayTable.add(data);
+                break;
+              case 'thursday':
+                thursdayTable.add(data);
+                break;
+              case 'friday':
+                fridayTable.add(data);
+                break;
+            }
+          }
+        }
+        await examSheet();
+      } else {
+        Utils.showMySnackbar(desc: 'Something went wrong');
+      }
+    } catch (e) {
+      log('Error: $e');
+    } finally {
+      isLoading(false);
+    }
+  }
 
 //-----------------------Exam Sheet-------------------------------
 
@@ -66,48 +107,4 @@ class ScheduleController extends GetxController {
       isLoading(false);
     }
   }
-
-//-----------------------Time table-------------------------------
-
-   Future<void> scheduledTimetable() async {
-    isLoading(true);
-    try {
-      final response = await APIManager.getTimeTable();
-
-      if (response.data['status'] == true) {
-
-        classScheduleModel.value = ClassScheduleModel.fromJson(response.data);
-
-        for (final element in classScheduleModel.value.data!) {
-          for (final data in element!.timeTable!) {
-            switch (data.day!.toLowerCase()) {
-              case 'monday':
-                mondayTable.value.add(data);
-                break;
-              case 'tuesday':
-                tuesdayTable.value.add(data);
-                break;
-              case 'wednesday':
-                wednesdayTable.value.add(data);
-                break;
-              case 'thursday':
-                thursdayTable.value.add(data);
-                break;
-              case 'friday':
-                fridayTable.value.add(data);
-                break;
-            }
-          }
-        }
-        await examSheet();
-      } else {
-        Utils.showMySnackbar(desc: 'Something went wrong');
-      }
-    } catch (e) {
-      log('Error: $e');
-    } finally {
-      isLoading(false);
-    }
-  }
-
 }

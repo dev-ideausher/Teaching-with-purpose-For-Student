@@ -28,9 +28,9 @@ class AssignmentController extends GetxController {
 
 
 
-void getArguments(){
-assignment.value = route.Get.arguments;
-}
+void getArguments() {
+    assignment.value = route.Get.arguments;
+  }
 
 
 Future<String?> pickFile() async {
@@ -76,7 +76,7 @@ Future<String?> pickFile() async {
 //-----------------------Submit Assignment-------------------------------
 
  Future<void> submitAssignment() async {
-    if (asnwerController.text.isEmpty || selectedFile.value.isEmpty) {
+    if (asnwerController.text.isEmpty ) {
       Utils.showMySnackbar(desc: 'Answer required');
       return;
     }

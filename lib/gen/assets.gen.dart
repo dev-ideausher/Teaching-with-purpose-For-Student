@@ -169,6 +169,10 @@ class $AssetsImagesGen {
   AssetGenImage get quizImg1 =>
       const AssetGenImage('assets/images/quiz_img1.png');
 
+  /// File path: assets/images/resume_img.png
+  AssetGenImage get resumeImg =>
+      const AssetGenImage('assets/images/resume_img.png');
+
   /// File path: assets/images/splash.png
   AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
 
@@ -213,6 +217,7 @@ class $AssetsImagesGen {
         profileimg,
         qaImg,
         quizImg1,
+        resumeImg,
         splash,
         tempProfile,
         tempVideoImg
@@ -264,6 +269,14 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/attendance.svg
   SvgGenImage get attendance => const SvgGenImage('assets/svg/attendance.svg');
+
+  /// File path: assets/svg/big_dark_version_ right.svg
+  SvgGenImage get bigDarkVersionRight =>
+      const SvgGenImage('assets/svg/big_dark_version_ right.svg');
+
+  /// File path: assets/svg/big_dark_version_left.svg
+  SvgGenImage get bigDarkVersionLeft =>
+      const SvgGenImage('assets/svg/big_dark_version_left.svg');
 
   /// File path: assets/svg/biology.svg
   SvgGenImage get biology => const SvgGenImage('assets/svg/biology.svg');
@@ -367,6 +380,17 @@ class $AssetsSvgGen {
   SvgGenImage get ratingOutline =>
       const SvgGenImage('assets/svg/rating_outline.svg');
 
+  /// File path: assets/svg/resume_img.svg
+  SvgGenImage get resumeImg => const SvgGenImage('assets/svg/resume_img.svg');
+
+  /// File path: assets/svg/small_dark_version.svg
+  SvgGenImage get smallDarkVersion =>
+      const SvgGenImage('assets/svg/small_dark_version.svg');
+
+  /// File path: assets/svg/small_light_version.svg
+  SvgGenImage get smallLightVersion =>
+      const SvgGenImage('assets/svg/small_light_version.svg');
+
   /// File path: assets/svg/trophy.svg
   SvgGenImage get trophy => const SvgGenImage('assets/svg/trophy.svg');
 
@@ -382,6 +406,8 @@ class $AssetsSvgGen {
         addPlus,
         allSubjects,
         attendance,
+        bigDarkVersionRight,
+        bigDarkVersionLeft,
         biology,
         bookmark,
         boxEffect,
@@ -414,6 +440,9 @@ class $AssetsSvgGen {
         plusAdd,
         qA,
         ratingOutline,
+        resumeImg,
+        smallDarkVersion,
+        smallLightVersion,
         trophy,
         upload
       ];

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:teaching_with_purpose_student/app/modules/live_quizz/controllers/live_quizz_controller.dart';
 import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
-import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/custom_button.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
@@ -29,15 +28,8 @@ class QuizzSucessView extends GetWidget<LiveQuizzController> {
               ),
               8.kheightBox,
               Text(
-                  textAlign: TextAlign.center,
-                  'Congratulations !',
-                  style: TextStyleUtil.kText24_6(fontWeight: FontWeight.w600)),
-              8.kheightBox,
-              Text(
-                  textAlign: TextAlign.center,
-                  'You scored 10 out of 10 marks. !',
-                  style: TextStyleUtil.kText16_5(
-                      fontWeight: FontWeight.w400, color: Get.context!.kNeutral)),
+              'Congratulations !',
+              style: TextStyleUtil.kText24_6(fontWeight: FontWeight.w600)),
               85.kheightBox,
               SizedBox(
                   width: 343.kw,

@@ -24,12 +24,18 @@ class CustomSubjectCardVertical extends StatelessWidget {
             width: 72.kw,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(width: 1,color: color),
-                image: DecorationImage(
-                    image: Assets.images.boxEffect.image().image,
-                    fit: BoxFit.cover)),
-            child: Center(
-              child: svgImage.svg(),
+                border: Border.all(width: 1,color: color)
+              ),
+            child: Stack(
+              children: [
+                Center(
+                  child: svgImage.svg(),
+                ),
+              Align(
+                alignment: Alignment.bottomLeft,
+              child: Assets.svg.smallDarkVersion.svg(),
+              )
+              ],
             ),
           ),
           8.kheightBox,

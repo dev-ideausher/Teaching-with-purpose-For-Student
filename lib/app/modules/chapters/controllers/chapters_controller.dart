@@ -12,7 +12,6 @@ import 'package:teaching_with_purpose_student/app/data/models/chapters_model_dat
 import 'package:teaching_with_purpose_student/app/data/models/questions_model.dart';
 import 'package:teaching_with_purpose_student/app/data/models/questions_model_data.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
-import 'package:teaching_with_purpose_student/app/services/global_data.dart';
 import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 import 'package:video_player/video_player.dart';
 
@@ -23,6 +22,7 @@ class ChaptersController extends GetxController with GetSingleTickerProviderStat
   bool isVideoWatched = false;
   String chapterName = '';
   String concept = '';
+  String id = '';
   RxDouble downloadProgress = 0.0.obs;
   RxBool isDownloadStarted = false.obs;
 
@@ -42,9 +42,11 @@ class ChaptersController extends GetxController with GetSingleTickerProviderStat
   }
 
   void tabBarView()async{
+    final Map<String, dynamic> arguments = Get.arguments;
+    chapterDetailsModel.value = arguments['chapter'];
+     id = arguments['chapterId'];
     tabController = TabController(length: 2, vsync: this);
     tabController.addListener(() => selectedTabIndex.value = tabController.index);
-    chapterDetailsModel.value = Get.arguments;
     await getAssignments();
     chapterVideoInitialize();
     await getQuestions();
@@ -53,11 +55,11 @@ class ChaptersController extends GetxController with GetSingleTickerProviderStat
 
 
 void chapterVideoInitialize() {
- if (isValidVideoUrl()) {
-    initializeVideoController();
-    addVideoListener();
- } 
-}
+    if (isValidVideoUrl()) {
+      initializeVideoController();
+      addVideoListener();
+    }
+  }
 
 bool isValidVideoUrl() {
  if (chapterDetailsModel.value.video != null && chapterDetailsModel.value.video!.isNotEmpty) {
@@ -159,15 +161,16 @@ void downloadPdf() async {
   Future<void> getQuestions() async {
     isLoding(true);
     try {
-      final response = await APIManager.getQuestion(chapterId: Get.find<GlobalData>().id);
+      final response = await APIManager.getQuestion(chapterId:id);
       if (response.data['status'] == true) {
 
-        // log('Questions...${response.data}');
+        log(id);
+        log('Questions...${response.data}');
 
         questionsModel.value = QuestionsModel.fromJson(response.data);
 
       } else {
-        Utils.showMySnackbar(desc: response.data['message']);
+        Utils.showMySnackbar(desc: 'Error while loding question');
       }
     } catch (e) {
 

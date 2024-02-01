@@ -37,6 +37,10 @@ class GetStorageService extends GetxService {
 
   set concept(String concept) => _runData.write('concept', concept); 
 
+  String get chapterId => _runData.read('chapterId') ?? '';
+
+  set chapterId(String chapterId) => _runData.write('chapterId', chapterId); 
+
 
 
 

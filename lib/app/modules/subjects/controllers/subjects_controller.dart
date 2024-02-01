@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/data/models/chapters_model.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
-import 'package:teaching_with_purpose_student/app/services/global_data.dart';
 import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 
 
@@ -43,10 +42,6 @@ Rx<ChaptersModel> chapterModel = ChaptersModel().obs;
       //log('Chapters...${response.data}');
 
       chapterModel.value = ChaptersModel.fromJson(response.data);
-
-      String id = chapterModel.value.data?[0]?.Id ?? '';
-
-      Get.find<GlobalData>().id = id;
 
       } else {
         Utils.showMySnackbar(desc: response.data['message']);

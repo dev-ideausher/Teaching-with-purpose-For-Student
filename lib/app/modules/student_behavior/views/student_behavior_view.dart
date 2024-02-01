@@ -37,11 +37,11 @@ class StudentBehaviorView extends GetView<StudentBehaviorController> {
                     0.75, '75%', 'Student Behavior', () {})),
                     Align(
                       alignment: Alignment.topRight,
-                      child: Assets.images.gpdEllipsLargeright.image(),
+                      child:Assets.svg.bigDarkVersionRight.svg(),
                     ),
                     Align(
                       alignment: Alignment.bottomLeft,
-                      child: Assets.images.gpdEllipsLargeleft.image(),
+                      child:Assets.svg.bigDarkVersionLeft.svg(),
                     )
                   ],
                 ),

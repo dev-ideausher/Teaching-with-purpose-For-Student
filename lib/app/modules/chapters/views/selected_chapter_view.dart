@@ -9,8 +9,6 @@ import 'package:teaching_with_purpose_student/app/services/responsive_size.dart'
 import 'package:teaching_with_purpose_student/app/services/storage.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
 import 'package:teaching_with_purpose_student/app/utils/utils.dart';
-
-
 import '../../../constants/widget_constants.dart';
 
 class SelectedChapterView extends GetWidget<ChaptersController>{
@@ -32,7 +30,7 @@ Widget build(BuildContext context){
         children: [
               Center(
                 child: Container(
-                  color: context.kAverageMarkColor,
+                  color: context.kconceptColor,
                   child: Text(
                     data.concept?? '',
                     maxLines: 1,
@@ -129,7 +127,9 @@ Widget build(BuildContext context){
             style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
             ),
           16.kheightBox,
-          ListView.separated(
+           Obx(() => controller.isLoding.value?
+           Center(child: CircularProgressIndicator(color: context.kPrimary)):
+           ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           separatorBuilder: (context, index) => 8.kheightBox, 
@@ -137,21 +137,16 @@ Widget build(BuildContext context){
           itemBuilder: (context, index) => buildquestionWidget(
             questions: controller.questionsModel.value.data?[index]?.question?? '',
             onTap: (){
-                    if (controller.isVideoWatched) {
-                      final data = controller.questionsModel.value.data?[index];
-                      Get.toNamed(Routes.QUESTIONS, arguments: data);
-                    } else {
-                       Utils.showMySnackbar(title: 'Attention',desc: 'Please watch the video first');
-                    }
-                  },
+              if (controller.isVideoWatched) {
+              final data = controller.questionsModel.value.data?[index];
+               Get.toNamed(Routes.QUESTIONS, arguments: data);
+            } else {
+           Utils.showMySnackbar(title: 'Attention',desc: 'Please watch the video first');
+            }
+          },
           ) ,
-        ),
-          // 40.kheightBox,
-          //   SizedBox(
-          //     width: 343.kw,
-          //     height: 56.kh,
-          //     child: StButton(title:'Proceed', onTap: (){}),
-          //  ),          
+        ),),
+          40.kheightBox,          
         ],
        ),
      ),
@@ -160,20 +155,34 @@ Widget build(BuildContext context){
 }
 
 
-Widget buildquestionWidget({String? questions, void Function()? onTap}){
-  return InkWell(
-    onTap: onTap,
-    child: Column(
+Widget buildquestionWidget({String? questions, void Function()? onTap}) {
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-       Text(
-            questions!,
-            maxLines: 2,
-            style: TextStyleUtil.kText14_4(
-                fontWeight: FontWeight.w400, color: Get.context!.kLightTextColor),
+        Text(
+          questions!,
+          maxLines: 2,
+          style: TextStyleUtil.kText14_4(
+              fontWeight: FontWeight.w400, color: Get.context!.kLightTextColor),
+        ),
+        40.kheightBox,
+        InkWell(
+          onTap: onTap,
+          child: Container(
+            height: 56.kh,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Get.context!.kPrimary,
+              borderRadius: BorderRadius.circular(22),
+            ),
+            child: Center(
+              child: Text('Proced',
+                  style: TextStyleUtil.kText16_5(
+                      fontWeight: FontWeight.w500, color: Get.context!.kWhite)),
+            ),
           ),
+        ),
       ],
-    ),
-  );
-}
+    );
+  }
 }

@@ -35,7 +35,7 @@ const StartQuizzView({Key? key}) : super(key: key);
                   color: context.kPrimary,
                   shape: BoxShape.circle),
                   child: Obx(() => Text(
-                  '0.${controller.timerSeconds.value}:sec',
+                  '0.${controller.timerSeconds.value}sec',
                     style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w600, color: Get.context!.kWhite),
                   ),)
                 ),
@@ -44,17 +44,20 @@ const StartQuizzView({Key? key}) : super(key: key);
               buildQuizzCard(
               marks:controller.questions[0].points.toString() ,
               question: controller.questions[0].questionText ?? '',
-              options: controller.questions[0].options ?? []),
+              options: controller.questions[0].options ?? []
+              ),
               40.kheightBox,
-              SizedBox(
+               SizedBox(
                 width: 343.kw,
                 height: 56.kh,
-                child: StButton(
-                  title: 'Submit',
-                  onTap: () {
-                    controller.submitQuizz();
-                  },
-                ),
+                child: controller.quizSubmitted
+                    ? Text('Quiz Already Submitted')
+                    : StButton(
+                        title: 'Submit',
+                        onTap: () {
+                          controller.submitQuizz();
+                        },
+                      ),
               ),
             ],
           ),
@@ -63,7 +66,7 @@ const StartQuizzView({Key? key}) : super(key: key);
     );
   }
 
-  Widget buildQuizzCard({required String question, required String marks, required List<dynamic> options}) {
+  Widget buildQuizzCard({required String question, required String marks, required List<String?> options}) {
     List<String> stringOptions = options.map((option) => option.toString()).toList();
     return SizedBox(
       height: 420.kh,
@@ -118,7 +121,8 @@ const StartQuizzView({Key? key}) : super(key: key);
                           ),
                         ),
                       ),
-                    ));
+                    )
+                );
               },
             ),
           ),

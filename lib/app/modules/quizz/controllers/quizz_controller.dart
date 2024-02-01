@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/modules/home/controllers/home_controller.dart';
 
@@ -8,13 +8,16 @@ class QuizzController extends GetxController {
 
   @override
   void onInit() {
+    initilizeSubjects();
     super.onInit();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      initilizeSubjects();
-    });
   }
 
   void initilizeSubjects(){
     home.updateSubjectItems();
   }
 }
+
+
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   initilizeSubjects();
+    // });

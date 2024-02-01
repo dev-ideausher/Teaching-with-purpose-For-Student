@@ -37,11 +37,11 @@ class CourseCompletionView extends GetView<CourseCompletionController> {
                             0.75, '75%', 'Course completion', () {})),
                     Align(
                       alignment: Alignment.topRight,
-                      child: Assets.images.gpdEllipsLargeright.image(),
+                      child:Assets.svg.bigDarkVersionRight.svg(),
                     ),
                     Align(
                       alignment: Alignment.bottomLeft,
-                      child: Assets.images.gpdEllipsLargeleft.image(),
+                      child:Assets.svg.bigDarkVersionLeft.svg(),
                     )
                   ],
                 ),

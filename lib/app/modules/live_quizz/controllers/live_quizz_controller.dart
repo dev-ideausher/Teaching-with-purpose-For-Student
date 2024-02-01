@@ -9,7 +9,9 @@ import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 class LiveQuizzController extends GetxController {
   String? conductedBy = '';
   String? quizInstructions = '';
-
+  String? quizId = '';
+  bool quizSubmitted = false;
+  
   int? selectedOption;
   RxInt selectedOptionIndex = RxInt(-1);
 
@@ -29,6 +31,7 @@ class LiveQuizzController extends GetxController {
     final Map<String, dynamic> args = Get.arguments;
     conductedBy = args['conductedBy'];
     quizInstructions = args['instructions'];
+    quizId = args['id'];
     questions = args['questions'];
     await startTimer();
   }
@@ -47,7 +50,7 @@ class LiveQuizzController extends GetxController {
     bool isCorrect = selectedOption == correctAnswerIndex;
 
     if (isCorrect) {
-      
+      log('answer..$correctAnswerNumber');
     } else {}
   }
 
@@ -71,27 +74,34 @@ class LiveQuizzController extends GetxController {
 
 
 //-----------------------Submit QuizMark-------------------------------
+
   Future<void> submitQuizz() async {
+    if (quizSubmitted) {
+      Utils.showMySnackbar(desc: 'Quiz already submitted');
+      return;
+    }
+
     if (selectedOptionIndex.value == -1) {
-      Utils.showMySnackbar(desc: "Please select an answer before submitting.");
+      Utils.showMySnackbar(desc: 'Please select an answer before submitting.');
       return;
     }
 
     var body = {
-      "quizId": "65ae2164797fd61e0e063d3b",
-      "answers": [1],
-      "duration": 300
+      "quizId": quizId,
+      "answers": [selectedOptionIndex.value + 1],
+      "duration": 20 - timerSeconds.value,
     };
 
     try {
-      final responce = await APIManager.submitQuizz(body: body);
+      final response = await APIManager.submitQuizz(body: body);
 
-      if (responce.data['status'] == true) {
-        log('quizzSubmit..${responce.data}');
+      if (response.statusCode == 200) {
+        log('quizzSubmit..${response.data}');
 
-        Get.toNamed(Routes.BOTTOM_NAVBAR);
+        quizSubmitted = true;
+        Get.toNamed(Routes.QUIZZ_SUCESS);
       } else {
-        Utils.showMySnackbar(desc: responce.data['message']);
+        Utils.showMySnackbar(desc: 'Submit failed');
       }
     } catch (e) {
       log('quzzsbmtError..$e');
@@ -99,8 +109,3 @@ class LiveQuizzController extends GetxController {
   }
 }
 
-// {
-//       "quizId": questions[0].Id,
-//       "answers": [selectedOptionIndex.value + 1],
-//       "duration": 20 - timerSeconds.value,
-//     };

@@ -46,6 +46,7 @@ class QuizzView extends GetView<QuizzController> {
                     itemBuilder: (context, index) {
                       String conductedBy = filteredQuizzes[index]?.conductedBy?.name ?? '';
                       String instructions = filteredQuizzes[index]?.instructions ?? '';
+                      String id = Get.find<HomeController>().quizModel.value.data?[index]?.Id?? '';
                       final data = filteredQuizzes[index]?.question;
                       return buildQuizCard(
                         imgPath: Endpoints.temImg,
@@ -59,6 +60,7 @@ class QuizzView extends GetView<QuizzController> {
                           Get.toNamed(Routes.LIVE_QUIZZ, arguments: {
                             'conductedBy': conductedBy,
                             'instructions': instructions,
+                            'id': id,
                             'questions': data,
                           });
                         },

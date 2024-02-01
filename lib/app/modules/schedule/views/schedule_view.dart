@@ -148,6 +148,7 @@ class ScheduleView extends GetView<ScheduleController> {
   }
 }
 
+
 //   Widget buildTimeTable() {
 //     return Column(
 //       children: [
