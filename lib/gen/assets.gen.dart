@@ -267,6 +267,9 @@ class $AssetsSvgGen {
   SvgGenImage get allSubjects =>
       const SvgGenImage('assets/svg/all_subjects.svg');
 
+  /// File path: assets/svg/assignment.svg
+  SvgGenImage get assignment => const SvgGenImage('assets/svg/assignment.svg');
+
   /// File path: assets/svg/attendance.svg
   SvgGenImage get attendance => const SvgGenImage('assets/svg/attendance.svg');
 
@@ -346,6 +349,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/like.svg
   SvgGenImage get like => const SvgGenImage('assets/svg/like.svg');
 
+  /// File path: assets/svg/logo.svg
+  SvgGenImage get logo => const SvgGenImage('assets/svg/logo.svg');
+
   /// File path: assets/svg/logout.svg
   SvgGenImage get logout => const SvgGenImage('assets/svg/logout.svg');
 
@@ -383,6 +389,22 @@ class $AssetsSvgGen {
   /// File path: assets/svg/resume_img.svg
   SvgGenImage get resumeImg => const SvgGenImage('assets/svg/resume_img.svg');
 
+  /// File path: assets/svg/screen2_combined.svg
+  SvgGenImage get screen2Combined =>
+      const SvgGenImage('assets/svg/screen2_combined.svg');
+
+  /// File path: assets/svg/screen3_combined.svg
+  SvgGenImage get screen3Combined =>
+      const SvgGenImage('assets/svg/screen3_combined.svg');
+
+  /// File path: assets/svg/screen4_combined.svg
+  SvgGenImage get screen4Combined =>
+      const SvgGenImage('assets/svg/screen4_combined.svg');
+
+  /// File path: assets/svg/screen5_ combined.svg
+  SvgGenImage get screen5Combined =>
+      const SvgGenImage('assets/svg/screen5_ combined.svg');
+
   /// File path: assets/svg/small_dark_version.svg
   SvgGenImage get smallDarkVersion =>
       const SvgGenImage('assets/svg/small_dark_version.svg');
@@ -390,6 +412,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/small_light_version.svg
   SvgGenImage get smallLightVersion =>
       const SvgGenImage('assets/svg/small_light_version.svg');
+
+  /// File path: assets/svg/splash_bg.svg
+  SvgGenImage get splashBg => const SvgGenImage('assets/svg/splash_bg.svg');
 
   /// File path: assets/svg/trophy.svg
   SvgGenImage get trophy => const SvgGenImage('assets/svg/trophy.svg');
@@ -405,6 +430,7 @@ class $AssetsSvgGen {
         account,
         addPlus,
         allSubjects,
+        assignment,
         attendance,
         bigDarkVersionRight,
         bigDarkVersionLeft,
@@ -429,6 +455,7 @@ class $AssetsSvgGen {
         home,
         language,
         like,
+        logo,
         logout,
         mail,
         maths,
@@ -441,8 +468,13 @@ class $AssetsSvgGen {
         qA,
         ratingOutline,
         resumeImg,
+        screen2Combined,
+        screen3Combined,
+        screen4Combined,
+        screen5Combined,
         smallDarkVersion,
         smallLightVersion,
+        splashBg,
         trophy,
         upload
       ];

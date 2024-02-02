@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart';
 import 'package:teaching_with_purpose_student/app/components/stbottom_sheet.dart';
 import 'package:teaching_with_purpose_student/app/constants/image_constant.dart';
+import 'package:teaching_with_purpose_student/app/constants/widget_constants.dart';
 import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
@@ -84,7 +85,7 @@ class ProfileView extends GetView<ProfileController> {
                           image: Assets.svg.logout,
                           title: 'Logout',
                           onTap: () {
-                            logoutWidget();
+                            showLogout(context);
                           }),
                     ],
                   ),
@@ -192,16 +193,20 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  // dialog box for log-out
-  logoutWidget() {
-    return Get.defaultDialog(
-        title: 'Confirm Logout',
-        titleStyle: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
-        middleText: 'Are you sure you want to logout ?',
-        middleTextStyle: TextStyleUtil.kText14_4(
-            fontWeight: FontWeight.w400, color: Get.context!.kLightTextColor),
-        cancel:TextButton(onPressed: () => Get.back(), child: const Text('No')),
-        confirm:TextButton(onPressed: (){controller.logout();}, child: const Text('Logout'))
+
+//logout
+  showLogout(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return WidgetsConstants.customLogoutDialog(
+          context: context,
+          onNoPressed: () => Get.back(),
+          onLogoutPressed: () {
+           controller.logout();
+          },
         );
+      },
+    );
   }
 }

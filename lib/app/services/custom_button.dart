@@ -53,12 +53,12 @@ class StButton extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: height??48.kh,
+          height: height??56.kh,
           alignment: Alignment.center,
           decoration: !outline
               ? BoxDecoration(
                   // color: !disabled ? color ?? ColorUtil.kcPrimaryColor : color ?? ColorUtil.kcMediumGreyColor,
-                  borderRadius: BorderRadius.circular(borderRadius ?? 20.kh),
+                  borderRadius: BorderRadius.circular(borderRadius ?? 25.kh),
                   gradient: linearGradient ??
                       LinearGradient(
                           begin: const Alignment(0, 0),

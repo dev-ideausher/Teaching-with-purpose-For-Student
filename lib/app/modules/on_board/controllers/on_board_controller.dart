@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
+import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 
 
 class OnBoardController extends GetxController {
@@ -15,6 +16,15 @@ class OnBoardController extends GetxController {
     } else {
       Get.offNamed(Routes.GET_STARTED);
     }
+  }
+
+
+double calculateDotWidth(int index) {
+    return index == pageCount.value ? 14.kw : 10.kw;
+  }
+
+  double calculateDotHeight(int index) {
+    return index == pageCount.value ? 14.kh : 10.kh;
   }
 
   onDotClicked(int index) {

@@ -1,5 +1,7 @@
 class StringConstants {
   static String onBoardTexttitle1 = 'Personalized courses at your fingertips ';
+  static String onBoardTexttitle2 = "These are the best teachers we've got";
+  static String onBoardTexttitle3 = "Assignments and quizzes help you learn";
   static String onBoardTextSubtitle2 =
       'Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.';
   static String next = 'Next';

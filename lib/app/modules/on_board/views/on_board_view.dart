@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:teaching_with_purpose_student/app/components/common_image_view.dart';
-import 'package:teaching_with_purpose_student/app/constants/image_constant.dart';
 import 'package:teaching_with_purpose_student/app/constants/string_constants.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/custom_button.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
+import 'package:teaching_with_purpose_student/gen/assets.gen.dart';
 
 import '../controllers/on_board_controller.dart';
 
@@ -19,39 +17,40 @@ class OnBoardView extends GetView<OnBoardController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 35),
-            child:
-                skipButton(StringConstants.skip, Get.context!.dotNotActive, () {
-              controller.pageCount.value = 2;
-              controller.pageController.jumpToPage(controller.pageCount.value);
-            }),
-          ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(265, 68, 16, 0),
+          child: skipButton(
+          StringConstants.skip, 
+          Get.context!.dotNotActive,
+           () {
+            controller.pageCount.value = 2;
+            controller.pageController.jumpToPage(controller.pageCount.value);
+          }),
+        ),
+        32.kheightBox,
           Expanded(
             child: PageView(
               controller: controller.pageController,
               onPageChanged: (value) => controller.pageCount.value = value,
               children: [
                 onboardingWidget(
-                    img: ImageConstant.onBoardImageOne,
+                    img: Assets.svg.screen2Combined,
                     title: StringConstants.onBoardTexttitle1,
                     subTitle: StringConstants.onBoardTextSubtitle2),
                 onboardingWidget(
-                    img: ImageConstant.onBoardImagetwo,
-                    title: StringConstants.onBoardTexttitle1,
+                    img: Assets.svg.screen3Combined,
+                    title: StringConstants.onBoardTexttitle2,
                     subTitle: StringConstants.onBoardTextSubtitle2),
                 onboardingWidget(
-                    img: ImageConstant.onBoardImagethree,
-                    title: StringConstants.onBoardTexttitle1,
+                    img: Assets.svg.screen4Combined,
+                    title: StringConstants.onBoardTexttitle3,
                     subTitle: StringConstants.onBoardTextSubtitle2),
               ],
             ),
           ),
-          78.kheightBox,
           Padding(
-            padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+            padding: const EdgeInsets.fromLTRB(35, 78, 35, 33),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -64,8 +63,10 @@ class OnBoardView extends GetView<OnBoardController> {
                         dotHeight: 10.kh,
                         spacing: 10.kh,
                         dotWidth: 10.kh,
-                        expansionFactor: 1.1),
+                        expansionFactor: 1.1
+                    ),
                     onDotClicked: (index) => controller.onDotClicked(index)),
+                // 140.kwidthBox,
                 SizedBox(
                   width: 113.kw,
                   height: 37.kh,
@@ -85,25 +86,31 @@ class OnBoardView extends GetView<OnBoardController> {
 
 
   onboardingWidget(
-      {required String img, required String title, required String subTitle}) {
+  {required SvgGenImage img, required String title, required String subTitle}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CommonImageView(imagePath: img, height: 300.kh, width: 300.kh),
+        img.svg(height: 300.kh, width: 300.kw),
         43.kheightBox,
-        ListTile(
-          title: Text(
-            textAlign: TextAlign.center,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 38),
+          child: Text(
             title,
+            textAlign: TextAlign.center,
             style: TextStyleUtil.kText24_6(fontWeight: FontWeight.w700),
           ),
-          subtitle: Text(
-            textAlign: TextAlign.center,
+        ),
+        16.kheightBox,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
             subTitle,
+            textAlign: TextAlign.center,
+            maxLines: 3,
             style: TextStyleUtil.kText16_5(
                 fontWeight: FontWeight.w400, color: Get.context!.kBlacklight),
           ),
-        )
+        ),
       ],
     );
   }
@@ -116,12 +123,11 @@ class OnBoardView extends GetView<OnBoardController> {
       width: 78.kw,
       height: 37.kh,
       decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(15)),
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: onTap,
         child: Center(
           child: Text(
-            textAlign: TextAlign.center,
             text,
             style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500),
           ),

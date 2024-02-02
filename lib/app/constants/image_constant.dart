@@ -9,14 +9,6 @@ class ImageConstant {
 
   static String bgImage = 'assets/images/Group.png';
 
-  static String onBoardImageOne = 'assets/images/onboardone.png';
-
-  static String onBoardImagetwo = 'assets/images/onboardtwo.png';
-
-  static String onBoardImagethree = 'assets/images/onboardthree.png';
-
-  static String getStartedImg = 'assets/images/getstartedimg.png';
-
   static String profileImg = 'assets/images/temp_profile.png';
 
   static String focousIcon = 'assets/images/focus_filled.png';

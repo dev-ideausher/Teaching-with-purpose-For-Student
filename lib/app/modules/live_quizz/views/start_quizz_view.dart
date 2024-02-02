@@ -51,7 +51,7 @@ const StartQuizzView({Key? key}) : super(key: key);
                 width: 343.kw,
                 height: 56.kh,
                 child: controller.quizSubmitted
-                    ? Text('Quiz Already Submitted')
+                    ? Text('Quiz Already Submitted',style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500))
                     : StButton(
                         title: 'Submit',
                         onTap: () {
@@ -106,11 +106,11 @@ const StartQuizzView({Key? key}) : super(key: key);
                     onTap: () {
                       controller.selectOption(index);
                     },
-                    child: Container(
+                    child: Obx(() => Container(
                       height: 56,
                       width: 343.kw,
                       decoration: BoxDecoration(
-                        color: getOptionColor(index),
+                        color: getOptionCOlor(index),
                         border: Border.all(color: Get.context!.kNeutral, width: 0.5),
                         borderRadius: BorderRadius.circular(15),
                       ),
@@ -121,7 +121,7 @@ const StartQuizzView({Key? key}) : super(key: key);
                           ),
                         ),
                       ),
-                    )
+                    ))
                 );
               },
             ),
@@ -131,17 +131,18 @@ const StartQuizzView({Key? key}) : super(key: key);
     );
   }
 
-  Color getOptionColor(int index) {
-    if (controller.selectedOption != null) {
-      bool isCorrectOption = (controller.selectedOption == controller.questions[0].answer! - 1);
-      return (controller.selectedOption == index)
+ getOptionCOlor(int index){
+  int correctOption = controller.questions[0].answer! - 1;
+  bool isCorrectOption = (controller.selectedOptionIndex.value == correctOption);
+  if(controller.showcorrectAnswer.value && index == correctOption) {
+    return Colors.green;
+  }
+    return (controller.selectedOptionIndex.value == index)
           ? (isCorrectOption ? Colors.green : Colors.red)
           : Colors.white;
-    }
+ }
 
-    return Colors.white;
-  }
-
+ 
   Color getOptionTextColor(int index) {
     if (controller.selectedOption != null) {
       return (controller.selectedOption == index) ? Colors.white : Colors.black;

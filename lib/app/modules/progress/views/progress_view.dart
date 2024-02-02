@@ -28,14 +28,17 @@ class ProgressView extends GetView<ProgressController> {
             bottom: TabBar(
               controller: controller.tabController,
               indicatorWeight: 3,
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
               indicatorColor: context.kPrimary,
               labelColor: context.kPrimary,
               unselectedLabelColor: context.kLightTextColor,
               tabs: [
                 SizedBox(
+                  height: 27.kh,
                   width: 170.kw,
                   child: const Tab(text: 'Progress')),
                 SizedBox(
+                  height: 27.kh,
                   width: 170.kw,
                   child: const Tab(text: 'Performance')),
           ]) ,

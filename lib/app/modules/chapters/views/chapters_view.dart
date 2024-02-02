@@ -77,7 +77,7 @@ Widget buildBody(){
   return Obx(() => SingleChildScrollView(
     physics:const  BouncingScrollPhysics(),
     child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 39,horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 39),
       child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -126,8 +126,15 @@ Widget buildBody(){
           ),
         ),
       ),
-    16.kheightBox,  
-    
+    32.kheightBox, 
+      Text(
+      'Video Content',
+      style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
+      4.kheightBox,    
+      Text(
+      'Watch video’s for the topics you want to study.',
+      style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
+
     ],
   );
  }
@@ -136,6 +143,16 @@ Widget buildAssignment() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+      Text(
+      'Important Questions',
+      style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
+      4.kheightBox,    
+      Text(
+      'Choose a topic to view the questions.',
+      style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
+      16.kheightBox,
+      191.kheightBox,
+      32.kheightBox,
         WidgetsConstants.buildRowWidget(
             title: 'Assignments', subtitle: 'See all', onTap: () {}),
         4.kheightBox,

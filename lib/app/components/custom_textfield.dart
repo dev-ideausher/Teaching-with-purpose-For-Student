@@ -74,6 +74,7 @@ class StTextField extends StatelessWidget {
             inputFormatters: inputFormatters,
             cursorColor: context.kPrimary,
             obscureText: isObscure,
+            obscuringCharacter: '*',
             onTap: onTap,
             readOnly: readOnly,
             keyboardType: textInputType ?? TextInputType.text,

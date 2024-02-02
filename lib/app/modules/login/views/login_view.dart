@@ -65,7 +65,7 @@ class LoginView extends GetView<LoginController> {
                               controller.isPassVisible.value
                                   ? Icons.visibility
                                   : Icons.visibility_off_outlined,
-                              color: context.kPrimary))),
+                              color: context.kNotActive))),
                 ),
                 16.kheightBox,
                 Row(
@@ -84,13 +84,9 @@ class LoginView extends GetView<LoginController> {
                   ],
                 ),
                 43.kheightBox,
-              SizedBox(
-                  width: 343.kw,
-                  height: 56.kh,
-                  child: StButton(
-                      title: StringConstants.login,
-                      onTap: () => controller.checkLogin()),
-                ),
+              StButton(
+                  title: StringConstants.login,
+                  onTap: () => controller.checkLogin()),
               ],
             ),
           ),

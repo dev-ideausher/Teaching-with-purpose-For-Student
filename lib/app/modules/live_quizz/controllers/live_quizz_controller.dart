@@ -14,6 +14,7 @@ class LiveQuizzController extends GetxController {
   
   int? selectedOption;
   RxInt selectedOptionIndex = RxInt(-1);
+  RxBool showcorrectAnswer = false.obs;
 
   List<QuizModelDataQuestion> questions = <QuizModelDataQuestion>[];
 
@@ -39,6 +40,7 @@ class LiveQuizzController extends GetxController {
   void selectOption(int optionIndex) {
     selectedOption = optionIndex;
     selectedOptionIndex.value = optionIndex;
+    showcorrectAnswer(true);
     log('index..${selectedOptionIndex.value}');
   }
 
