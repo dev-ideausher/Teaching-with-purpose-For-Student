@@ -20,7 +20,7 @@ class AssignmentController extends GetxController {
   Rx<UploadFileModel> fileUpload = UploadFileModel().obs;
   Rx<AssignmentsListModelData> assignment = AssignmentsListModelData().obs;
 
-@override
+ @override
   void onInit() {
   getArguments();
   super.onInit();
@@ -28,12 +28,12 @@ class AssignmentController extends GetxController {
 
 
 
-void getArguments() {
+ void getArguments() {
     assignment.value = route.Get.arguments;
   }
 
 
-Future<String?> pickFile() async {
+ Future<String?> pickFile() async {
   List<String> filePath = await Utils.pickMultipleFilesWithFilter(['pdf','jpg', 'jpeg', 'png']);
   if (filePath.isNotEmpty) {
     String addedFilePath = filePath.first;

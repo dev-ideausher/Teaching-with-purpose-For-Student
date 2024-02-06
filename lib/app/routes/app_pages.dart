@@ -18,6 +18,8 @@ import '../modules/chapters/views/chapters_view.dart';
 import '../modules/chapters/views/selected_chapter_view.dart';
 import '../modules/course_completion/bindings/course_completion_binding.dart';
 import '../modules/course_completion/views/course_completion_view.dart';
+import '../modules/edit_assignment/bindings/edit_assignment_binding.dart';
+import '../modules/edit_assignment/views/edit_assignment_view.dart';
 import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/education_profile/bindings/education_profile_binding.dart';
@@ -253,6 +255,11 @@ class AppPages {
       name: _Paths.EXAM_SCORE,
       page: () => const ExamScoreView(),
       binding: ExamScoreBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_ASSIGNMENT,
+      page: () => const EditAssignmentView(),
+      binding: EditAssignmentBinding(),
     ),
   ];
 }

@@ -41,11 +41,13 @@ class SubjectsView extends GetView<SubjectsController> {
               ),
             ),
            40.kheightBox,
-            StTextField(hint: 'Search for chapter,concepts...', 
+           StTextField(
+            hint: 'Search for chapter,concepts...', 
             controller: controller.searchController,
             prefixIcon: const Icon(Icons.search),
             suffixIcon: const Icon(Icons.arrow_forward),
-          ),
+            onTap: (){},
+          ), 
           32.kheightBox,
           Text(
           'Resume Chapter',

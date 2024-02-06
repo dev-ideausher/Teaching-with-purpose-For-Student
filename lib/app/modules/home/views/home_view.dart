@@ -170,41 +170,28 @@ class HomeView extends GetView<HomeController> {
               Center(
                 child: Column(
                   children: [
-                    Obx(() {
-                      final bgColor = controller.isClockIn.value? Get.context!.kPrimary
-                          : Get.context!.kRed;
-                      final buttonText =
-                          controller.isClockIn.value ? 'Present' : 'Clock Out';
-                      return InkWell(
-                        onTap: () => controller.toggleClock(),
+                       InkWell(
+                        onTap: (){
+                          controller.markAttendance();
+                        },
                         child: Container(
                           height: 96.kh,
                           width: 96.kw,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                              color: bgColor,
+                              color: Get.context!.kPrimary,
                               shape: BoxShape.circle,
                               border: Border.all(
-                                  color: controller.isClockIn.value
-                                      ? Get.context!.kLightgreen
-                                      : Get.context!.kLightred)),
+                                  color: Get.context!.kLightgreen)),
                           child: Text(
-                            buttonText,
+                            'Present',
                             style: TextStyleUtil.kText14_4(
                                 fontWeight: FontWeight.w600,
                                 color: Get.context!.kWhite),
                           ),
                         ),
-                      );
-                    }),
-                    16.kheightBox,
-                    Obx(
-                      () => Text(
-                        controller.timerText.value,
-                        style: TextStyleUtil.kText12_4(
-                            fontWeight: FontWeight.w500,color: Get.context!.kWhite),
                       ),
-                    )
+                    16.kheightBox,
                   ],
                 ),
               )

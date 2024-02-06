@@ -29,9 +29,11 @@ class ProgressController extends GetxController with GetSingleTickerProviderStat
 
   @override
   void onInit() {
-    tabController = TabController(length: 2, vsync: this);
-    tabController.addListener(() => selectedTabIndex.value = tabController.index);
     super.onInit();
+    tabController = TabController(length: 2, vsync: this);
+    tabController.addListener(() {
+      selectedTabIndex.value = tabController.index;
+    });
   }
 
   @override

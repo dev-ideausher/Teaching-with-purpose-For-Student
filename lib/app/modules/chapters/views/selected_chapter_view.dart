@@ -139,6 +139,7 @@ Widget build(BuildContext context){
             onTap: (){
               if (controller.isVideoWatched) {
               final data = controller.questionsModel.value.data?[index];
+              //String id =  controller.questionsModel.value.data?[index]?.Id?? '';
                Get.toNamed(Routes.QUESTIONS, arguments: data);
             } else {
            Utils.showMySnackbar(title: 'Attention',desc: 'Please watch the video first');

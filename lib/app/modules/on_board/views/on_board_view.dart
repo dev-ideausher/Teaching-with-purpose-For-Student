@@ -63,7 +63,7 @@ class OnBoardView extends GetView<OnBoardController> {
                         dotHeight: 10.kh,
                         spacing: 10.kh,
                         dotWidth: 10.kh,
-                        expansionFactor: 1.1
+                        expansionFactor: 1.4,
                     ),
                     onDotClicked: (index) => controller.onDotClicked(index)),
                 // 140.kwidthBox,
@@ -85,7 +85,7 @@ class OnBoardView extends GetView<OnBoardController> {
 
 
 
-  onboardingWidget(
+  Widget onboardingWidget(
   {required SvgGenImage img, required String title, required String subTitle}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

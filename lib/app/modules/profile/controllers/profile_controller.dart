@@ -25,6 +25,7 @@ class ProfileController extends GetxController {
           await APIManager.getUser(id: Get.find<GetStorageService>().id);
       if (responce.statusCode == 200) {
         studentModel = StudentModel.fromJson(responce.data);
+        Get.find< GetStorageService>().rollNumber = studentModel!.data!.first!.rollNumber.toString();
         // log('profile...${jsonEncode(responce.data)}');
       }
     } catch (e) {

@@ -13,7 +13,7 @@ class Endpoints {
 
   static const String login = "user/login";
 
-  static const String markAttendance = "";
+  static const String markAttendance = "attendence/save";
 
   static const String getSubjects = "api/subject/get";
 
@@ -29,9 +29,7 @@ class Endpoints {
 
   static const String getQuiz = "api/quiz/get";
 
-  static const String getAssignment = "api/assignment/get";
-
-  static const String updateAssignment = "api/assignment/update";
+  static const String submitQuizz = "api/quizsubmit/attend";
 
   static const String getChapter = "api/chapter/get?subjectId=";
 
@@ -45,11 +43,17 @@ class Endpoints {
 
   static const String ratings = "api/rating/save";
 
+  static const String getAssignment = "api/assignment/get";
+
   static const String sumbmitAssignment = "api/assigmentsubmit/save";
 
-  static const String submitQuizz = "api/quizsubmit/attend";
+  static const String getSubmitedAssignment = "api/assigmentsubmit/get";
+
+  static const String updateSubmittedAssignment = "api/assigmentsubmit/update";
 
   static const String completeChapter = "api/completechapter/save";
+
+
 
 
 

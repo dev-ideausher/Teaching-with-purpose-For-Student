@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
 import 'package:teaching_with_purpose_student/gen/assets.gen.dart';
+
+import '../components/commom_richtext.dart';
 
 
 class WidgetsConstants{
@@ -178,4 +181,100 @@ static Widget customLogoutDialog(
       ),
     );
   }
+
+ // prcentage progress indiacater for marks and all
+static Widget percentageIndicater(double percent, String text1, String text2,void Function () onTap) {
+  return InkWell(
+    onTap: onTap,
+    child: SizedBox(
+      width: 165.kw,
+      height: 122.kh,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+        child: Column(
+          children: [
+            CircularPercentIndicator(
+              radius: 30,
+              lineWidth: 8,
+              progressColor: Get.context!.kPrimary,
+              backgroundColor: Get.context!.kLightSkyBlue,
+              animation: true,
+              percent: percent,
+              center: Text( text1,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+            ),
+            8.kheightBox,
+            Text( text2, textAlign: TextAlign.center,style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400)),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+//Widget for feedback section by teachers
+static Widget feedback(String feebackimg, String teacherName, String statement, String time) {
+    return SizedBox(
+      height: 79.kh,
+      width: 343.kw,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+        child: Row(
+          children: [
+            ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(feebackimg, height: 30.kh, width: 30.kw)),
+            12.kwidthBox,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text( teacherName,textAlign: TextAlign.center,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500)),
+                  4.kheightBox,
+                  Text( statement, maxLines: 2,
+                    style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
+                ],
+              ),
+            ),
+            32.kwidthBox,
+            Text( time, maxLines: 1,textAlign: TextAlign.center,
+              style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  //widget for key-focus
+ static Widget keyFocus(String focusImg, String subject, String area,String performance) {
+    return SizedBox(
+      width: 343.kw,
+      height: 60.kh,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 8, 24, 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Image.asset(focusImg, height: 24.kh, width: 24.kw),
+            16.kwidthBox,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ReUsableRichText(
+                    text1: subject,
+                    text2: area,
+                    style1:TextStyleUtil.kText14_4(fontWeight: FontWeight.w600),
+                    style2: TextStyleUtil.kText14_4(fontWeight: FontWeight.w600,color: Get.context!.kLightTextColor)),
+                8.kheightBox,
+                ReUsableRichText(
+                    text1: 'Performance : ',
+                    text2: performance,
+                    style1:TextStyleUtil.kText12_4(fontWeight: FontWeight.w400),
+                    style2: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
+              ],
+            )
+          ],
+        ),
+      ),
+    );  
+}
 }

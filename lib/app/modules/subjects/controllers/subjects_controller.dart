@@ -12,6 +12,7 @@ String subjectId = '';
 RxBool isLoding = false.obs;
 var searchController = TextEditingController();
 Rx<ChaptersModel> chapterModel = ChaptersModel().obs;
+Rx<ChaptersModel> filteredChapterModel = ChaptersModel().obs;
 
 
 @override
@@ -19,7 +20,6 @@ Rx<ChaptersModel> chapterModel = ChaptersModel().obs;
     getArguments();
     super.onInit();
   }
-
 
 
  void getArguments()async{
@@ -42,6 +42,7 @@ Rx<ChaptersModel> chapterModel = ChaptersModel().obs;
       //log('Chapters...${response.data}');
 
       chapterModel.value = ChaptersModel.fromJson(response.data);
+      //filterChapters();
 
       } else {
         Utils.showMySnackbar(desc: response.data['message']);
@@ -52,6 +53,19 @@ Rx<ChaptersModel> chapterModel = ChaptersModel().obs;
       isLoding(false);
     }
   }
+
+  // void filterChapters() {
+  //   final searchText = searchController.text.toLowerCase();
+
+  //   log('Search Text: $searchText');
+    
+  //   final filteredChapters = chapterModel.value.data?.where((chapter) {
+  //     return chapter?.chapterName?.toLowerCase().contains(searchText) == true ||
+  //            chapter?.concept?.toLowerCase().contains(searchText) == true;}).toList();
+  //   log('Filtered Chapters: $filteredChapters');
+
+  //   filteredChapterModel.value.data = filteredChapters;
+  // }
 
   @override
   void onClose() {

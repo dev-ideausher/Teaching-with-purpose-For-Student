@@ -75,7 +75,7 @@ class QuestionsView extends GetView<QuestionsController> {
               height: 56.kh,
               child: StButton(
                 title:'Finish', onTap: () {
-                Get.offAllNamed(Routes.BOTTOM_NAVBAR);
+                Get.toNamed(Routes.BOTTOM_NAVBAR);
               }),
            ),
             ],

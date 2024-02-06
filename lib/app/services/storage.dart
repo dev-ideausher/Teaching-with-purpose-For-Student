@@ -25,9 +25,9 @@ class GetStorageService extends GetxService {
 
   set id(String id) => _runData.write('id', id);
 
-  String get uId => _runData.read('firebaseUid') ?? '';
+  String get rollNumber => _runData.read('rollNumber') ?? '';
 
-  set uId(String uId) => _runData.write('firebaseUid', uId);  
+  set rollNumber(String rollNumber) => _runData.write('rollNumber', rollNumber);  
 
   String get chapter => _runData.read('chapter') ?? '';
 
