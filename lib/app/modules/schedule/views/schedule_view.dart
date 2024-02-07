@@ -37,21 +37,20 @@ class ScheduleView extends GetView<ScheduleController> {
                   length: 5,
                   child: SizedBox(
                     height: 267.kh,
-                    width: 343.kw,
+                    width: double.infinity,
                     child: Column(
                       children: [
                         TabBar(
                           physics: const NeverScrollableScrollPhysics(),
-                          indicatorWeight: 3,
                           indicatorColor: context.kPrimary,
                           labelColor: context.kPrimary,
                           unselectedLabelColor: context.kLightTextColor,
-                          tabs: const [
-                            Tab(text: 'Mon'),
-                            Tab(text: 'Tue'),
-                            Tab(text: 'Wed'),
-                            Tab(text: 'Thu'),
-                            Tab(text: 'Fri'),
+                          tabs: [
+                            SizedBox(width: 48.kw,child: const Tab(text: 'Mon')),
+                            SizedBox(width: 48.kw,child: const Tab(text: 'Tue')),
+                            SizedBox(width: 48.kw ,child: const Tab(text: 'Wed')),
+                            SizedBox(width: 48.kw,child: const Tab(text: 'Thu')),
+                            SizedBox(width: 48.kw,child: const Tab(text: 'Fri')),
                           ],
                           onTap: (index) => controller.selectDay(index),
                         ),

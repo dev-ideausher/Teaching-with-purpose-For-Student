@@ -58,6 +58,8 @@ import '../modules/questions/bindings/questions_binding.dart';
 import '../modules/questions/views/questions_view.dart';
 import '../modules/quizz/bindings/quizz_binding.dart';
 import '../modules/quizz/views/quizz_view.dart';
+import '../modules/revice_questions/bindings/revice_questions_binding.dart';
+import '../modules/revice_questions/views/revice_questions_view.dart';
 import '../modules/schedule/bindings/schedule_binding.dart';
 import '../modules/schedule/views/schedule_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -260,6 +262,11 @@ class AppPages {
       name: _Paths.EDIT_ASSIGNMENT,
       page: () => const EditAssignmentView(),
       binding: EditAssignmentBinding(),
+    ),
+    GetPage(
+      name: _Paths.REVICE_QUESTIONS,
+      page: () => const ReviceQuestionsView(),
+      binding: ReviceQuestionsBinding(),
     ),
   ];
 }

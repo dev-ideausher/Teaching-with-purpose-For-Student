@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -126,28 +128,20 @@ Widget build(BuildContext context){
             'Questions',
             style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
             ),
-          16.kheightBox,
-           Obx(() => controller.isLoding.value?
-           Center(child: CircularProgressIndicator(color: context.kPrimary)):
-           ListView.separated(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          separatorBuilder: (context, index) => 8.kheightBox, 
-          itemCount: controller.questionsModel.value.data?.length?? 0,
-          itemBuilder: (context, index) => buildquestionWidget(
-            questions: controller.questionsModel.value.data?[index]?.question?? '',
-            onTap: (){
-              if (controller.isVideoWatched) {
-              final data = controller.questionsModel.value.data?[index];
-              //String id =  controller.questionsModel.value.data?[index]?.Id?? '';
-               Get.toNamed(Routes.QUESTIONS, arguments: data);
-            } else {
-           Utils.showMySnackbar(title: 'Attention',desc: 'Please watch the video first');
-            }
-          },
-          ) ,
-        ),),
-          40.kheightBox,          
+          8.kheightBox,
+              buildquestionWidget(
+                questions: 'Questions to be shown after the video is completed',
+                onTap: () {
+                  if (controller.isVideoWatched) {
+                    String? id = data.Id;
+                    log('id......$id');
+                    Get.toNamed(Routes.QUESTIONS, arguments: {'chapterId': id});
+                  } else {
+                    Utils.showMySnackbar(title: 'Attention',desc: 'Please watch the video first');
+                  }
+                },
+              ),
+      
         ],
        ),
      ),
@@ -177,7 +171,7 @@ Widget buildquestionWidget({String? questions, void Function()? onTap}) {
               borderRadius: BorderRadius.circular(22),
             ),
             child: Center(
-              child: Text('Proced',
+              child: Text('Proceed',
                   style: TextStyleUtil.kText16_5(
                       fontWeight: FontWeight.w500, color: Get.context!.kWhite)),
             ),

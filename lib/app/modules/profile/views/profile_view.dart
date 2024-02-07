@@ -171,17 +171,11 @@ class ProfileView extends GetView<ProfileController> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => ResponseBottomSheet(
-
         onTap: (double selectedRating){
-
         if(selectedRating > 0){
-
         controller.giveRating(selectedRating.toString());
-
         Get.back();
-
        } else{
-
         Utils.showMySnackbar(desc: 'Please select rating, Before Submitting');
           }
         },

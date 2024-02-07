@@ -17,7 +17,7 @@ class ProgressView extends GetView<ProgressController> {
   const ProgressView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    log('progresssCtlr...${Get.isRegistered<ProgressController>()}');
+    //log('progresssCtlr...${Get.isRegistered<ProgressController>()}');
     return Scaffold(
       backgroundColor: context.kGreyBack,
       appBar: PreferredSize(

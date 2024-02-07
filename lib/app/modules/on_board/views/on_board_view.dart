@@ -116,8 +116,6 @@ class OnBoardView extends GetView<OnBoardController> {
   }
 
 
-
-
   Widget skipButton(String text, Color color, void Function()? onTap) {
     return Container(
       width: 78.kw,

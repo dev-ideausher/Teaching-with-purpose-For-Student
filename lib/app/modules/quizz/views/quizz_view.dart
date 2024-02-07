@@ -79,21 +79,25 @@ class QuizzView extends GetView<QuizzController> {
   required String title, required String imgPath, required String date,required String conducted, required String t4, required String t5, void Function()? onTap}){
     return InkWell(
       onTap: onTap,
-      child: SizedBox(
+      child: Container(
         height: 184.kh,
         width: 343.kw,
+        color: Get.context!.kWhite,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                  width: 55.kw,
-                  height: 55.kh,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                      image: NetworkImage(imgPath), fit: BoxFit.fill))),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 25),
+                child: Container(
+                    width: 55.kw,
+                    height: 55.kh,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                        image: NetworkImage(imgPath), fit: BoxFit.fill))),
+              ),
               24.kwidthBox,
               Expanded(
                 child: Column(

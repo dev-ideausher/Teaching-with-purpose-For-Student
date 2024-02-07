@@ -88,9 +88,13 @@ class EventsView extends GetView<EventsController> {
 
 // event card Widget
   Widget eventCardWidget({ Widget? image,  String? title, String? date, String? description}) {
-    return SizedBox(
+    return Container(
       height: 162.kh,
       width: 343.kw,
+      decoration: BoxDecoration(
+        color: Get.context!.kWhite,
+        borderRadius: BorderRadius.circular(15)
+      ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
         child: Row(

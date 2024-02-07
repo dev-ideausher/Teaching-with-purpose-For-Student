@@ -228,7 +228,9 @@ static Widget feedback(String feebackimg, String teacherName, String statement, 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text( teacherName,textAlign: TextAlign.center,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500)),
+                  Text( 
+                    teacherName,
+                    textAlign: TextAlign.center,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500)),
                   4.kheightBox,
                   Text( statement, maxLines: 2,
                     style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
@@ -236,7 +238,9 @@ static Widget feedback(String feebackimg, String teacherName, String statement, 
               ),
             ),
             32.kwidthBox,
-            Text( time, maxLines: 1,textAlign: TextAlign.center,
+            Text( 
+              time,
+               maxLines: 1,textAlign: TextAlign.center,
               style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
           ],
         ),

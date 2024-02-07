@@ -42,6 +42,7 @@ abstract class Routes {
   static const STUDENT_BEHAVIOR = _Paths.STUDENT_BEHAVIOR;
   static const EXAM_SCORE = _Paths.EXAM_SCORE;
   static const EDIT_ASSIGNMENT = _Paths.EDIT_ASSIGNMENT;
+  static const REVICE_QUESTIONS = _Paths.REVICE_QUESTIONS;
 }
 
 abstract class _Paths {
@@ -85,4 +86,5 @@ abstract class _Paths {
   static const STUDENT_BEHAVIOR = '/student-behavior';
   static const EXAM_SCORE = '/exam-score';
   static const EDIT_ASSIGNMENT = '/edit-assignment';
+  static const REVICE_QUESTIONS = '/revice-questions';
 }

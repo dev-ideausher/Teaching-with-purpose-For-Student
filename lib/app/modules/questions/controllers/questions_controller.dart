@@ -1,29 +1,58 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:teaching_with_purpose_student/app/data/models/questions_model.dart';
-import 'package:teaching_with_purpose_student/app/data/models/questions_model_data.dart';
+import 'package:teaching_with_purpose_student/app/data/models/chapter_questions_model.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
 
 import '../../../utils/utils.dart';
 
 class QuestionsController extends GetxController {
-
-  
-  Rx<QuestionsModel> questionsModel = QuestionsModel().obs;
-  Rx<QuestionsModelData> questionsModelData = QuestionsModelData().obs;
+  RxBool isLoding = false.obs;
+  String chapterId = '';
+  Rx<ChapterQuestionsModel> questionsModel = ChapterQuestionsModel().obs;
   RxBool isSolutionVisible = false.obs;
   List<String> alphabets = ['A)','B)','C)', 'D)'];
 
 @override
   void onInit() {
-    questionsModelData.value = Get.arguments;
-    log('question...${questionsModelData.value.question}');
+    getArguments();
     super.onInit();
+  }
+
+  void getArguments()async{
+   final Map<String, dynamic> args = Get.arguments;
+   chapterId = args['chapterId'];
+   await getQuestions();
   }
 
   void toggleSolutionVisibility() {
     isSolutionVisible.toggle();
+  }
+
+  //-----------------------Questions-------------------------------
+
+  Future<void> getQuestions() async {
+    isLoding(true);
+    try {
+      final response = await APIManager.getQuestion(chapterId:chapterId);
+      if (response.data['status'] == true) {
+
+        //log('id from chapter.....$chapterId');
+        //log('Questions...${response.data}');
+
+        questionsModel.value = ChapterQuestionsModel.fromJson(response.data);
+
+      } else {
+        Utils.showMySnackbar(desc: 'Error while loding question');
+      }
+    } catch (e) {
+
+      log('error..$e');
+
+    } finally {
+
+      isLoding(false);
+    }
   }
 
 
