@@ -101,31 +101,41 @@ Widget buildBody(){
       'Download PDF’s for the topics you want to study.',
       style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
       16.kheightBox,
-      InkWell(
-        onTap: (){Get.toNamed(Routes.SELECTED_CHAPTER);},
-        child: Container(
-          height: 88.kh,
-          width: 104.kw,
-          decoration: BoxDecoration(
-          color: Get.context!.kWhite,
-          borderRadius: BorderRadius.circular(15)
-          ),
-          child: Stack(
-            children: [
-              Center(
-                child:Text(
-                controller.chapterDetailsModel.value.concept?? '',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+        GridView.builder(
+          shrinkWrap: true,
+          itemCount: 6,
+          physics:const  NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+              childAspectRatio: 0.846
+            ),
+            itemBuilder: (context, index) => InkWell(
+            onTap: (){Get.toNamed(Routes.SELECTED_CHAPTER);},
+            child: Container(
+              height: 88.kh,
+              width: 104.kw,
+              decoration: BoxDecoration(
+              color: Get.context!.kWhite,
+              borderRadius: BorderRadius.circular(15)),
+              child: Stack(
+                children: [
+                  Center(
+                    child: Text(
+                        controller.chapterDetailsModel.value.concept ?? '',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Assets.svg.smallDarkVersion.svg(),
+                  )
+                ],
               ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Assets.svg.smallDarkVersion.svg(),
-              )
-            ],
+            ),
           ),
         ),
-      ),
     32.kheightBox, 
       Text(
       'Video Content',
@@ -151,7 +161,48 @@ Widget buildAssignment() {
       'Choose a topic to view the questions.',
       style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor)),
       16.kheightBox,
-      191.kheightBox,
+        GridView.builder(
+          shrinkWrap: true,
+          itemCount: 6,
+          physics:const  NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+              childAspectRatio: 0.846
+            ),
+            itemBuilder: (context, index) => InkWell(
+            onTap: () {
+              String? chapterId = controller.chapterId;
+              final data = controller.chapterDetailsModel.value;
+              Get.toNamed(Routes.REVICE_QUESTIONS,arguments: {
+              'chapterId': chapterId,
+              'chapterName':data.chapterName,
+              'concept':data.concept
+            });},
+            child: Container(
+              height: 88.kh,
+              width: 104.kw,
+              decoration: BoxDecoration(
+              color: Get.context!.kWhite,
+              borderRadius: BorderRadius.circular(15)),
+              child: Stack(
+                children: [
+                  Center(
+                    child: Text(
+                        controller.chapterDetailsModel.value.concept ?? '',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Assets.svg.smallDarkVersion.svg(),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
       32.kheightBox,
         WidgetsConstants.buildRowWidget(
             title: 'Assignments', subtitle: 'See all', onTap: () {}),

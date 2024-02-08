@@ -41,62 +41,70 @@ Widget build(BuildContext context){
                 ),
               ),
             40.kheightBox,
-              SizedBox(
-                height: 192.kh,
-                width: double.infinity,
-                child: Stack(
-                  children: [
-                    Obx(
-                      () {
-                        if (controller.videoController.value != null) {
-                          return Chewie(
-                            controller: ChewieController(
-                              videoPlayerController: controller.videoController.value!,
-                              aspectRatio: controller.videoController.value!.value.aspectRatio,
-                              placeholder: Container(
-                                color: Colors.black,
-                              )
-                            ),
-                          );
-                        } else {
-                          return Center(
-                            child: Text('No video available',style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
-                          );
-                        }
-                      },
-                    ),
-                    Positioned.fill(
-                      child: GestureDetector(
-                        onTap: () {
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: SizedBox(
+                  height: 192.kh,
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      Obx(
+                        () {
                           if (controller.videoController.value != null) {
-                            if (controller.videoController.value!.value.isPlaying) {
-                              controller.videoController.value!.pause();
-                            } else {
-                              controller.videoController.value!.play();
-                            }
+                            return Chewie(
+                              controller: ChewieController(
+                                materialProgressColors: ChewieProgressColors(
+                                  bufferedColor: context.kWhite,
+                                  handleColor: context.kPrimary,
+                                  playedColor: context.kPrimary
+                                ),
+                                videoPlayerController: controller.videoController.value!,
+                                aspectRatio: 16/9,
+                                //controller.videoController.value!.value.aspectRatio
+                                placeholder: Container(color: Colors.black,
+                                )
+                              ),
+                            );
+                          } else {
+                            return Center(
+                              child: Text('No video available',style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+                            );
                           }
                         },
-                        child: Obx(
-                          () {
-                            if (controller.videoController.value != null && controller.videoController.value!.value.isPlaying) {
-                              return Container(
-                                color: Colors.transparent,
-                                child:  Center(
-                                  child: Icon(
-                                    Icons.pause,
-                                    color:context.kWhite,
-                                    size: 50.0,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return const SizedBox();
+                      ),
+                      Positioned.fill(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (controller.videoController.value != null) {
+                              if (controller.videoController.value!.value.isPlaying) {
+                                controller.videoController.value!.pause();
+                              } else {
+                                controller.videoController.value!.play();
+                              }
                             }
                           },
+                          child: Obx(
+                            () {
+                              if (controller.videoController.value != null && controller.videoController.value!.value.isPlaying) {
+                                return Container(
+                                  color: Colors.transparent,
+                                  child:  Center(
+                                    child: Icon(
+                                      Icons.pause,
+                                      color:context.kWhite,
+                                      size: 50.0,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
           32.kheightBox,

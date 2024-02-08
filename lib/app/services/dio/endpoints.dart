@@ -53,6 +53,8 @@ class Endpoints {
 
   static const String completeChapter = "api/completechapter/save";
 
+  static const String getReviceQuestions = "api/revisedquestion/get?chapterId=";
+
 
 
 

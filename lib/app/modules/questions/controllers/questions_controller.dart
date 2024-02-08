@@ -13,7 +13,7 @@ class QuestionsController extends GetxController {
   RxBool isSolutionVisible = false.obs;
   List<String> alphabets = ['A)','B)','C)', 'D)'];
 
-@override
+  @override
   void onInit() {
     getArguments();
     super.onInit();
@@ -36,19 +36,15 @@ class QuestionsController extends GetxController {
     try {
       final response = await APIManager.getQuestion(chapterId:chapterId);
       if (response.data['status'] == true) {
-
         //log('id from chapter.....$chapterId');
         //log('Questions...${response.data}');
-
         questionsModel.value = ChapterQuestionsModel.fromJson(response.data);
 
       } else {
         Utils.showMySnackbar(desc: 'Error while loding question');
       }
     } catch (e) {
-
       log('error..$e');
-
     } finally {
 
       isLoding(false);

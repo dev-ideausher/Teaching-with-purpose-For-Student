@@ -49,6 +49,8 @@ class APIManager {
   static Future<Response> getTimeTable() async => await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(Endpoints.timeTable);  
 
   static Future<Response> getSubmittedAssignment() async => await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(Endpoints.getSubmitedAssignment); 
+
+  static Future<Response> getReviceQuestions({required String chapterId}) async => await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(Endpoints.getReviceQuestions + chapterId);  
   
 
 
