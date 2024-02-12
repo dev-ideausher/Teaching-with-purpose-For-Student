@@ -21,6 +21,7 @@ class QuizzView extends GetView<QuizzController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.kGreyBack,
       appBar: PreferredSize(
       preferredSize: Size.fromHeight(46.kh),
       child: CustomAppBar(title: 'Live Quizzes', isBack: true)),
@@ -80,8 +81,8 @@ class QuizzView extends GetView<QuizzController> {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 184.kh,
-        width: 343.kw,
+        height: 150.kh,
+        width: double.infinity,
         color: Get.context!.kWhite,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),

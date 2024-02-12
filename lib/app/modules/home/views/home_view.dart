@@ -19,6 +19,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.kGreyBack,
         body: Obx(
       () => controller.isLoding.value ?
       Center(child: CircularProgressIndicator(color: context.kPrimary)):

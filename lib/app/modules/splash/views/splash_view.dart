@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
-import 'package:teaching_with_purpose_student/gen/assets.gen.dart';
 
 import '../controllers/splash_controller.dart';
 

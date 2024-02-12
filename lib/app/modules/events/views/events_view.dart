@@ -17,6 +17,7 @@ class EventsView extends GetView<EventsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.kGreyBack,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(46.kh),
           child: CustomAppBar(title: 'Events', isBack: true)),

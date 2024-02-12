@@ -11,7 +11,9 @@ class QuestionsController extends GetxController {
   String chapterId = '';
   Rx<ChapterQuestionsModel> questionsModel = ChapterQuestionsModel().obs;
   RxBool isSolutionVisible = false.obs;
-  List<String> alphabets = ['A)','B)','C)', 'D)'];
+  RxInt selectedOptionIndex = (-1).obs;
+  RxInt selectedQuestionIndex = (-1).obs;
+  RxInt correctAnswerIndex = (-1).obs;
 
   @override
   void onInit() {
@@ -27,6 +29,14 @@ class QuestionsController extends GetxController {
 
   void toggleSolutionVisibility() {
     isSolutionVisible.toggle();
+  }
+
+  void selectOption(int optionIndex, int questionIndex) {
+    selectedOptionIndex.value = optionIndex; 
+    selectedQuestionIndex.value = questionIndex; 
+    isSolutionVisible.value = true; 
+    final correctAnswer = questionsModel.value.data?[questionIndex]?.question?.first?.solution;
+    correctAnswerIndex.value = questionsModel.value.data?[questionIndex]?.question?.first?.options?.indexOf(correctAnswer) ?? -1;
   }
 
   //-----------------------Questions-------------------------------

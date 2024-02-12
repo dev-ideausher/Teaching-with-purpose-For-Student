@@ -109,10 +109,9 @@ Widget buildBody(){
               crossAxisCount: 3,
               crossAxisSpacing: 15,
               mainAxisSpacing: 15,
-              childAspectRatio: 0.846
             ),
             itemBuilder: (context, index) => InkWell(
-            onTap: (){Get.toNamed(Routes.SELECTED_CHAPTER);},
+            onTap: (){ Get.toNamed(Routes.SELECTED_CHAPTER);},
             child: Container(
               height: 88.kh,
               width: 104.kw,
@@ -124,7 +123,8 @@ Widget buildBody(){
                   Center(
                     child: Text(
                         controller.chapterDetailsModel.value.concept ?? '',
-                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
                         style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
                   ),
                   Align(
@@ -169,7 +169,6 @@ Widget buildAssignment() {
               crossAxisCount: 3,
               crossAxisSpacing: 15,
               mainAxisSpacing: 15,
-              childAspectRatio: 0.846
             ),
             itemBuilder: (context, index) => InkWell(
             onTap: () {
@@ -191,7 +190,8 @@ Widget buildAssignment() {
                   Center(
                     child: Text(
                         controller.chapterDetailsModel.value.concept ?? '',
-                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
                         style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
                   ),
                   Align(

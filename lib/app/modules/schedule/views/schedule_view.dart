@@ -103,9 +103,10 @@ class ScheduleView extends GetView<ScheduleController> {
 
   Widget buildTimeTable() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          flex: 1,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24),
           child: SizedBox(
             width: double.infinity,
             child: Row(
@@ -118,28 +119,26 @@ class ScheduleView extends GetView<ScheduleController> {
             ),
           ),
         ),
-        Expanded(
-          flex: 3,
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              children: List.generate(controller.getSelectedDayTable().length,
-                  (index) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text('${controller.getSelectedDayTable()[index].time}',
-                        style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color:Get.context!.kLightTextColor)),
-
-                    Text('${controller.getSelectedDayTable()[index].subject}',
-                        style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color:Get.context!.kLightTextColor)),
-
-                    Text('${controller.getSelectedDayTable()[index].subjectTeacher}',
-                        style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor))
-                  ],
-                );
-              }),
-            ),
+        SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: List.generate(
+              controller.getSelectedDayTable().length,
+                (index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text('${controller.getSelectedDayTable()[index].time}',
+                  style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color:Get.context!.kLightTextColor)),
+        
+                  Text('${controller.getSelectedDayTable()[index].subject}',
+                  style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color:Get.context!.kLightTextColor)),
+        
+                  Text('${controller.getSelectedDayTable()[index].subjectTeacher}',
+                  style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor))
+                ],
+              );
+            }),
           ),
         ),
       ],

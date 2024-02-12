@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:teaching_with_purpose_student/app/components/common_table.dart';
 import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart';
 import 'package:teaching_with_purpose_student/app/components/stsubject_vertical.dart';
 import 'package:teaching_with_purpose_student/app/constants/image_constant.dart';
@@ -84,18 +81,19 @@ class ProgressView extends GetView<ProgressController> {
               scrollDirection: Axis.horizontal,
               separatorBuilder: (context, index) => 16.kwidthBox,
               itemCount: controller.subjectImage.length,
-              itemBuilder: (context, index) => Obx(() {
-                    final isSelected =
-                        controller.selectedSubjectIndex.value == index;
-                    return InkWell(
-                      onTap: () =>
-                          controller.selectedSubjectIndex.value = index,
-                      child: StSubjectVertical(
-                          text: controller.subjectText[index],
-                          color: isSelected ? context.kRed : context.kWhite,
-                          svgImage: controller.subjectImage[index]),
-                    );
-                  })),
+              itemBuilder: (context, index) {
+                return Obx(() {
+                  final isSelected =
+                      controller.selectedSubjectIndex.value == index;
+                  return InkWell(
+                    onTap: () => controller.selectedSubjectIndex.value = index,
+                    child: StSubjectVertical(
+                        text: controller.subjectText[index],
+                        color: isSelected ? context.kRed : context.kWhite,
+                        svgImage: controller.subjectImage[index]),
+                  );
+                });
+              }),
         ),
         32.kheightBox,
       ],
@@ -153,23 +151,71 @@ class ProgressView extends GetView<ProgressController> {
           style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
         ),
         16.kheightBox,
-        SizedBox(
-          height: 248.kh,
-          width: 343.kw,
-          child: const CommoncardTable(),
+        Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text('Subject',
+                      style:
+                          TextStyleUtil.kText16_5(fontWeight: FontWeight.w400)),
+                  Text('Grade',
+                      style:
+                          TextStyleUtil.kText16_5(fontWeight: FontWeight.w400)),
+                  Text('Mark',
+                      style:
+                          TextStyleUtil.kText16_5(fontWeight: FontWeight.w400))
+                ],
+              ),
+            ),
+            24.kheightBox,
+            SizedBox(
+              width: double.infinity,
+              child: Column(
+                children: List.generate(5, (index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text('Physics',
+                          style: TextStyleUtil.kText14_4(
+                              fontWeight: FontWeight.w400,
+                              color: Get.context!.kLightTextColor)),
+                      Text('A',
+                          style: TextStyleUtil.kText14_4(
+                              fontWeight: FontWeight.w400,
+                              color: Get.context!.kLightTextColor)),
+                      Text('88',
+                          style: TextStyleUtil.kText14_4(
+                              fontWeight: FontWeight.w400,
+                              color: Get.context!.kLightTextColor))
+                    ],
+                  );
+                }),
+              ),
+            ),
+        10.kheightBox,
+        Container(
+          height: 37.kh,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Get.context!.kAverageMarkColor),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text('Average marks',
+                  style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+              Text('A',
+                  style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+              Text('86',
+                  style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+            ],
+          ),
         ),
-        // Container(
-        // height: 37.kh,width: 343.kw,
-        // decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Get.context!.kAverageMarkColor),
-        // child: Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //   children: [
-        //   Text('Average marks',style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
-        //   Text('A', style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
-        //   Text('86',style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
-        //   ],
-        // ),
-        // ),
+        32.kheightBox,
+          ],
+        ),
       ],
     );
   }
@@ -183,18 +229,18 @@ class ProgressView extends GetView<ProgressController> {
             style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
         24.kheightBox,
         WidgetsConstants.feedback(
-            ImageConstant.profileImg,
-             'Esther Howard',
-            'It’s good to see improvement in English so far.', 
-             '01:50 pm'
-          ),
+          ImageConstant.profileImg, 
+          'Esther Howard',
+          'It’s good to see improvement in English so far.', 
+          '01:50 pm'
+        ),
         8.kheightBox,
         WidgetsConstants.feedback(
-            ImageConstant.profileImg,
-             'Esther Howard',
-            'It’s good to see improvement in English so far.', 
-            '01:50 pm'
-          ),
+        ImageConstant.profileImg, 
+        'Esther Howard',
+        'It’s good to see improvement in English so far.', 
+        '01:50 pm'
+       ),
       ],
     );
   }
@@ -207,15 +253,11 @@ class ProgressView extends GetView<ProgressController> {
         Text('Key Focus Areas',
             style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
         24.kheightBox,
-        WidgetsConstants.keyFocus(
-          ImageConstant.focousIcon, 
-          'Mathematics : ',
-          'Relations and Functions I', 'Average'),
+        WidgetsConstants.keyFocus(ImageConstant.focousIcon, 'Mathematics : ',
+            'Relations and Functions I', 'Average'),
         8.kheightBox,
-        WidgetsConstants.keyFocus(
-          ImageConstant.focousIcon, 
-          'Mathematics : ',
-          'Relations and Functions I', 'Average'),
+        WidgetsConstants.keyFocus(ImageConstant.focousIcon, 'Mathematics : ',
+            'Relations and Functions I', 'Average'),
       ],
     );
   }

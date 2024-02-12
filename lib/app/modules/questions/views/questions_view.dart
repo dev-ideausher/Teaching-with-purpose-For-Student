@@ -15,8 +15,9 @@ class QuestionsView extends GetView<QuestionsController> {
   const QuestionsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    String chapter = Get.find<GetStorageService>().chapter;
-    String concept = Get.find<GetStorageService>().concept;
+    final getStorageService = Get.find<GetStorageService>();
+    final chapter = getStorageService.chapter;
+    final concept = getStorageService.concept;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(46.kh),
@@ -51,12 +52,8 @@ class QuestionsView extends GetView<QuestionsController> {
                   questions: controller.questionsModel.value.data?[index]?.question?.first?.questionText?? '',
                   solution: controller.questionsModel.value.data?[index]?.question?.first?.solution ??'',
                   questionIndex: index,
-                  onTap: (){
-                    controller.toggleSolutionVisibility();
-                  }
                 ),
               ),
-            //40.kheightBox,
             StButton(
               title:'Finish', 
               onTap: () {
@@ -71,9 +68,8 @@ class QuestionsView extends GetView<QuestionsController> {
   }
 
  Widget buildquestion(
-  {required int questionIndex,required String questions,required String solution,void Function()? onTap}){
+  {required int questionIndex,required String questions,required String solution}){
   return SizedBox(
-    //height: 490.kh,
     width: double.infinity,
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 40),
@@ -95,12 +91,19 @@ class QuestionsView extends GetView<QuestionsController> {
         separatorBuilder: (context, index) =>16.kheightBox, 
         itemCount: 4,
         itemBuilder:(context, index) {
+        final isSelected = controller.selectedOptionIndex.value == index;
+        final isCorrect = index == controller.correctAnswerIndex.value;
+        final backgroundColor = isSelected ? (isCorrect ? Colors.green : Colors.red) : Colors.white;
+        final textColor = isSelected ? Colors.white : context.kLightTextColor;
           return GestureDetector(
-            child: Container(
+              onTap: () {
+                controller.selectOption(index, questionIndex);
+              },
+            child: Obx(() => Container(
             height: 56.kh ,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Get.context!.kWhite,
+              color: backgroundColor,
               border: Border.all(color: context.kGreyBack),
               borderRadius: BorderRadius.circular(9)
             ),
@@ -113,20 +116,20 @@ class QuestionsView extends GetView<QuestionsController> {
                     child: Text(
                     controller.questionsModel.value.data?[questionIndex]?.question?.first?.options?[index]?? '',
                     maxLines: 2,
-                    style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500,color: Get.context!.kLightTextColor)
+                    style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500,color: textColor)
                     ),
                   ),
                 ],
               ),
             ),
-           ),
+           ))
           );
         },
       ), 
       24.kheightBox,
       Center(
         child: Obx(() => Visibility(
-        visible: controller.isSolutionVisible.value,
+        visible: controller.isSolutionVisible.value && controller.selectedQuestionIndex.value == questionIndex,
         replacement: const SizedBox.shrink(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -147,16 +150,6 @@ class QuestionsView extends GetView<QuestionsController> {
           )
         ),
             16.kheightBox,
-            InkWell(
-                onTap: onTap,
-                child: Center(
-                  child: Text(
-                    'Solution',
-                    style: TextStyleUtil.kText16_5(
-                        fontWeight: FontWeight.w500,
-                        color: Get.context!.kPrimary),
-                  ),
-                )),
           ],
         ),
       ),

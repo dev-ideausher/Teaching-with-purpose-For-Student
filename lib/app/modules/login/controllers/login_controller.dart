@@ -28,6 +28,16 @@ class LoginController extends GetxController with GetSingleTickerProviderStateMi
   RxBool isLoding = false.obs;
   
 
+
+    String? passwordValidater(String value) {
+    if (value.isEmpty) {
+      return "Password required";
+    } else if (value.length < 6) {
+      return "Character must me 6 or more";
+    }
+    return null;
+  }
+
 //-----------------------login-------------------------------
 
   void checkLogin() {
@@ -52,12 +62,6 @@ class LoginController extends GetxController with GetSingleTickerProviderStateMi
       }
     });
   }
-
-        //   if (value.user!.emailVerified) {
-        //   handleGetContact();
-        // }else{
-        //   CommonUtils.showMySnackbar(title: "Email verify ", desc: "Please verify your email and continue"); 
-        // }
 
   Future<void> handleGetContact() async {
     try {
