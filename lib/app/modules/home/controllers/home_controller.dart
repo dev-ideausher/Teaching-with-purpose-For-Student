@@ -14,6 +14,7 @@ import '../../profile/controllers/profile_controller.dart';
 
 class HomeController extends GetxController {
   RxBool isLoding = false.obs;
+  RxBool isAttendanceMarked = false.obs;
   Rx<SubjectsListModel> subjectLists= SubjectsListModel().obs;
   Rx<EventsModel> eventsModel= EventsModel().obs;
   Rx<QuizModel> quizModel = QuizModel().obs;
@@ -110,6 +111,7 @@ void updateSubjectItems() {
       if (responce.data['status'] == true) {
         //log('attendance...${responce.data}');
         Utils.showMySnackbar(desc: "Attendance marked success");
+        isAttendanceMarked.value = true;
       } else {
         Utils.showMySnackbar(desc: "Can't mark attaendance at the moment");
       }

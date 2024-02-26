@@ -217,7 +217,7 @@ static Widget feedback(String feebackimg, String teacherName, String statement, 
       height: 79.kh,
       width: 343.kw,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
         child: Row(
           children: [
             ClipRRect(

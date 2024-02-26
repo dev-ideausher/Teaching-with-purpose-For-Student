@@ -19,6 +19,7 @@ class QuestionsView extends GetView<QuestionsController> {
     final chapter = getStorageService.chapter;
     final concept = getStorageService.concept;
     return Scaffold(
+      backgroundColor: context.kGreyBack,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(46.kh),
           child: CustomAppBar(title: chapter, isBack: true)),
@@ -91,15 +92,14 @@ class QuestionsView extends GetView<QuestionsController> {
         separatorBuilder: (context, index) =>16.kheightBox, 
         itemCount: 4,
         itemBuilder:(context, index) {
-        final isSelected = controller.selectedOptionIndex.value == index;
-        final isCorrect = index == controller.correctAnswerIndex.value;
-        final backgroundColor = isSelected ? (isCorrect ? Colors.green : Colors.red) : Colors.white;
-        final textColor = isSelected ? Colors.white : context.kLightTextColor;
           return GestureDetector(
-              onTap: () {
-                controller.selectOption(index, questionIndex);
-              },
-            child: Obx(() => Container(
+            onTap: () => controller.selectOption(index, questionIndex),
+            child: Obx(() {
+            final isSelected = controller.selectedOptionIndex.value == index;
+            final isCorrect = index == controller.correctAnswerIndex.value;
+            final backgroundColor = isSelected ? (isCorrect ? context.kPrimary : context.kRed) : context.kWhite;
+            final textColor = isSelected ? Colors.white : context.kLightTextColor;
+            return Container(
             height: 56.kh ,
             width: double.infinity,
             decoration: BoxDecoration(
@@ -122,7 +122,8 @@ class QuestionsView extends GetView<QuestionsController> {
                 ],
               ),
             ),
-           ))
+                       );
+            })
           );
         },
       ), 
@@ -149,7 +150,7 @@ class QuestionsView extends GetView<QuestionsController> {
             )
           )
         ),
-            16.kheightBox,
+        16.kheightBox,
           ],
         ),
       ),

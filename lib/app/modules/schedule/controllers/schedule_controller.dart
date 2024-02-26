@@ -25,6 +25,7 @@ class ScheduleController extends GetxController {
     super.onInit();
   }
  
+ 
   List<DaysTableModel> getSelectedDayTable() {
     switch (selectedIndex.value) {
       case 0:
@@ -51,7 +52,7 @@ class ScheduleController extends GetxController {
    Future<void> scheduledTimetable() async {
     isLoading(true);
     try {
-      final response = await APIManager.getTimeTable();
+      final response = await APIManager.getClasses();
 
       if (response.data['status'] == true) {
 

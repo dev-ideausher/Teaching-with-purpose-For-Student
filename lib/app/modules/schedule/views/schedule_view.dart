@@ -131,10 +131,10 @@ class ScheduleView extends GetView<ScheduleController> {
                   Text('${controller.getSelectedDayTable()[index].time}',
                   style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color:Get.context!.kLightTextColor)),
         
-                  Text('${controller.getSelectedDayTable()[index].subject}',
+                  Text('${controller.getSelectedDayTable()[index].subject?.subject}',
                   style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color:Get.context!.kLightTextColor)),
         
-                  Text('${controller.getSelectedDayTable()[index].subjectTeacher}',
+                  Text('${controller.getSelectedDayTable()[index].subjectTeacher?.name}',
                   style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor))
                 ],
               );

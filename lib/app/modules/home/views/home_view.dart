@@ -171,27 +171,46 @@ class HomeView extends GetView<HomeController> {
               Center(
                 child: Column(
                   children: [
-                       InkWell(
-                        onTap: (){
-                          controller.markAttendance();
-                        },
-                        child: Container(
+                    InkWell(
+                      onTap: () {
+                        controller.markAttendance();
+                      },
+                      child: Container(
                           height: 96.kh,
                           width: 96.kw,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: Get.context!.kPrimary,
                               shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: Get.context!.kLightgreen)),
-                          child: Text(
-                            'Present',
-                            style: TextStyleUtil.kText14_4(
-                                fontWeight: FontWeight.w600,
-                                color: Get.context!.kWhite),
-                          ),
-                        ),
-                      ),
+                              border: Border.all(color: Get.context!.kLightgreen)),
+                          child: Obx(() {
+                            if (controller.isAttendanceMarked.value) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.check,
+                                      size: 28, color: Colors.white),
+                                  4.kheightBox,
+                                  Text(
+                                    'Marked!',
+                                    style: TextStyleUtil.kText14_4(
+                                      fontWeight: FontWeight.w600,
+                                      color: Get.context!.kWhite,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return Text(
+                                'Present',
+                                style: TextStyleUtil.kText14_4(
+                                  fontWeight: FontWeight.w600,
+                                  color: Get.context!.kWhite,
+                                ),
+                              );
+                            }
+                          })),
+                    ),
                     16.kheightBox,
                   ],
                 ),

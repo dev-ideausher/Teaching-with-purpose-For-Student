@@ -21,8 +21,7 @@ class ProfileController extends GetxController {
   Future<void> getStudent() async {
     isLoding(true);
     try {
-      var responce =
-          await APIManager.getUser(id: Get.find<GetStorageService>().id);
+      var responce = await APIManager.getUser(id: Get.find<GetStorageService>().id);
       if (responce.statusCode == 200) {
         studentModel = StudentModel.fromJson(responce.data);
         Get.find< GetStorageService>().rollNumber = studentModel!.data!.first!.rollNumber.toString();

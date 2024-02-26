@@ -61,7 +61,6 @@ class QuestionsController extends GetxController {
     }
   }
 
-
 //-----------------------complete Chapter-------------------------------
 
 Future<void> completeChapter() async {

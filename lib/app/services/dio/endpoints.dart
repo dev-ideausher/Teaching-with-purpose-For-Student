@@ -55,6 +55,8 @@ class Endpoints {
 
   static const String getReviceQuestions = "api/revisedquestion/get?chapterId=";
 
+  static const String getClasses = "api/class/get";
+
 
 
 
