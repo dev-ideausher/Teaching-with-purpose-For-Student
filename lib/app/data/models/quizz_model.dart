@@ -4,13 +4,13 @@
 class QuizModelDataQuestion {
 /*
 {
-  "questionText": "Which of the following is a synonym for benevolent",
-  "answer": 2,
-  "points": 10,
+  "questionText": "What is 2 + 2?",
+  "answer": 4,
+  "points": 5,
   "options": [
-    "Malevolent "
+    "3"
   ],
-  "_id": "65b2784d2ea2c9ecd2012732"
+  "_id": "65d301c642db28a52371cb7d"
 } 
 */
 
@@ -40,6 +40,220 @@ class QuizModelDataQuestion {
     options = arr0;
     }
     Id = json['_id']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['questionText'] = questionText;
+    data['answer'] = answer;
+    data['points'] = points;
+    if (options != null) {
+      final v = options;
+      final arr0 = [];
+  for (var v in v!) {
+  arr0.add(v);
+  }
+      data['options'] = arr0;
+    }
+    data['_id'] = Id;
+    return data;
+  }
+}
+
+class QuizModelDataClassesTimeTable {
+/*
+{
+  "time": "10am-11am",
+  "day": "monday",
+  "subject": "657025d48c2337e8d3e2e30d",
+  "subjectTeacher": "657021118c2337e8d3e2e307",
+  "_id": "65d1b46061241ee42bf91b74"
+} 
+*/
+
+  String? time;
+  String? day;
+  String? subject;
+  String? subjectTeacher;
+  String? Id;
+
+  QuizModelDataClassesTimeTable({
+    this.time,
+    this.day,
+    this.subject,
+    this.subjectTeacher,
+    this.Id,
+  });
+  QuizModelDataClassesTimeTable.fromJson(Map<String, dynamic> json) {
+    time = json['time']?.toString();
+    day = json['day']?.toString();
+    subject = json['subject']?.toString();
+    subjectTeacher = json['subjectTeacher']?.toString();
+    Id = json['_id']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['time'] = time;
+    data['day'] = day;
+    data['subject'] = subject;
+    data['subjectTeacher'] = subjectTeacher;
+    data['_id'] = Id;
+    return data;
+  }
+}
+
+class QuizModelDataClassesClassFaculity {
+/*
+{
+  "subjectTeacher": "657021118c2337e8d3e2e307",
+  "subject": "6570261b8c2337e8d3e2e313",
+  "_id": "65d1b46061241ee42bf91b72"
+} 
+*/
+
+  String? subjectTeacher;
+  String? subject;
+  String? Id;
+
+  QuizModelDataClassesClassFaculity({
+    this.subjectTeacher,
+    this.subject,
+    this.Id,
+  });
+  QuizModelDataClassesClassFaculity.fromJson(Map<String, dynamic> json) {
+    subjectTeacher = json['subjectTeacher']?.toString();
+    subject = json['subject']?.toString();
+    Id = json['_id']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['subjectTeacher'] = subjectTeacher;
+    data['subject'] = subject;
+    data['_id'] = Id;
+    return data;
+  }
+}
+
+class QuizModelDataClasses {
+/*
+{
+  "_id": "65d1b46061241ee42bf91b71",
+  "school": "65a52f67e6b1f330a3d7673d",
+  "classTeacher": "657021118c2337e8d3e2e307",
+  "className": "8th",
+  "section": "A",
+  "subject": "6570261b8c2337e8d3e2e313",
+  "classCapcity": 30,
+  "classFaculity": [
+    {
+      "subjectTeacher": "657021118c2337e8d3e2e307",
+      "subject": "6570261b8c2337e8d3e2e313",
+      "_id": "65d1b46061241ee42bf91b72"
+    }
+  ],
+  "timeTable": [
+    {
+      "time": "10am-11am",
+      "day": "monday",
+      "subject": "657025d48c2337e8d3e2e30d",
+      "subjectTeacher": "657021118c2337e8d3e2e307",
+      "_id": "65d1b46061241ee42bf91b74"
+    }
+  ],
+  "isDeleted": false,
+  "createdAt": "2024-02-18T07:40:16.767Z",
+  "updatedAt": "2024-02-18T07:40:16.767Z",
+  "__v": 0
+} 
+*/
+
+  String? Id;
+  String? school;
+  String? classTeacher;
+  String? className;
+  String? section;
+  String? subject;
+  int? classCapcity;
+  List<QuizModelDataClassesClassFaculity?>? classFaculity;
+  List<QuizModelDataClassesTimeTable?>? timeTable;
+  bool? isDeleted;
+  String? createdAt;
+  String? updatedAt;
+  int? V;
+
+  QuizModelDataClasses({
+    this.Id,
+    this.school,
+    this.classTeacher,
+    this.className,
+    this.section,
+    this.subject,
+    this.classCapcity,
+    this.classFaculity,
+    this.timeTable,
+    this.isDeleted,
+    this.createdAt,
+    this.updatedAt,
+    this.V,
+  });
+  QuizModelDataClasses.fromJson(Map<String, dynamic> json) {
+    Id = json['_id']?.toString();
+    school = json['school']?.toString();
+    classTeacher = json['classTeacher']?.toString();
+    className = json['className']?.toString();
+    section = json['section']?.toString();
+    subject = json['subject']?.toString();
+    classCapcity = json['classCapcity']?.toInt();
+  if (json['classFaculity'] != null) {
+  final v = json['classFaculity'];
+  final arr0 = <QuizModelDataClassesClassFaculity>[];
+  v.forEach((v) {
+  arr0.add(QuizModelDataClassesClassFaculity.fromJson(v));
+  });
+    classFaculity = arr0;
+    }
+  if (json['timeTable'] != null) {
+  final v = json['timeTable'];
+  final arr0 = <QuizModelDataClassesTimeTable>[];
+  v.forEach((v) {
+  arr0.add(QuizModelDataClassesTimeTable.fromJson(v));
+  });
+    timeTable = arr0;
+    }
+    isDeleted = json['isDeleted'];
+    createdAt = json['createdAt']?.toString();
+    updatedAt = json['updatedAt']?.toString();
+    V = json['__v']?.toInt();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['_id'] = Id;
+    data['school'] = school;
+    data['classTeacher'] = classTeacher;
+    data['className'] = className;
+    data['section'] = section;
+    data['subject'] = subject;
+    data['classCapcity'] = classCapcity;
+    if (classFaculity != null) {
+      final v = classFaculity;
+      final arr0 = [];
+  for (var v in v!) {
+  arr0.add(v!.toJson());
+  }
+      data['classFaculity'] = arr0;
+    }
+    if (timeTable != null) {
+      final v = timeTable;
+      final arr0 = [];
+  for (var v in v!) {
+  arr0.add(v!.toJson());
+  }
+      data['timeTable'] = arr0;
+    }
+    data['isDeleted'] = isDeleted;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = V;
+    return data;
   }
 }
 
@@ -75,43 +289,139 @@ class QuizModelDataConductedBy {
   }
 }
 
+class QuizModelDataSubject {
+/*
+{
+  "icon": "",
+  "_id": "6570261b8c2337e8d3e2e313",
+  "subject": "English",
+  "subjectCode": "005",
+  "isDeleted": false,
+  "createdAt": "2023-12-06T07:43:23.213Z",
+  "updatedAt": "2023-12-06T07:43:23.213Z",
+  "__v": 0
+} 
+*/
+
+  String? icon;
+  String? Id;
+  String? subject;
+  String? subjectCode;
+  bool? isDeleted;
+  String? createdAt;
+  String? updatedAt;
+  int? V;
+
+  QuizModelDataSubject({
+    this.icon,
+    this.Id,
+    this.subject,
+    this.subjectCode,
+    this.isDeleted,
+    this.createdAt,
+    this.updatedAt,
+    this.V,
+  });
+  QuizModelDataSubject.fromJson(Map<String, dynamic> json) {
+    icon = json['icon']?.toString();
+    Id = json['_id']?.toString();
+    subject = json['subject']?.toString();
+    subjectCode = json['subjectCode']?.toString();
+    isDeleted = json['isDeleted'];
+    createdAt = json['createdAt']?.toString();
+    updatedAt = json['updatedAt']?.toString();
+    V = json['__v']?.toInt();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['icon'] = icon;
+    data['_id'] = Id;
+    data['subject'] = subject;
+    data['subjectCode'] = subjectCode;
+    data['isDeleted'] = isDeleted;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = V;
+    return data;
+  }
+}
+
 class QuizModelData {
 /*
 {
-  "_id": "65b2784d2ea2c9ecd2012731",
-  "subject": "English",
+  "_id": "65d301c642db28a52371cb7c",
+  "subject": {
+    "icon": "",
+    "_id": "6570261b8c2337e8d3e2e313",
+    "subject": "English",
+    "subjectCode": "005",
+    "isDeleted": false,
+    "createdAt": "2023-12-06T07:43:23.213Z",
+    "updatedAt": "2023-12-06T07:43:23.213Z",
+    "__v": 0
+  },
   "conductedBy": {
     "_id": "657021118c2337e8d3e2e307",
     "name": "John Doe",
     "__t": "Teachers"
   },
-  "date": "2024-01-25",
+  "classes": {
+    "_id": "65d1b46061241ee42bf91b71",
+    "school": "65a52f67e6b1f330a3d7673d",
+    "classTeacher": "657021118c2337e8d3e2e307",
+    "className": "8th",
+    "section": "A",
+    "subject": "6570261b8c2337e8d3e2e313",
+    "classCapcity": 30,
+    "classFaculity": [
+      {
+        "subjectTeacher": "657021118c2337e8d3e2e307",
+        "subject": "6570261b8c2337e8d3e2e313",
+        "_id": "65d1b46061241ee42bf91b72"
+      }
+    ],
+    "timeTable": [
+      {
+        "time": "10am-11am",
+        "day": "monday",
+        "subject": "657025d48c2337e8d3e2e30d",
+        "subjectTeacher": "657021118c2337e8d3e2e307",
+        "_id": "65d1b46061241ee42bf91b74"
+      }
+    ],
+    "isDeleted": false,
+    "createdAt": "2024-02-18T07:40:16.767Z",
+    "updatedAt": "2024-02-18T07:40:16.767Z",
+    "__v": 0
+  },
+  "date": "2023-11-23",
   "image": "",
   "topicCover": [
     ""
   ],
-  "instructions": "Understand the Question and then only answer ",
+  "instructions": "Read the questions carefully.",
   "question": [
     {
-      "questionText": "Which of the following is a synonym for benevolent",
-      "answer": 2,
-      "points": 10,
+      "questionText": "What is 2 + 2?",
+      "answer": 4,
+      "points": 5,
       "options": [
-        "Malevolent "
+        "3"
       ],
-      "_id": "65b2784d2ea2c9ecd2012732"
+      "_id": "65d301c642db28a52371cb7d"
     }
   ],
   "isDeleted": false,
-  "createdAt": "2024-01-25T15:03:41.178Z",
-  "updatedAt": "2024-01-25T15:03:41.178Z",
+  "createdAt": "2024-02-19T07:22:46.606Z",
+  "updatedAt": "2024-02-19T07:22:46.606Z",
   "__v": 0
 } 
 */
 
   String? Id;
-  String? subject;
+  QuizModelDataSubject? subject;
   QuizModelDataConductedBy? conductedBy;
+  QuizModelDataClasses? classes;
   String? date;
   String? image;
   List<String?>? topicCover;
@@ -126,6 +436,7 @@ class QuizModelData {
     this.Id,
     this.subject,
     this.conductedBy,
+    this.classes,
     this.date,
     this.image,
     this.topicCover,
@@ -138,8 +449,9 @@ class QuizModelData {
   });
   QuizModelData.fromJson(Map<String, dynamic> json) {
     Id = json['_id']?.toString();
-    subject = json['subject']?.toString();
+    subject = (json['subject'] != null) ? QuizModelDataSubject.fromJson(json['subject']) : null;
     conductedBy = (json['conductedBy'] != null) ? QuizModelDataConductedBy.fromJson(json['conductedBy']) : null;
+    classes = (json['classes'] != null) ? QuizModelDataClasses.fromJson(json['classes']) : null;
     date = json['date']?.toString();
     image = json['image']?.toString();
   if (json['topicCover'] != null) {
@@ -164,43 +476,117 @@ class QuizModelData {
     updatedAt = json['updatedAt']?.toString();
     V = json['__v']?.toInt();
   }
-
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['_id'] = Id;
+    if (subject != null) {
+      data['subject'] = subject!.toJson();
+    }
+    if (conductedBy != null) {
+      data['conductedBy'] = conductedBy!.toJson();
+    }
+    if (classes != null) {
+      data['classes'] = classes!.toJson();
+    }
+    data['date'] = date;
+    data['image'] = image;
+    if (topicCover != null) {
+      final v = topicCover;
+      final arr0 = [];
+  for (var v in v!) {
+  arr0.add(v);
+  }
+      data['topicCover'] = arr0;
+    }
+    data['instructions'] = instructions;
+    if (question != null) {
+      final v = question;
+      final arr0 = [];
+  for (var v in v!) {
+  arr0.add(v!.toJson());
+  }
+      data['question'] = arr0;
+    }
+    data['isDeleted'] = isDeleted;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = V;
+    return data;
+  }
 }
 
 class QuizModel {
 /*
 {
   "status": true,
-  "result": 2,
+  "result": 4,
   "data": [
     {
-      "_id": "65b2784d2ea2c9ecd2012731",
-      "subject": "English",
+      "_id": "65d301c642db28a52371cb7c",
+      "subject": {
+        "icon": "",
+        "_id": "6570261b8c2337e8d3e2e313",
+        "subject": "English",
+        "subjectCode": "005",
+        "isDeleted": false,
+        "createdAt": "2023-12-06T07:43:23.213Z",
+        "updatedAt": "2023-12-06T07:43:23.213Z",
+        "__v": 0
+      },
       "conductedBy": {
         "_id": "657021118c2337e8d3e2e307",
         "name": "John Doe",
         "__t": "Teachers"
       },
-      "date": "2024-01-25",
+      "classes": {
+        "_id": "65d1b46061241ee42bf91b71",
+        "school": "65a52f67e6b1f330a3d7673d",
+        "classTeacher": "657021118c2337e8d3e2e307",
+        "className": "8th",
+        "section": "A",
+        "subject": "6570261b8c2337e8d3e2e313",
+        "classCapcity": 30,
+        "classFaculity": [
+          {
+            "subjectTeacher": "657021118c2337e8d3e2e307",
+            "subject": "6570261b8c2337e8d3e2e313",
+            "_id": "65d1b46061241ee42bf91b72"
+          }
+        ],
+        "timeTable": [
+          {
+            "time": "10am-11am",
+            "day": "monday",
+            "subject": "657025d48c2337e8d3e2e30d",
+            "subjectTeacher": "657021118c2337e8d3e2e307",
+            "_id": "65d1b46061241ee42bf91b74"
+          }
+        ],
+        "isDeleted": false,
+        "createdAt": "2024-02-18T07:40:16.767Z",
+        "updatedAt": "2024-02-18T07:40:16.767Z",
+        "__v": 0
+      },
+      "date": "2023-11-23",
       "image": "",
       "topicCover": [
         ""
       ],
-      "instructions": "Understand the Question and then only answer ",
+      "instructions": "Read the questions carefully.",
       "question": [
         {
-          "questionText": "Which of the following is a synonym for benevolent",
-          "answer": 2,
-          "points": 10,
+          "questionText": "What is 2 + 2?",
+          "answer": 4,
+          "points": 5,
           "options": [
-            "Malevolent "
+            "3"
           ],
-          "_id": "65b2784d2ea2c9ecd2012732"
+          "_id": "65d301c642db28a52371cb7d"
         }
       ],
       "isDeleted": false,
-      "createdAt": "2024-01-25T15:03:41.178Z",
-      "updatedAt": "2024-01-25T15:03:41.178Z",
+      "createdAt": "2024-02-19T07:22:46.606Z",
+      "updatedAt": "2024-02-19T07:22:46.606Z",
       "__v": 0
     }
   ]
@@ -225,10 +611,23 @@ class QuizModel {
   v.forEach((v) {
   arr0.add(QuizModelData.fromJson(v));
   });
-    this.data = arr0;
+    data = arr0;
     }
   }
-
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['status'] = status;
+    data['result'] = result;
+    if (this.data != null) {
+      final v = this.data;
+      final arr0 = [];
+  for (var v in v!) {
+  arr0.add(v!.toJson());
+  }
+      data['data'] = arr0;
+    }
+    return data;
+  }
 }
 
 

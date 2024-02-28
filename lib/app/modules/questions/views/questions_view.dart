@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart';
-import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/custom_button.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
@@ -47,7 +46,7 @@ class QuestionsView extends GetView<QuestionsController> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, index) => 16.kheightBox,
-                itemCount: controller.questionsModel.value.data?.length??0,
+                itemCount: controller.questionsModel.value.data?.length ?? 0,
                 itemBuilder: (context, index) => 
                 buildquestion(
                   questions: controller.questionsModel.value.data?[index]?.question?.first?.questionText?? '',
@@ -58,7 +57,7 @@ class QuestionsView extends GetView<QuestionsController> {
             StButton(
               title:'Finish', 
               onTap: () {
-              Get.offNamed(Routes.BOTTOM_NAVBAR);
+              controller.completeChapter();
             }),
             ],
           ),
@@ -122,7 +121,7 @@ class QuestionsView extends GetView<QuestionsController> {
                 ],
               ),
             ),
-                       );
+          );
             })
           );
         },

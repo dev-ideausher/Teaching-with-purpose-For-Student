@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/data/models/chapter_questions_model.dart';
+import 'package:teaching_with_purpose_student/app/routes/app_pages.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
 
 import '../../../utils/utils.dart';
@@ -14,6 +15,8 @@ class QuestionsController extends GetxController {
   RxInt selectedOptionIndex = (-1).obs;
   RxInt selectedQuestionIndex = (-1).obs;
   RxInt correctAnswerIndex = (-1).obs;
+
+  Map<String, int> userAnswers = {};
 
   @override
   void onInit() {
@@ -37,6 +40,9 @@ class QuestionsController extends GetxController {
     isSolutionVisible.value = true; 
     final correctAnswer = questionsModel.value.data?[questionIndex]?.question?.first?.solution;
     correctAnswerIndex.value = questionsModel.value.data?[questionIndex]?.question?.first?.options?.indexOf(correctAnswer) ?? -1;
+
+    final questionId = questionsModel.value.data?[questionIndex]?.Id?? '';
+    userAnswers[questionId] = optionIndex;
   }
 
   //-----------------------Questions-------------------------------
@@ -61,28 +67,36 @@ class QuestionsController extends GetxController {
     }
   }
 
+
+  List<Map<String, dynamic>> prepareChapterCompletionData() {
+    List<Map<String, dynamic>> completionData = [];
+    userAnswers.forEach((questionId, selectedAnswerIndex) {
+      completionData.add({
+        "question": questionId,
+        "answer": selectedAnswerIndex,
+      });
+    });
+    return completionData;
+  }
+
 //-----------------------complete Chapter-------------------------------
 
 Future<void> completeChapter() async {
-    var body = {
-      "chapter": "65b2188c5f3a80c309a4f352",
-      "question": [
-        {
-          "questionText": "What is 2 + 2?",
-          "answer": 4,
-          "options": ["3", "4", "5", "6"]
-        }
-      ]
+    var body =  {
+      "chapter": chapterId,
+      "answers":prepareChapterCompletionData()
     };
 
     try {
       final responce = await APIManager.completeChapter(body: body);
-      if (responce.data['status'] == true) {
-        log('..${responce.data}');
+      if (responce.statusCode == 200 ||responce.statusCode == 201 ) {
+      log('..${responce.data}');
+      
+      Get.toNamed(Routes.BOTTOM_NAVBAR);
+      Utils.showMySnackbar(desc: 'Chapter completed');
 
-        Utils.showMySnackbar(desc: 'Chapter completed');
       } else {
-        Utils.showMySnackbar(desc: 'Cant complet the chapter');
+        Utils.showMySnackbar(desc: "Can't complete the chapter");
       }
     } catch (e) {
       log('e**..$e');

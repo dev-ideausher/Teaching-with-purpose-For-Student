@@ -38,7 +38,7 @@ class QuizzView extends GetView<QuizzController> {
                   final selectedSubject = controller.home.selectedSubject.value;
                   final quizzes = Get.find<HomeController>().quizModel.value.data ?? [];
                   final filteredQuizzes = selectedSubject.isEmpty?
-                  quizzes: quizzes.where((quiz) => quiz?.subject == selectedSubject).toList();
+                  quizzes: quizzes.where((quiz) => quiz?.subject?.subject == selectedSubject).toList();
                   return ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -51,7 +51,7 @@ class QuizzView extends GetView<QuizzController> {
                       final data = filteredQuizzes[index]?.question;
                       return buildQuizCard(
                         imgPath: Endpoints.temImg,
-                        title: filteredQuizzes[index]?.subject ?? '',
+                        title: filteredQuizzes[index]?.subject?.subject ?? '',
                         date: 'Date: ${filteredQuizzes[index]?.date ?? ''}',
                         conducted: conductedBy,
                         t4: '',

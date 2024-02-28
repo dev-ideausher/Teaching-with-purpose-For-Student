@@ -86,7 +86,7 @@ class WidgetsConstants{
                         color: Get.context!.kLightTextColor),
                   ),
                   Text(
-                    'Due Date:$dueDate',
+                    'Due Date: $dueDate',
                     maxLines: 1,
                     style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
                   ),

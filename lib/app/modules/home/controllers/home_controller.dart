@@ -110,7 +110,7 @@ void updateSubjectItems() {
       final responce = await APIManager.markattendance(body: body);
       if (responce.data['status'] == true) {
         //log('attendance...${responce.data}');
-        Utils.showMySnackbar(desc: "Attendance marked success");
+        Utils.showMySnackbar(desc: "Attendance marked");
         isAttendanceMarked.value = true;
       } else {
         Utils.showMySnackbar(desc: "Can't mark attaendance at the moment");

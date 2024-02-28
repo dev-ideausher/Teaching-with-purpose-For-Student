@@ -121,7 +121,7 @@ class ProfileView extends GetView<ProfileController> {
         ),
         8.kheightBox,
         Text(
-            'Class: ${controller.studentModel?.data?.first?.className ?? ''} | RollNumber: ${controller.studentModel?.data?.first?.rollNumber ?? ''}',
+            'Class: ${controller.studentModel?.data?.first?.className?.className ?? ''}-${Get.find<ProfileController>().studentModel?.data?.first?.className?.section ?? ''} | RollNumber: ${controller.studentModel?.data?.first?.rollNumber ?? ''}',
             style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,color: Get.context!.kLightTextColor))
       ],
     );

@@ -30,7 +30,7 @@ class QuizzSucessView extends GetWidget<LiveQuizzController> {
               Text(
               'Congratulations !',
               style: TextStyleUtil.kText24_6(fontWeight: FontWeight.w600)),
-              85.kheightBox,
+              200.kheightBox,
               SizedBox(
                   width: 343.kw,
                   height: 56.kh,

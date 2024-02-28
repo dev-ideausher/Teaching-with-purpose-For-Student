@@ -70,7 +70,7 @@ class HomeView extends GetView<HomeController> {
                         onTap: () => Get.toNamed(Routes.QUIZZ),
                         child: StCard(
                             imagePath:  Endpoints.temImg,
-                            title: controller.quizModel.value.data?.first?.subject??'',
+                            title: controller.quizModel.value.data?.first?.subject?.subject??'',
                             text1: 'Date: ${controller.quizModel.value.data?.first?.date?? ''}',
                             text2: 'Conducted by ',
                             text3: controller.quizModel.value.data?.first?.conductedBy?.name??'',
@@ -90,7 +90,7 @@ class HomeView extends GetView<HomeController> {
                           itemBuilder: (context, index) => StCardVertical(
                               borderColor: context.kLightred,
                               title: controller.eventsModel.value.data?[index]?.name?? '',
-                              text1: 'Date:07 July 2023',
+                              text1: 'Date:${controller.eventsModel.value.data?[index]?.date?? ''}',
                               text2: controller.eventsModel.value.data?[index]?.desc?? '',
                               imagePath:controller.eventsModel.value.data?[index]?.image ?? ''
                           ),
@@ -122,7 +122,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 8.kheightBox,
                   Text(
-                    'Class:${Get.find<ProfileController>().studentModel?.data?.first?.className ?? ''} | RollNumber:${Get.find<ProfileController>().studentModel?.data?.first?.rollNumber ?? ''}',
+                    "Class:${Get.find<ProfileController>().studentModel?.data?.first?.className?.className ?? ''}-${Get.find<ProfileController>().studentModel?.data?.first?.className?.section ?? ''} | RollNumber:${Get.find<ProfileController>().studentModel?.data?.first?.rollNumber ?? ''}",
                     style: TextStyleUtil.kText14_4(
                         fontWeight: FontWeight.w400,
                         color: Get.context!.kNeutral),
@@ -131,20 +131,23 @@ class HomeView extends GetView<HomeController> {
             ),
             // 123.kwidthBox,
             const Spacer(),
-            Icon(Icons.notifications, color: Get.context!.kPrimary)
+            InkWell(
+              onTap: (){},
+              child: Icon(Icons.notifications, color: Get.context!.kPrimary))
           ],
         ));
   }
 
 //image logic
   Widget buildProfileImg() {
-    if (Get.find<ProfileController>().studentModel?.data?.first?.image !=null) {
+    if (Get.find<ProfileController>().studentModel?.data?.first?.image !=
+        null) {
       return CachedNetworkImage(
-          imageUrl:
-              Get.find<ProfileController>().studentModel?.data?.first?.image ??'',
+          imageUrl: Get.find<ProfileController>().studentModel?.data?.first?.image ??'',
           width: 48.kw,
           height: 48.kh,
-          fit: BoxFit.cover);
+          fit: BoxFit.cover
+      );
     }
     return Image.asset(ImageConstant.tempProfileImg,
         height: 48.kh, width: 48.kw, fit: BoxFit.cover);
@@ -231,14 +234,12 @@ class HomeView extends GetView<HomeController> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-            textAlign: TextAlign.center,
             title,
             style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
         149.kwidthBox,
         InkWell(
           onTap: onTap,
           child: Text(
-              textAlign: TextAlign.center,
               subtitle,
               style: TextStyleUtil.kText14_4(
                   fontWeight: FontWeight.w400, color: Get.context!.kPrimary)),
