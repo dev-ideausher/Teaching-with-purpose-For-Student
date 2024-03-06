@@ -86,8 +86,8 @@ class EditProfileController extends GetxController {
   var body = {
     "Image": uploadFileModel?.url
   };
-  log('$body');
-  log(Get.find<GetStorageService>().id.toString());
+  //log('$body');
+  //log(Get.find<GetStorageService>().id.toString());
     try {
       final responce = await APIManager.updateUser( body: body, id: Get.find<GetStorageService>().id);
       if (responce.statusCode == 200) {
@@ -96,7 +96,7 @@ class EditProfileController extends GetxController {
       Utils.showMySnackbar(  title: 'Sucess' ,desc: 'Profile updated Successfully');
       Get.find<ProfileController>().getStudent();
       Get.toNamed(Routes.BOTTOM_NAVBAR);
-      }else{
+      } else {
         Utils.showMySnackbar(desc: responce.data['message']);
       }
     } catch (e) {

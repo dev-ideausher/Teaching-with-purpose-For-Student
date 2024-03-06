@@ -33,8 +33,8 @@ class StSubjectVertical extends StatelessWidget {
           ),
           8.kheightBox,
           Text(
-            textAlign: TextAlign.center,
             text,
+            textAlign: TextAlign.center,
             style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
           )
         ],

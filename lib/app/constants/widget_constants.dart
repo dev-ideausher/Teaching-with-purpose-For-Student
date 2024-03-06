@@ -256,7 +256,6 @@ static Widget feedback(String feebackimg, String teacherName, String statement, 
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 24, 8),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Image.asset(focusImg, height: 24.kh, width: 24.kw),
             16.kwidthBox,

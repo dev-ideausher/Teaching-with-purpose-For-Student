@@ -41,6 +41,10 @@ class GetStorageService extends GetxService {
 
   set chapterId(String chapterId) => _runData.write('chapterId', chapterId); 
 
+  bool get isAttendanceMarked => _runData.read('isAttendanceMarked') ?? false;
+
+  set isAttendanceMarked(bool isAttendanceMarked) => _runData.write('isAttendanceMarked', isAttendanceMarked);
+
 
 
 

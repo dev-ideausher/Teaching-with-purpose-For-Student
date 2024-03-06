@@ -101,10 +101,10 @@ class ProfileView extends GetView<ProfileController> {
         Stack(
           children: [
             Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: profileImg(),
-              ),
+              child: CircleAvatar(
+                radius: 50,
+                child:  profileImg(),
+              )
             ),
             Positioned(
                 bottom: 12,

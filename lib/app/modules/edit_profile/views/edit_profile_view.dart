@@ -86,9 +86,10 @@ class EditProfileView extends GetView<EditProfileController> {
         Stack(
           children: [
             Center(
-              child: Obx(() => ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: getProfileImage())),
+              child: Obx(() => CircleAvatar(
+                    radius: 50,
+                    child: getProfileImage(),
+                  )),
             ),
             Positioned(
                 bottom: 12,
@@ -101,9 +102,7 @@ class EditProfileView extends GetView<EditProfileController> {
           ],
         ),
         8.kheightBox,
-        Text(
-            textAlign: TextAlign.center,
-            'Take or upload profile photo',
+        Text('Take or upload profile photo',
             style: TextStyleUtil.kText14_4(
                 fontWeight: FontWeight.w400,
                 color: Get.context!.kLightTextColor))
@@ -112,7 +111,7 @@ class EditProfileView extends GetView<EditProfileController> {
   }
 
 // widget for calling textfiels insted of callin one by one
-  Widget editProfileTextfelds({ required String title, required String hintText, required TextEditingController controller,bool readOnly = false}) {
+  Widget editProfileTextfelds({ required String title, required String hintText, required TextEditingController controller,bool readOnly = false}){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -141,8 +140,10 @@ class EditProfileView extends GetView<EditProfileController> {
           width: 100.kw, height: 100.kh, fit: BoxFit.cover);
     }
     if(Get.find<ProfileController>().studentModel?.data?.first?.image != null){
-    return CachedNetworkImage(imageUrl: Get.find<ProfileController>().studentModel?.data?.first?.image ?? '',height: 100.kh,width: 100.kw,fit: BoxFit.cover,);
-    }
+    return CachedNetworkImage(imageUrl: Get.find<ProfileController>().studentModel?.data?.first?.image ?? '',
+    height: 100.kh,width: 100.kw,fit: BoxFit.cover,
+    );
+  }
     return Image.asset(ImageConstant.tempProfileImg,
         height: 100.kh, width: 100.kw, fit: BoxFit.cover);
   }

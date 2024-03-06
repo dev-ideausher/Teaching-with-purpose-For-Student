@@ -57,6 +57,11 @@ class Endpoints {
 
   static const String getClasses = "api/class/get";
 
+  static const String getAssignmentPerformance = "api/assigmentsubmit/assignment-performance";
+
+  static const String getPerformance = "api/result/get";
+
+  static const String getCourseCompletion = "api/assigmentsubmit/percentage";
 
 
 

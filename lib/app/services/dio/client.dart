@@ -11,7 +11,7 @@ class DioClient {
   bool showSnakbar;
 
   DioClient(this._dio,
-      {this.isOverlayLoader = false, this.showSnakbar = false}) {
+      {this.isOverlayLoader = false, this.showSnakbar = false, required bool showSnackbar}) {
     _dio
       ..options.baseUrl = Endpoints.baseUrl
       ..options.connectTimeout =

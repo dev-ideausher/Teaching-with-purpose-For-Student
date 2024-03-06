@@ -16,18 +16,18 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.kGreyBack,
         body: Obx(
-      () => controller.isLoding.value ?
-      Center(child: CircularProgressIndicator(color: context.kPrimary)):
-       SingleChildScrollView(
+      () => controller.isLoding.value 
+      ? Center(child: CircularProgressIndicator(color: context.kPrimary))
+      : SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 50),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 50),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -90,28 +90,32 @@ class HomeView extends GetView<HomeController> {
                           itemBuilder: (context, index) => StCardVertical(
                               borderColor: context.kLightred,
                               title: controller.eventsModel.value.data?[index]?.name?? '',
-                              text1: 'Date:${controller.eventsModel.value.data?[index]?.date?? ''}',
+                              text1: 'Date:${controller.time[index]}',
                               text2: controller.eventsModel.value.data?[index]?.desc?? '',
                               imagePath:controller.eventsModel.value.data?[index]?.image ?? ''
                           ),
                         ),
                       ),
                     ],
-                  )),
-            ))
+                  ),
+                ),
+            ),
+      ),
     );
   }
 
 // section for the student details like roll Number and name with img
   Widget buildStudentSection() {
-    return Obx(() => 
-        Get.find<ProfileController>().isLoding.value?
-        CircularProgressIndicator(color: Get.context!.kPrimary):
-         Row(
+    final profileController = Get.find<ProfileController>();
+
+    return Obx(() => profileController.isLoding.value
+        ? CircularProgressIndicator(color: Get.context!.kPrimary)
+        : Row(
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: buildProfileImg()),
+                child: buildProfileImg(profileController),
+            ),
             16.kwidthBox,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,22 +139,29 @@ class HomeView extends GetView<HomeController> {
               onTap: (){},
               child: Icon(Icons.notifications, color: Get.context!.kPrimary))
           ],
-        ));
+        ),
+    );
   }
 
 //image logic
-  Widget buildProfileImg() {
-    if (Get.find<ProfileController>().studentModel?.data?.first?.image !=
-        null) {
+  Widget buildProfileImg(ProfileController profileController) {
+      final imageUrl = profileController.studentModel?.data?.first?.image ?? '';
+
+    if (imageUrl.isNotEmpty) {
       return CachedNetworkImage(
-          imageUrl: Get.find<ProfileController>().studentModel?.data?.first?.image ??'',
+          imageUrl: imageUrl,
           width: 48.kw,
           height: 48.kh,
-          fit: BoxFit.cover
+          fit: BoxFit.cover,
       );
     }
-    return Image.asset(ImageConstant.tempProfileImg,
-        height: 48.kh, width: 48.kw, fit: BoxFit.cover);
+
+    return Image.asset(
+      ImageConstant.tempProfileImg,
+        height: 48.kh, 
+        width: 48.kw, 
+        fit: BoxFit.cover,
+    );
   }
 
 // custom clock widget

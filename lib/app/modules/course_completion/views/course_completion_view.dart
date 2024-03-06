@@ -34,7 +34,11 @@ class CourseCompletionView extends GetView<CourseCompletionController> {
                   children: [
                     Center(
                         child: percentageIndicater(
-                            0.75, '75%', 'Course completion', () {})),
+                            0.75, 
+                            '75%', 
+                            'Course completion', 
+                            () {}
+                        )),
                     Align(
                       alignment: Alignment.topRight,
                       child:Assets.svg.bigDarkVersionRight.svg(),
@@ -157,7 +161,6 @@ class CourseCompletionView extends GetView<CourseCompletionController> {
               ),
               8.kheightBox,
               Text(
-                textAlign: TextAlign.center,
                 text2,
                 style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400),
               ),

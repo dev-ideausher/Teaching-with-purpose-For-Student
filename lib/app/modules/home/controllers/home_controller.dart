@@ -6,6 +6,7 @@ import 'package:teaching_with_purpose_student/app/data/models/events_model.dart'
 import 'package:teaching_with_purpose_student/app/data/models/quizz_model.dart';
 import 'package:teaching_with_purpose_student/app/data/models/subjects_list_model.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
+import 'package:teaching_with_purpose_student/app/services/storage.dart';
 import 'package:teaching_with_purpose_student/gen/assets.gen.dart';
 
 import '../../../utils/utils.dart';
@@ -18,9 +19,9 @@ class HomeController extends GetxController {
   Rx<SubjectsListModel> subjectLists= SubjectsListModel().obs;
   Rx<EventsModel> eventsModel= EventsModel().obs;
   Rx<QuizModel> quizModel = QuizModel().obs;
-  
   RxList<SubjectsListModelData?> subjectItems = <SubjectsListModelData?>[].obs;
   RxString selectedSubject = 'English'.obs;
+  final GetStorageService storageService = Get.find<GetStorageService>();
 
    @override
   void onInit() {
@@ -40,6 +41,9 @@ class HomeController extends GetxController {
   Assets.svg.biology.svg()
  ];
 
+   void checkAttendanceStatus() {
+    isAttendanceMarked.value = storageService.isAttendanceMarked;
+  }
 
   //-----------------------Subjects-------------------------------
 
@@ -51,6 +55,7 @@ class HomeController extends GetxController {
         // log('subject...${responce.data}');
         subjectLists.value = SubjectsListModel.fromJson(responce.data);
         await showEvents();
+        checkAttendanceStatus();
       }
     } catch (e) {
      log('error..$e');
@@ -112,6 +117,7 @@ void updateSubjectItems() {
         //log('attendance...${responce.data}');
         Utils.showMySnackbar(desc: "Attendance marked");
         isAttendanceMarked.value = true;
+        //storageService.isAttendanceMarked = true;
       } else {
         Utils.showMySnackbar(desc: "Can't mark attaendance at the moment");
       }

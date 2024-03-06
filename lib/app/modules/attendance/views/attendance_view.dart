@@ -40,19 +40,19 @@ class AttendanceView extends GetView<AttendanceController> {
                         color: context.kPrimary,
                       ),
                       hint: 'Select date',
-                      controller: controller.fromController,
+                      controller: controller.dateFromController,
                     ),
                   ),
                   Text(
-                    textAlign: TextAlign.center,
                     'to',
+                    textAlign: TextAlign.center,
                     style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500),
                   ),
                   Expanded(
                     child: StTextField(
                       textInputType: TextInputType.datetime,
                       hint: 'Select date',
-                      controller: controller.toController,
+                      controller: controller.dateToController,
                       suffixIcon: Icon(
                         Icons.calendar_month_rounded,
                         color: context.kPrimary,
@@ -63,36 +63,44 @@ class AttendanceView extends GetView<AttendanceController> {
               ),
               32.kheightBox,
               Text(
-                textAlign: TextAlign.center,
                 'Attendance',
                 style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
               ),
               16.kheightBox,
               attendenceRegister(
-                  'July 16th,2023', Assets.images.present.image()),
+                  'July 16th,2023',
+                   Assets.images.present.image()),
               8.kheightBox,
               attendenceRegister(
-                  'July 15th,2023', Assets.images.present.image()),
+                  'July 15th,2023', 
+                  Assets.images.present.image()),
               8.kheightBox,
               attendenceRegister(
-                  'July 14th,2023', Assets.images.present.image()),
+                  'July 14th,2023', 
+                  Assets.images.present.image()),
               8.kheightBox,
               attendenceRegister(
-                  'July 13th,2023', Assets.images.abcent.image()),
+                  'July 13th,2023', 
+                  Assets.images.abcent.image()),
               8.kheightBox,
               attendenceRegister(
-                  'July 12th,2023', Assets.images.present.image()),
+                  'July 12th,2023', 
+                  Assets.images.present.image()),
               8.kheightBox,
               attendenceRegister(
-                  'July 11th,2023', Assets.images.present.image()),
+                  'July 11th,2023', 
+                  Assets.images.present.image()),
               8.kheightBox,
               attendenceRegister(
-                  'July 10th,2023', Assets.images.abcent.image()),
+                  'July 10th,2023', 
+                  Assets.images.abcent.image()),
               attendenceRegister(
-                  'July  9th,2023', Assets.images.present.image()),
+                  'July  9th,2023', 
+                  Assets.images.present.image()),
               8.kheightBox,
               attendenceRegister(
-                  'July  8th,2023', Assets.images.present.image()),
+                  'July  8th,2023', 
+                  Assets.images.present.image()),
             ],
           ),
         ),
@@ -114,7 +122,6 @@ class AttendanceView extends GetView<AttendanceController> {
         child: Row(
           children: [
             Text(
-              textAlign: TextAlign.center,
               dateText,
               style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w500),
             ),
