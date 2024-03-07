@@ -183,12 +183,16 @@ static Widget customLogoutDialog(
   }
 
  // prcentage progress indiacater for marks and all
-static Widget percentageIndicater(double percent, String text1, String text2,void Function () onTap) {
+static Widget percentageIndicater({required double percent, required String percentText, required String trackingText,required void Function () onTap}) {
   return InkWell(
     onTap: onTap,
-    child: SizedBox(
+    child: Container(
       width: 165.kw,
       height: 122.kh,
+      decoration: BoxDecoration(
+        color: Get.context!.kWhite,
+        borderRadius: BorderRadius.circular(15)
+      ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
         child: Column(
@@ -200,10 +204,13 @@ static Widget percentageIndicater(double percent, String text1, String text2,voi
               backgroundColor: Get.context!.kLightSkyBlue,
               animation: true,
               percent: percent,
-              center: Text( text1,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+              center: Text( percentText,style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
             ),
             8.kheightBox,
-            Text( text2, textAlign: TextAlign.center,style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400)),
+            Text( 
+            trackingText,
+            textAlign: TextAlign.center,
+            style: TextStyleUtil.kText12_4(fontWeight: FontWeight.w400)),
           ],
         ),
       ),
@@ -213,9 +220,13 @@ static Widget percentageIndicater(double percent, String text1, String text2,voi
 
 //Widget for feedback section by teachers
 static Widget feedback(String feebackimg, String teacherName, String statement, String time) {
-    return SizedBox(
+    return Container(
       height: 79.kh,
       width: 343.kw,
+      decoration: BoxDecoration(
+        color: Get.context!.kWhite,
+        borderRadius: BorderRadius.circular(15)
+      ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
         child: Row(
@@ -250,9 +261,13 @@ static Widget feedback(String feebackimg, String teacherName, String statement, 
 
   //widget for key-focus
  static Widget keyFocus(String focusImg, String subject, String area,String performance) {
-    return SizedBox(
+    return Container(
       width: 343.kw,
       height: 60.kh,
+      decoration: BoxDecoration(
+        color: Get.context!.kWhite,
+        borderRadius: BorderRadius.circular(15)
+      ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 24, 8),
         child: Row(

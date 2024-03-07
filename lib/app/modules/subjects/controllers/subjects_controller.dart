@@ -18,6 +18,7 @@ Rx<ChaptersModel> filteredChapterModel = ChaptersModel().obs;
 @override
   void onInit() {
     getArguments();
+    log('subjectController oninited..');
     super.onInit();
   }
 

@@ -98,11 +98,13 @@ Widget buildTab() {
           itemBuilder: (context, index) {
             final isSelected = controller.selectedSubjectIndex.value == index;
             return InkWell(
-              onTap: () {
+              onTap: () async{
                 String? selectedSubjectId = subjectLists?[index]?.Id;
                 controller.selectedSubjectIndex.value = index;
-                //log('onTaped..$selectedSubjectId');
-                controller.getPerformance(selectedSubjectId: selectedSubjectId);
+                controller.subjectId = selectedSubjectId;
+                log('...............${controller.subjectId}');
+                await controller.getPerformance(selectedSubjectId: selectedSubjectId);
+                await controller.courseCompletionTracking();
               },
               child: StSubjectVertical(
                 text: subjectLists?[index]?.subject ?? '',
@@ -157,7 +159,7 @@ Widget dropdawnWidget() {
             value: controller.selectedExamType.value,
             onChanged: (String? newValue) {
               controller.selectedExamType.value = newValue!;
-              //controller.getPerformance();
+              controller.getPerformance();
             },
           ),
         ),
@@ -180,32 +182,34 @@ Widget dropdawnWidget() {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 1.352,
+            childAspectRatio: 1.3524,
             crossAxisCount: 2,
             crossAxisSpacing: 13,
             mainAxisSpacing: 16,
           ),
           children: [
             WidgetsConstants.percentageIndicater(
-                0.75,
-                '75%',
-                'Assignment completion tracking',
-                () => Get.toNamed(Routes.ASSIGNMENT_COMPLETION)),
+               percent:  0.75,
+               percentText: '75%',
+               trackingText:  'Assignment completion tracking',
+               onTap:  () => Get.toNamed(Routes.ASSIGNMENT_COMPLETION)),
             WidgetsConstants.percentageIndicater(
-                0.75,
-                '75%',
-                'Homework completion tracking',
-                () => Get.toNamed(Routes.COURSE_COMPLETION)),
+                percent: double.parse(controller.courseCompletion.value.data?.overallPercentage ?? '0')/100,
+                percentText: controller.courseCompletion.value.data?.overallPercentage??'',
+                trackingText: 'Course completion tracking',
+                onTap: () {
+                  Get.toNamed(Routes.COURSE_COMPLETION,arguments: {'subjectId':controller.subjectId});
+                }),
             WidgetsConstants.percentageIndicater(
-              0.75, 
-              '75%',
-              'Exam score tracking', 
-              () => Get.toNamed(Routes.EXAM_SCORE)),
+              percent: 0.75, 
+              percentText: '75%',
+              trackingText: 'Exam score tracking', 
+              onTap: () => Get.toNamed(Routes.EXAM_SCORE)),
             WidgetsConstants.percentageIndicater(
-              1, 
-              'View', 
-              'Student Behavior',
-              () => Get.toNamed(Routes.STUDENT_BEHAVIOR)),
+              percent: 1, 
+              percentText: 'View', 
+              trackingText: 'Student Behavior',
+              onTap: () => Get.toNamed(Routes.STUDENT_BEHAVIOR)),
           ],
         ),
         32.kheightBox,
@@ -245,21 +249,21 @@ Widget scoreBoard() {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      performanceData?[index]?.subject?.subject ?? '',
+                      performanceData?[index]?.subject?.subject ?? 'Nil',
                       style: TextStyleUtil.kText14_4(
                         fontWeight: FontWeight.w400,
                         color: Get.context!.kLightTextColor,
                       ),
                     ),
                     Text(
-                      performanceData?[index]?.markId?.grade ?? '',
+                      performanceData?[index]?.markId?.grade ?? 'Nil',
                       style: TextStyleUtil.kText14_4(
                         fontWeight: FontWeight.w400,
                         color: Get.context!.kLightTextColor,
                       ),
                     ),
                     Text(
-                      performanceData?[index]?.markId?.marks.toString() ?? '',
+                      performanceData?[index]?.markId?.marks.toString() ?? '0',
                       style: TextStyleUtil.kText14_4(
                         fontWeight: FontWeight.w400,
                         color: Get.context!.kLightTextColor,
@@ -270,22 +274,22 @@ Widget scoreBoard() {
               }),
             ),
           ),
-          10.kheightBox,
-          Container(
-            height: 37.kh,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Get.context!.kAverageMarkColor,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('Average marks', style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
-                Text('A', style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
-                Text('86', style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
-              ],
-            ),
-          ),
+          // 10.kheightBox,
+          // Container(
+          //   height: 37.kh,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(20),
+          //     color: Get.context!.kAverageMarkColor,
+          //   ),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [
+          //       Text('Average marks', style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+          //       Text('A', style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+          //       Text('86', style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400)),
+          //     ],
+          //   ),
+          // ),
           32.kheightBox,
         ],
       ),
@@ -325,6 +329,7 @@ Widget scoreBoard() {
         ),
         24.kheightBox,
         ListView.separated(
+        shrinkWrap: true,
         separatorBuilder: (context, index) => 8.kheightBox, 
         itemCount:controller.performanceModel.value.data?.length?? 0 ,
         itemBuilder: (context, index) => WidgetsConstants.keyFocus(

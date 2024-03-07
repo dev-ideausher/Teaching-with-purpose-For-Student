@@ -59,7 +59,7 @@ class APIManager {
   static Future<Response> getPerformance({required String resultType, String? subject}) async {String url = '${Endpoints.getPerformance}?resultType=$resultType${subject != null ? '&subject=$subject' : ''}';
   return await DioClient(Dio(), showSnackbar: true, isOverlayLoader: false).get(url);}
 
-  static Future<Response> getCourseCompletion({required String studentId,String? subject}) async {final url = '${Endpoints.getCourseCompletion}/$studentId${subject != null ? '?subject=$subject' : ''}';
+  static Future<Response> getCourseCompletion({required String studentId,String? subject}) async {String url = '${Endpoints.getCourseCompletion}/$studentId${subject != null ? '?subjectId=$subject' : ''}';
   return await DioClient(Dio(), isOverlayLoader: false, showSnackbar: true).get(url);}
 
   

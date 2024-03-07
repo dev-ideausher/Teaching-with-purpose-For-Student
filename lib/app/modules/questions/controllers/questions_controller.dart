@@ -92,7 +92,7 @@ Future<void> completeChapter() async {
       if (responce.statusCode == 200 ||responce.statusCode == 201 ) {
       log('..${responce.data}');
       
-      Get.toNamed(Routes.BOTTOM_NAVBAR);
+      Get.until((route) => route.settings.name == Routes.BOTTOM_NAVBAR);
       Utils.showMySnackbar(desc: 'Chapter completed');
 
       } else {
