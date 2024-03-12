@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:teaching_with_purpose_student/app/data/models/course_completion_model.dart';
+import 'package:teaching_with_purpose_student/app/modules/home/controllers/home_controller.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
 import 'package:teaching_with_purpose_student/app/services/storage.dart';
 import 'package:teaching_with_purpose_student/app/utils/utils.dart';
@@ -33,7 +34,7 @@ class CourseCompletionController extends GetxController {
   void setArguments()async{
   final Map<String, dynamic> arguments = Get.arguments;
   subjectId = arguments['subjectId'];
-  await courseCompletionTracking();
+  await courseCompletionTracking(selectedSub: subjectId);
   }
  
 
@@ -41,7 +42,7 @@ class CourseCompletionController extends GetxController {
     isLoading(true);
     String studentId = Get.find<GetStorageService>().id;
     try {
-      final responce = await APIManager.getCourseCompletion(studentId: studentId,subject:subjectId );
+      final responce = await APIManager.getCourseCompletion(studentId: studentId,subject:selectedSub );
       if (responce.data['status'] == true) {
         courseCompletion.value = CourseCompletionModel.fromJson(responce.data);
         log('Course completion data...${responce.data}');
@@ -54,4 +55,13 @@ class CourseCompletionController extends GetxController {
       isLoading(false);
     }
   }
+
+ void changeSubject(int index) {
+  selectedSubjectIndex.value = index;
+  final subjectLists = Get.find<HomeController>().subjectLists.value.data;
+  if (subjectLists != null && index >= 0 && index < subjectLists.length) {
+    String subjectId = subjectLists[index]?.Id ?? '';
+    courseCompletionTracking(selectedSub: subjectId); 
+  }
+}
 }

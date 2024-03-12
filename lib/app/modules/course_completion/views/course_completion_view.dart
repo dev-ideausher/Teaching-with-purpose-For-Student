@@ -41,7 +41,7 @@ class CourseCompletionView extends GetView<CourseCompletionController> {
                     Center(
                         child: percentageIndicator(
                         percent: double.parse(controller.courseCompletion.value.data?.overallPercentage ?? '0')/300, 
-                        percentText: controller.courseCompletion.value.data?.overallPercentage??'', 
+                        percentText: "${controller.courseCompletion.value.data?.overallPercentage??''}%", 
                         trackingText: 'Course completion', 
                         onTap: () {}),
                     ),
@@ -108,10 +108,9 @@ class CourseCompletionView extends GetView<CourseCompletionController> {
               itemBuilder: (context, index) => Obx(() {
                 final isSelected = controller.selectedSubjectIndex.value == index;
                     return InkWell(
-                      onTap: () {
-                        String? subjectId = subjectLists?[index]?.Id;
-                        controller.selectedSubjectIndex.value = index;
-                        controller.courseCompletionTracking(selectedSub: subjectId);
+                      onTap: ()async {
+                        //controller.selectedSubjectIndex.value = index;
+                        controller.changeSubject(index);
                       },
                       child: CustomSubjectCardVertical(
                         text: subjectLists?[index]?.subject?? '',

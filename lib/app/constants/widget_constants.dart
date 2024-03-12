@@ -191,7 +191,7 @@ static Widget percentageIndicater({required double percent, required String perc
       height: 122.kh,
       decoration: BoxDecoration(
         color: Get.context!.kWhite,
-        borderRadius: BorderRadius.circular(15)
+        borderRadius: BorderRadius.circular(10)
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
@@ -233,7 +233,7 @@ static Widget feedback(String feebackimg, String teacherName, String statement, 
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(feebackimg, height: 30.kh, width: 30.kw)),
+                child: Image.network(feebackimg, height: 30.kh, width: 30.kw)),
             12.kwidthBox,
             Expanded(
               child: Column(
@@ -295,4 +295,52 @@ static Widget feedback(String feebackimg, String teacherName, String statement, 
       ),
     );  
 }
+
+static  Widget resultWidget({required String text, required String topic,required String marks}){
+  return SizedBox(
+      height: 112.kh,
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Assets.svg.editPencil.svg(height: 24.kh, width: 24.kw),
+            16.kwidthBox,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    text,
+                    style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w600),
+                  ),
+                  4.kheightBox,
+                  Text(
+                    'Topic:$topic',
+                    style: TextStyleUtil.kText14_4(
+                        fontWeight: FontWeight.w400,
+                        color: Get.context!.kLightTextColor),
+                  ),
+                  4.kheightBox,
+                  ReUsableRichText(
+                      text1: 'Marks obtained: ',
+                      text2: marks,
+                      style1:
+                          TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
+                      style2: TextStyleUtil.kText14_4(
+                          fontWeight: FontWeight.w400,
+                          color: Get.context!.kLightTextColor)),
+                ],
+              ),
+            ),
+            72.kwidthBox,
+            Assets.svg.eye.svg(height: 24.kh, width: 24.kw),
+            8.kwidthBox,
+            Assets.svg.download.svg(height: 24.kh, width: 24.kw),
+          ],
+        ),
+      ),
+    );
+ }
 }

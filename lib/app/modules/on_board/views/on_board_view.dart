@@ -88,12 +88,11 @@ class OnBoardView extends GetView<OnBoardController> {
   Widget onboardingWidget(
   {required SvgGenImage img, required String title, required String subTitle}) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         img.svg(height: 300.kh, width: 300.kw),
-        43.kheightBox,
+        21.kheightBox,
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 38),
+          padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Text(
             title,
             textAlign: TextAlign.center,
@@ -102,7 +101,7 @@ class OnBoardView extends GetView<OnBoardController> {
         ),
         16.kheightBox,
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 38),
           child: Text(
             subTitle,
             textAlign: TextAlign.center,

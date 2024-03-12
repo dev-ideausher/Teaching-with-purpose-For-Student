@@ -59,6 +59,7 @@ Widget buildTab() {
     child: SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (controller.selectedTabIndex.value == 0) 
           const SizedBox()
@@ -97,7 +98,7 @@ Widget buildTab() {
           itemCount: subjectLists?.length ?? 0,
           itemBuilder: (context, index) {
             final isSelected = controller.selectedSubjectIndex.value == index;
-            return InkWell(
+            return GestureDetector(
               onTap: () async{
                 String? selectedSubjectId = subjectLists?[index]?.Id;
                 controller.selectedSubjectIndex.value = index;
@@ -105,6 +106,7 @@ Widget buildTab() {
                 log('...............${controller.subjectId}');
                 await controller.getPerformance(selectedSubjectId: selectedSubjectId);
                 await controller.courseCompletionTracking();
+                await controller.assignmentCompletionTracking();
               },
               child: StSubjectVertical(
                 text: subjectLists?[index]?.subject ?? '',
@@ -189,13 +191,15 @@ Widget dropdawnWidget() {
           ),
           children: [
             WidgetsConstants.percentageIndicater(
-               percent:  0.75,
-               percentText: '75%',
+               percent: double.parse(controller.assignmentTracking.value.data?.percentageSubmitted?? '0')/100,
+               percentText: "${controller.assignmentTracking.value.data?.percentageSubmitted?? ''}%",
                trackingText:  'Assignment completion tracking',
-               onTap:  () => Get.toNamed(Routes.ASSIGNMENT_COMPLETION)),
+               onTap:  () {
+                 Get.toNamed(Routes.ASSIGNMENT_COMPLETION,arguments: {'subjectId':controller.subjectId});
+               }),
             WidgetsConstants.percentageIndicater(
                 percent: double.parse(controller.courseCompletion.value.data?.overallPercentage ?? '0')/100,
-                percentText: controller.courseCompletion.value.data?.overallPercentage??'',
+                percentText: "${controller.courseCompletion.value.data?.overallPercentage??''}%",
                 trackingText: 'Course completion tracking',
                 onTap: () {
                   Get.toNamed(Routes.COURSE_COMPLETION,arguments: {'subjectId':controller.subjectId});
@@ -203,13 +207,17 @@ Widget dropdawnWidget() {
             WidgetsConstants.percentageIndicater(
               percent: 0.75, 
               percentText: '75%',
-              trackingText: 'Exam score tracking', 
-              onTap: () => Get.toNamed(Routes.EXAM_SCORE)),
+              trackingText: 'Quiz tracking', 
+              onTap: () {
+                Get.toNamed(Routes.EXAM_SCORE);
+              }),
             WidgetsConstants.percentageIndicater(
               percent: 1, 
               percentText: 'View', 
               trackingText: 'Student Behavior',
-              onTap: () => Get.toNamed(Routes.STUDENT_BEHAVIOR)),
+              onTap: () {
+                Get.toNamed(Routes.STUDENT_BEHAVIOR);
+              }),
           ],
         ),
         32.kheightBox,
@@ -241,29 +249,30 @@ Widget scoreBoard() {
             ),
           ),
           24.kheightBox,
-          SizedBox(
+          performanceData != null && performanceData.isNotEmpty
+          ? SizedBox(
             width: double.infinity,
             child: Column(
-              children: List.generate(performanceData?.length ?? 0, (index) {
+              children: List.generate(performanceData.length , (index) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      performanceData?[index]?.subject?.subject ?? 'Nil',
+                      performanceData[index]?.subject?.subject ?? '',
                       style: TextStyleUtil.kText14_4(
                         fontWeight: FontWeight.w400,
                         color: Get.context!.kLightTextColor,
                       ),
                     ),
                     Text(
-                      performanceData?[index]?.markId?.grade ?? 'Nil',
+                      performanceData[index]?.markId?.grade ?? '',
                       style: TextStyleUtil.kText14_4(
                         fontWeight: FontWeight.w400,
                         color: Get.context!.kLightTextColor,
                       ),
                     ),
                     Text(
-                      performanceData?[index]?.markId?.marks.toString() ?? '0',
+                      performanceData[index]?.markId?.marks.toString() ?? '',
                       style: TextStyleUtil.kText14_4(
                         fontWeight: FontWeight.w400,
                         color: Get.context!.kLightTextColor,
@@ -272,6 +281,15 @@ Widget scoreBoard() {
                   ],
                 );
               }),
+            ),
+          )
+        : Center(
+            child: Text(
+              'No scores available for selected subject',
+              style: TextStyleUtil.kText14_4(
+                fontWeight: FontWeight.w400,
+                color: Get.context!.kLightTextColor,
+              ),
             ),
           ),
           // 10.kheightBox,
@@ -304,17 +322,19 @@ Widget scoreBoard() {
         Text('Teacher’s Feedback',
             style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
         24.kheightBox,
-        WidgetsConstants.feedback(
-          ImageConstant.profileImg, 
-          'Esther Howard',
-          'It’s good to see improvement in English so far.', 
-          '01:50 pm'),
-        8.kheightBox,
-        WidgetsConstants.feedback(
-        ImageConstant.profileImg, 
-        'Esther Howard',
-        'It’s good to see improvement in English so far.', 
-        '01:50 pm'),
+       controller.assignmentTracking.value.data!.improvements != null && controller.assignmentTracking.value.data!.improvements!.isNotEmpty 
+       ? ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => 8.kheightBox, 
+        itemCount: controller.assignmentTracking.value.data?.improvements?.length?? 0, 
+        itemBuilder: (context, index) => WidgetsConstants.feedback(
+        controller.assignmentTracking.value.data?.improvements?[index]?.teacherDetails?.image?? '', 
+        controller.assignmentTracking.value.data?.improvements?[index]?.teacherDetails?.name?? '',
+        controller.assignmentTracking.value.data?.improvements?[index]?.improvement?? '', 
+        '01:50 pm'))
+       : Text('No feedback available at the moment',
+         style:  TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,
+          )),
       ],
     );
   }
@@ -328,7 +348,8 @@ Widget scoreBoard() {
           style: TextStyleUtil.kText18_6(fontWeight: FontWeight.w600),
         ),
         24.kheightBox,
-        ListView.separated(
+        controller.performanceModel.value.data != null && controller.performanceModel.value.data!.isNotEmpty
+       ? ListView.separated(
         shrinkWrap: true,
         separatorBuilder: (context, index) => 8.kheightBox, 
         itemCount:controller.performanceModel.value.data?.length?? 0 ,
@@ -336,7 +357,11 @@ Widget scoreBoard() {
           ImageConstant.focousIcon, 
           '${controller.performanceModel.value.data?[index]?.topic} : ',
           controller.performanceModel.value.data?[index]?.remarks ?? '', 
-          controller.performanceModel.value.data?[index]?.performance ?? '')),
+          controller.performanceModel.value.data?[index]?.performance ?? ''))
+       : Text('No remarks available at the moment',
+         style:  TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,
+          ),
+         ),
         8.kheightBox,
       ],
     );

@@ -54,7 +54,8 @@ class APIManager {
 
   static Future<Response> getClasses() async => await DioClient(Dio(), isOverlayLoader: false, showSnackbar: true).get(Endpoints.getClasses);  
 
-  static Future<Response> getAssignmentPerformance({required String studentId}) async => await DioClient(Dio(), isOverlayLoader: false, showSnackbar: true).get("${Endpoints.getAssignmentPerformance}/$studentId");  
+  static Future<Response> getAssignmentCompletion({required String studentId,String? subjectId}) async {String url = '${Endpoints.getAssignmentCompletion}/$studentId${subjectId != null ? '?subjectId=$subjectId' : ''}';
+  return await DioClient(Dio(), isOverlayLoader: false, showSnackbar: true).get(url);} 
 
   static Future<Response> getPerformance({required String resultType, String? subject}) async {String url = '${Endpoints.getPerformance}?resultType=$resultType${subject != null ? '&subject=$subject' : ''}';
   return await DioClient(Dio(), showSnackbar: true, isOverlayLoader: false).get(url);}

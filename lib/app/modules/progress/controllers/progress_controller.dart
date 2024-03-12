@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:teaching_with_purpose_student/app/data/models/assignment_completion_model.dart';
 import 'package:teaching_with_purpose_student/app/data/models/course_completion_model.dart';
 import 'package:teaching_with_purpose_student/app/data/models/student_performance_model.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
@@ -18,8 +19,7 @@ class ProgressController extends GetxController with GetSingleTickerProviderStat
   String? subjectId = '';
   Rx<StudentPerformanceModel> performanceModel = StudentPerformanceModel().obs;
   Rx<CourseCompletionModel> courseCompletion = CourseCompletionModel().obs;
-
-
+  Rx<AssignmentCompletionModel> assignmentTracking = AssignmentCompletionModel().obs;
   List<SvgGenImage> subjectImage = [
     Assets.svg.allSubjects,
     Assets.svg.maths,
@@ -30,14 +30,13 @@ class ProgressController extends GetxController with GetSingleTickerProviderStat
     Assets.svg.biology,
   ];
 
-
   @override
   void onInit() {
-    initilize();
+    initialize();
     super.onInit();
   }
 
-  void initilize()async{
+  void initialize() async {
     tabController = TabController(length: 2, vsync: this);
     tabController.addListener(() {
       selectedTabIndex.value = tabController.index;
@@ -50,9 +49,9 @@ class ProgressController extends GetxController with GetSingleTickerProviderStat
  Future<void> getPerformance({String? selectedSubjectId}) async {
     isLoading(true);
     try {
-      final responce = await APIManager.getPerformance(resultType: selectedExamType.value, subject: selectedSubjectId);
-      if (responce.data['status'] == true) {
-        performanceModel.value = StudentPerformanceModel.fromJson(responce.data);
+      final response = await APIManager.getPerformance(resultType: selectedExamType.value, subject: selectedSubjectId);
+      if (response.data['status'] == true) {
+        performanceModel.value = StudentPerformanceModel.fromJson(response.data);
         //log('Performance data...${responce.data}');
         await courseCompletionTracking();
       } else {
@@ -71,10 +70,31 @@ class ProgressController extends GetxController with GetSingleTickerProviderStat
     isLoading(true);
     String studentId = Get.find<GetStorageService>().id;
     try {
-      final responce = await APIManager.getCourseCompletion(studentId: studentId,subject: selectedSub);
-      if (responce.data['status'] == true) {
-        courseCompletion.value = CourseCompletionModel.fromJson(responce.data);
+      final response = await APIManager.getCourseCompletion(studentId: studentId,subject: selectedSub);
+      if (response.data['status'] == true) {
+        courseCompletion.value = CourseCompletionModel.fromJson(response.data);
         //log('Course completion data...${responce.data}');
+        await assignmentCompletionTracking();
+      } else {
+        Utils.showMySnackbar(desc: 'Something went wrong');
+      }
+    } catch (e) {
+       log('e...**$e');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  //-----------------------Assignment-tracking-------------------------------
+
+  Future<void> assignmentCompletionTracking({String? selectedSub}) async {
+    isLoading(true);
+    String studentId = Get.find<GetStorageService>().id;
+    try {
+      final response = await APIManager.getAssignmentCompletion(studentId: studentId,subjectId: selectedSub);
+      if (response.data['status'] == true) {
+        assignmentTracking.value = AssignmentCompletionModel.fromJson(response.data);
+        //log('Assignment completion data...${response.data}');
       } else {
         Utils.showMySnackbar(desc: 'Something went wrong');
       }

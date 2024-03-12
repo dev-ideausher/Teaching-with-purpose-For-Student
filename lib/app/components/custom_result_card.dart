@@ -13,6 +13,7 @@ class CustomResultCard extends StatelessWidget {
   final String subtitle;
   final String text1;
   final String text2;
+  final String? submitedOn;
   final SvgGenImage svg2;
   final SvgGenImage svg3;
   const CustomResultCard(
@@ -22,13 +23,14 @@ class CustomResultCard extends StatelessWidget {
       required this.subtitle,
       required this.text1,
       required this.text2,
+       this.submitedOn,
       required this.svg2,
       required this.svg3});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 87.kh,
-      width: 343.kw,
+      height: 112.kh,
+      width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
         child: Row(
@@ -47,6 +49,7 @@ class CustomResultCard extends StatelessWidget {
                   4.kheightBox,
                   Text(
                     subtitle,
+                    maxLines: 1,
                     style: TextStyleUtil.kText14_4(
                         fontWeight: FontWeight.w400,
                         color: context.kLightTextColor),
@@ -60,6 +63,13 @@ class CustomResultCard extends StatelessWidget {
                       style2: TextStyleUtil.kText14_4(
                           fontWeight: FontWeight.w400,
                           color: context.kLightTextColor)),
+                  4.kheightBox,
+                  ReUsableRichText(
+                      text1: 'Submitted on',
+                      text2: submitedOn!,
+                      style1:TextStyleUtil.kText14_4(fontWeight: FontWeight.w400),
+                      style2: TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,
+                              color: context.kLightTextColor)),
                 ],
               ),
             ),

@@ -16,7 +16,7 @@ class GetStartedView extends GetView<OnBoardController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 142, 20, 32),
+        padding: const EdgeInsets.fromLTRB(20, 98, 20, 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -43,14 +43,20 @@ class GetStartedView extends GetView<OnBoardController> {
       children: [
         img.svg(height: 300.kh,width: 300.kw),
         38.kheightBox,
-        Text(
-          title,
-          style: TextStyleUtil.kText24_6(fontWeight: FontWeight.w700),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            title,
+            style: TextStyleUtil.kText24_6(fontWeight: FontWeight.w700),
+          ),
         ),
         16.kheightBox,
-        Text(
-          subTitle,
-          style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            subTitle,
+            style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400),
+          ),
         ),
       ],
     );

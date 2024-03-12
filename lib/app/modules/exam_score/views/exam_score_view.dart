@@ -1,14 +1,16 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:teaching_with_purpose_student/app/components/custom_appbar.dart';
+import 'package:teaching_with_purpose_student/app/constants/image_constant.dart';
+import 'package:teaching_with_purpose_student/app/constants/widget_constants.dart';
 import 'package:teaching_with_purpose_student/app/services/colors.dart';
 import 'package:teaching_with_purpose_student/app/services/responsive_size.dart';
 import 'package:teaching_with_purpose_student/app/services/text_style_util.dart';
 
 import '../../../../gen/assets.gen.dart';
-import '../../../components/custom_result_card.dart';
 import '../../../components/custom_subjectvertical_card.dart';
 import '../controllers/exam_score_controller.dart';
 
@@ -18,7 +20,8 @@ class ExamScoreView extends GetView<ExamScoreController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(46.kh),
-       child: CustomAppBar(title: 'Exam Score',isBack: true)),
+       child: CustomAppBar(title: 'Exam Score', isBack: true)
+     ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -26,6 +29,39 @@ class ExamScoreView extends GetView<ExamScoreController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+      Text(
+        'Exam Type',
+        style: TextStyleUtil.kText14_4(fontWeight: FontWeight.w500),
+      ),
+      8.kheightBox,
+      Obx(() => Container(
+        width: 343.kw,
+        height: 56.kh,
+        decoration: BoxDecoration(
+          color: Get.context!.kWhite,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton2<String>(
+            items: [
+              DropdownMenuItem(
+                value: 'In between quiz',
+                child: Text('In between quiz', style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400)),
+              ),
+              DropdownMenuItem(
+                value: 'live-quiz',
+                child: Text('live-quiz', style: TextStyleUtil.kText16_5(fontWeight: FontWeight.w400)),
+              ),
+            ],
+            value: controller.selectedExamType.value,
+            onChanged: (String? newValue) {
+              controller.selectedExamType.value = newValue!;
+            },
+          ),
+        ),
+      ),
+    ),
+      32.kheightBox,
              subjectsWidget(),
              32.kheightBox,
               SizedBox(
@@ -49,26 +85,31 @@ class ExamScoreView extends GetView<ExamScoreController> {
               ),
               32.kheightBox,
             Text(
-              'Exam Score',
+            'Result',
+            style:TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
+            16.kheightBox,
+            WidgetsConstants.resultWidget(
+            text: 'Quiz' ,
+            topic: 'Ordered Pair',
+            marks: '23/30'
+            ),
+            32.kheightBox,  
+            Text(
+              "Area Of Improvement / Feedback",
               style:TextStyleUtil.kText18_6(fontWeight: FontWeight.w600)),
             16.kheightBox,
-            CustomResultCard(
-                  svg1: Assets.svg.editPencil,
-                  title: 'Yearly',
-                  subtitle: 'Pass',
-                  text1: 'Marks obtained: ',
-                  text2: '650/800',
-                  svg2: Assets.svg.eye,
-                  svg3: Assets.svg.download),
-              8.kheightBox,
-            CustomResultCard(
-                  svg1: Assets.svg.editPencil,
-                  title: 'Half-Yearly',
-                  subtitle: 'Pass',
-                  text1: 'Marks obtained: ',
-                  text2: '360/400',
-                  svg2: Assets.svg.eye,
-                  svg3: Assets.svg.download),                    
+              ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) => 8.kheightBox,
+                  itemCount: 2,
+                  itemBuilder: (context, index) => WidgetsConstants.keyFocus(
+                      ImageConstant.focousIcon,
+                      'Topic : ',
+                      'Relations and Functions I',
+                      'Performance : Average'
+               ),
+              ),                           
             ],
           ),
         ),
@@ -110,7 +151,6 @@ class ExamScoreView extends GetView<ExamScoreController> {
     );
   }
 
-
 //.....percentagewidget........
    Widget percentageIndicater(
       double percent, String text1, String text2, void Function() onTap) {
@@ -145,4 +185,5 @@ class ExamScoreView extends GetView<ExamScoreController> {
       ),
     );
   }
+
 }

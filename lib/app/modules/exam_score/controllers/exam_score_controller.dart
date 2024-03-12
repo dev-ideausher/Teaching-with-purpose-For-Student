@@ -3,6 +3,8 @@ import 'package:teaching_with_purpose_student/gen/assets.gen.dart';
 
 class ExamScoreController extends GetxController {
   final selectedSubjectIndex = 0.obs;
+  RxBool isLoading = false.obs;
+  var selectedExamType = 'In between quiz'.obs;
   
   List<SvgGenImage> subjectImage = [
     Assets.svg.allSubjects,
