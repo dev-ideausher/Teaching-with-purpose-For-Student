@@ -45,7 +45,6 @@ class ProgressController extends GetxController with GetSingleTickerProviderStat
   }
 
   //-----------------------Performance-------------------------------
-
  Future<void> getPerformance({String? selectedSubjectId}) async {
     isLoading(true);
     try {
@@ -65,7 +64,6 @@ class ProgressController extends GetxController with GetSingleTickerProviderStat
   }
 
  //-----------------------Course-completion-------------------------------
- 
   Future<void> courseCompletionTracking({String? selectedSub}) async {
     isLoading(true);
     String studentId = Get.find<GetStorageService>().id;
@@ -86,7 +84,6 @@ class ProgressController extends GetxController with GetSingleTickerProviderStat
   }
 
   //-----------------------Assignment-tracking-------------------------------
-
   Future<void> assignmentCompletionTracking({String? selectedSub}) async {
     isLoading(true);
     String studentId = Get.find<GetStorageService>().id;

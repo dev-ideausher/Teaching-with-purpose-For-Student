@@ -22,31 +22,33 @@ class HomeController extends GetxController {
   RxList<SubjectsListModelData?> subjectItems = <SubjectsListModelData?>[].obs;
   RxString selectedSubject = 'English'.obs;
   final GetStorageService storageService = Get.find<GetStorageService>();
+  Rx<DateTime?> lastAttendanceMarkedDate = Rx<DateTime?>(null);
+  List<SvgPicture> subjectImages = [
+    Assets.svg.maths.svg(),
+    Assets.svg.physics.svg(),
+    Assets.svg.chemistry.svg(),
+    Assets.svg.history.svg(),
+    Assets.svg.geography.svg(),
+    Assets.svg.biology.svg(),
+  ];
+  List<String> time = ['Friday, 3:00 pm', 'Friday, 3:00 pm', 'Friday, 3:00 pm'];
 
-   @override
+
+  @override
   void onInit() {
     getSubjects();
     super.onInit();
   }
 
-  List<String> time = ['Friday, 3:00 pm', 'Friday, 3:00 pm', 'Friday, 3:00 pm'];
-
-
- List<SvgPicture> subjectImages = [
-  Assets.svg.maths.svg(),
-  Assets.svg.physics.svg(),
-  Assets.svg.chemistry.svg(),
-  Assets.svg.history.svg(),
-  Assets.svg.geography.svg(),
-  Assets.svg.biology.svg()
- ];
-
-   void checkAttendanceStatus() {
+  void checkAttendanceStatus() {
     isAttendanceMarked.value = storageService.isAttendanceMarked;
+    lastAttendanceMarkedDate.value = storageService.lastAttendanceMarkedDate;
+    if (lastAttendanceMarkedDate.value != null && lastAttendanceMarkedDate.value!.day != DateTime.now().day) {
+      isAttendanceMarked.value = false;
+    }
   }
 
-  //-----------------------Subjects-------------------------------
-
+  //-----------------------Get-Subjects-------------------------------
   Future<void> getSubjects()async{
     isLoding(true);
     try {
@@ -64,12 +66,11 @@ class HomeController extends GetxController {
     }
   }
 
-void updateSubjectItems() {
+ void updateSubjectItems() {
     subjectItems.assignAll(subjectLists.value.data ?? []);
   }
 
-//-----------------------Events-------------------------------
-
+//-----------------------Get-Events-------------------------------
   Future<void> showEvents()async{
     isLoding(true);
     try {
@@ -86,7 +87,7 @@ void updateSubjectItems() {
     }
   }
 
-  //-----------------------Quizz-------------------------------
+  //-----------------------Get-Quizzs-------------------------------
   Future<void> showQuiz()async{
     isLoding(true);
     try {
@@ -102,24 +103,23 @@ void updateSubjectItems() {
     }
   }
 
-
-//-----------------------Mark Attendance -------------------------------
-
+//-----------------------Mark-Attendance -------------------------------
   Future<void> markAttendance() async {
     var body = {
-      "rollNumber":Get.find<ProfileController>().studentModel?.data?.first?.rollNumber ??'',
+      "rollNumber": Get.find<ProfileController>().studentModel?.data?.first?.rollNumber ?? '',
       "isPresent": true
     };
 
     try {
-      final responce = await APIManager.markattendance(body: body);
-      if (responce.data['status'] == true) {
-        //log('attendance...${responce.data}');
+      final response = await APIManager.markattendance(body: body);
+      if (response.data['status'] == true) {
         Utils.showMySnackbar(desc: "Attendance marked");
         isAttendanceMarked.value = true;
-        //storageService.isAttendanceMarked = true;
+        lastAttendanceMarkedDate.value = DateTime.now();
+        storageService.isAttendanceMarked = true;
+        storageService.lastAttendanceMarkedDate = lastAttendanceMarkedDate.value!;
       } else {
-        Utils.showMySnackbar(desc: "Can't mark attaendance at the moment");
+        Utils.showMySnackbar(desc: "Can't mark attendance at the moment");
       }
     } catch (e) {
       log('error..$e');

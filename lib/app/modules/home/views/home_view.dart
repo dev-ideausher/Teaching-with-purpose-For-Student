@@ -103,7 +103,6 @@ class HomeView extends GetView<HomeController> {
       ),
     );
   }
-
 // section for the student details like roll Number and name with img
   Widget buildStudentSection() {
     final profileController = Get.find<ProfileController>();
@@ -142,7 +141,6 @@ class HomeView extends GetView<HomeController> {
         ),
     );
   }
-
 //image logic
   Widget buildProfileImg(ProfileController profileController) {
       final imageUrl = profileController.studentModel?.data?.first?.image ?? '';
@@ -163,7 +161,6 @@ class HomeView extends GetView<HomeController> {
         fit: BoxFit.cover,
     );
   }
-
 // custom clock widget
   Widget buildClockWidget() {
     return SizedBox(
@@ -235,7 +232,6 @@ class HomeView extends GetView<HomeController> {
       ),
     );
   }
-
 // insted of use multiple row in  a single tree
   Widget buildRowWidget(
       {required String title,

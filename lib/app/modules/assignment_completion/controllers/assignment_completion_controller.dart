@@ -55,14 +55,14 @@ class AssignmentCompletionController extends GetxController {
     }
   }
 
-//  void changeSubject(int index) {
-//   selectedSubjectIndex.value = index;
-//   final subjectLists = Get.find<HomeController>().subjectLists.value.data;
-//   if (subjectLists != null && index >= 0 && index < subjectLists.length) {
-//     String subjectId = subjectLists[index]?.Id ?? '';
-//     assignmentCompletionTracking(selectedSub: subjectId); 
-//   }
-// }
+ void changeSubject(int index) {
+  selectedSubjectIndex.value = index;
+  final subjectLists = Get.find<HomeController>().subjectLists.value.data;
+  if (subjectLists != null && index >= 0 && index < subjectLists.length) {
+    String subjectId = subjectLists[index]?.Id ?? '';
+    assignmentCompletionTracking(selectedSub: subjectId); 
+  }
+}
 
 }
 

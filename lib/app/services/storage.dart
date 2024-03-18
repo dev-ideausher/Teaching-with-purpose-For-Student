@@ -45,14 +45,22 @@ class GetStorageService extends GetxService {
 
   set isAttendanceMarked(bool isAttendanceMarked) => _runData.write('isAttendanceMarked', isAttendanceMarked);
 
+  DateTime? get lastAttendanceMarkedDate => _runData.read<DateTime>('lastAttendanceMarkedDate');
+
+  set lastAttendanceMarkedDate(DateTime? date) => _runData.write('lastAttendanceMarkedDate', date?.toIso8601String());
+
+  double get videoPosition => _runData.read('videoPosition') ?? 0.0;
+
+  set videoPosition(double position) => _runData.write('videoPosition', position);
+
+  String get videoUrl => _runData.read('videoUrl') ?? '';
+
+  set videoUrl(String url) => _runData.write('videoUrl', url);
 
 
 
 
 
-
-
-  
 
   void logout() {
     _runData.erase();

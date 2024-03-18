@@ -127,7 +127,8 @@ class AssignmentCompletionView extends GetView<AssignmentCompletionController> {
                     final isSelected = controller.selectedSubjectIndex.value == index;
                     return InkWell(
                       onTap: () {
-                        controller.selectedSubjectIndex.value =index;
+                        // controller.selectedSubjectIndex.value =index;
+                        controller.changeSubject(index);
                       },
                       child: CustomSubjectCardVertical(
                         text: subjectLists?[index]?.subject ?? '',

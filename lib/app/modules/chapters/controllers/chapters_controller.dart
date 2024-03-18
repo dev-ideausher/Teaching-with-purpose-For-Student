@@ -10,6 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:teaching_with_purpose_student/app/data/models/assignments_list_model.dart';
 import 'package:teaching_with_purpose_student/app/data/models/chapters_model_data.dart';
 import 'package:teaching_with_purpose_student/app/services/dio/api_service.dart';
+import 'package:teaching_with_purpose_student/app/services/storage.dart';
 import 'package:teaching_with_purpose_student/app/utils/utils.dart';
 import 'package:video_player/video_player.dart';
 
@@ -25,12 +26,11 @@ class ChaptersController extends GetxController with GetSingleTickerProviderStat
   String chapterId = '';
   RxDouble downloadProgress = 0.0.obs;
   RxBool isDownloadStarted = false.obs;
-
-
   Rx<ChapterQuestionsModel> questionsModel = ChapterQuestionsModel().obs;
   Rx<ChaptersModelData> chapterDetailsModel = ChaptersModelData().obs;
   Rx<AssignmentsListModel> assignmentList = AssignmentsListModel().obs;
   Rx<VideoPlayerController?> videoController = VideoPlayerController.network('').obs;
+  final GetStorageService storageService = Get.find();
 
 
 
@@ -87,71 +87,72 @@ void addVideoListener() {
  });
 }
 
-void downloadPdf() async {
-    try {
-      final data = chapterDetailsModel.value;
+  void resumeVideoPlayback() {
+    // Retrieve stored video playback state
+    final storedPosition = storageService.videoPosition;
+    final storedVideoUrl = storageService.videoUrl;
 
-      if (data.uploadPdf == null || data.uploadPdf!.isEmpty) {
-        Utils.showMySnackbar(desc: 'PDF is not available');
-        return;
-      }
-
-      final status = await Permission.storage.request();
-
-      if (!status.isGranted) {
-        Utils.showMySnackbar(desc: 'Permission denied for storage');
-        return;
-      }
-
-      isDownloadStarted(true);
-
-      final pdfUrl = data.uploadPdf!;
-      final fileName ='${data.chapterName?.replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}.pdf';
-      final downloadDir = await getDownloadsDirectory();
-
-      if (downloadDir == null) {
-        isDownloadStarted(false);
-        return;
-      }
-
-      final filesDirectory = Directory('${downloadDir.path}/files');
-      if (!(await filesDirectory.exists())) {
-        await filesDirectory.create(recursive: true);
-      }
-
-      final downloadPath = '${filesDirectory.path}/$fileName';
-      final file = File(downloadPath);
-
-      if (file.existsSync()) {
-        await file.delete();
-      }
-
-      log('File Name: $fileName');
-      log('Directory Path: ${downloadDir.path}');
-      log('Download Path: $downloadPath');
-
-      final downloadedFile = await APIManager.downloadFile(
-        pdfUrl,
-        downloadPath: downloadPath,
-        onReceiveProgress: (progress) {
-          downloadProgress.value = progress;
-          log('Download progress: ${downloadProgress.value}%');
-        },
-      );
-
-      if (downloadedFile.existsSync()) {
-        Utils.showMySnackbar(desc: 'PDF downloaded successfully');
-        OpenFile.open(downloadPath);
-      } else {
-        Utils.showMySnackbar(desc: 'Error downloading PDF');
-      }
-    } catch (e) {
-      log('Error downloading PDF: $e');
-      Utils.showMySnackbar(desc: 'Error downloading PDF: $e');
-    } finally {
-      isDownloadStarted(false);
+    if (storedPosition != 0.0 && storedVideoUrl.isNotEmpty) {
+      // Initialize video controller with stored video URL
+      videoController.value = VideoPlayerController.network(storedVideoUrl);
+      // Initialize and play video from stored position
+      videoController.value!.initialize().then((_) {
+        videoController.value!.seekTo(Duration(seconds: storedPosition.toInt()));
+        videoController.value!.play();
+      });
     }
   }
+
+void downloadPdf() async {
+    try {
+        final data = chapterDetailsModel.value;
+        if (data.uploadPdf == null || data.uploadPdf!.isEmpty) {
+            Utils.showMySnackbar(desc: 'PDF is not available');
+            return;
+        }
+
+        final status = await Permission.storage.request();
+        if (!status.isGranted) {
+            Utils.showMySnackbar(desc: 'Permission denied for storage');
+            return;
+        }
+
+        isDownloadStarted(true);
+
+        final pdfUrl = data.uploadPdf!;
+        final fileName = '${data.chapterName?.replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}.pdf';
+        final downloadDir = await getDownloadsDirectory();
+        if (downloadDir == null) {
+            isDownloadStarted(false);
+            return;
+        }
+
+        final downloadPath = '${downloadDir.path}/files/$fileName';
+        final file = File(downloadPath);
+        if (file.existsSync()) {
+            await file.delete();
+        }
+
+        final downloadedFile = await APIManager.downloadFile(
+            pdfUrl,
+            downloadPath: downloadPath,
+            onReceiveProgress: (progress) {
+                downloadProgress.value = progress;
+            },
+        );
+
+        if (downloadedFile.existsSync()) {
+            Utils.showMySnackbar(desc: 'PDF downloaded successfully');
+            OpenFile.open(downloadPath);
+        } else {
+            Utils.showMySnackbar(desc: 'Error downloading PDF');
+        }
+    } catch (e) {
+        Utils.showMySnackbar(desc: 'Error downloading PDF: $e');
+    } finally {
+        isDownloadStarted(false);
+    }
+}
 
 
 
@@ -178,6 +179,10 @@ Future<void> getAssignments() async {
   @override
   void onClose() {
     tabController.dispose();
+    if (videoController.value != null && videoController.value!.value.isPlaying) {
+      storageService.videoPosition = videoController.value!.value.position.inSeconds.toDouble();
+      storageService.videoUrl = chapterDetailsModel.value.video ?? '';
+    }
     videoController.value?.dispose();
     super.onClose();
   }

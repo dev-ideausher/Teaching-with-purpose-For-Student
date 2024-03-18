@@ -15,7 +15,6 @@ class LiveQuizzController extends GetxController {
   int? selectedOption;
   RxInt selectedOptionIndex = RxInt(-1);
   RxBool showcorrectAnswer = false.obs;
-
   List<QuizModelDataQuestion> questions = <QuizModelDataQuestion>[];
 
 

@@ -18,10 +18,11 @@ class ReviceQuestionsView extends GetView<ReviceQuestionsController> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(46.kh),
-          child: CustomAppBar(title:controller.chapterName, isBack: true)),
-      body: Obx(() => controller.isLoding.value?
-      Center(child: CircularProgressIndicator(color: context.kPrimary)):
-        SingleChildScrollView(
+          child: CustomAppBar(title:controller.chapterName, isBack: true)
+    ),
+      body: Obx(() => controller.isLoding.value
+      ? Center(child: CircularProgressIndicator(color: context.kPrimary))
+      : SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
@@ -66,6 +67,7 @@ class ReviceQuestionsView extends GetView<ReviceQuestionsController> {
       )),
     );
   }
+
  Widget buildquestion(
  {required int questionIndex,required String questions,required String solution,void Function()? onTap}){
   return SizedBox(

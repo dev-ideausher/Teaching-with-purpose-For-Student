@@ -331,7 +331,8 @@ Widget scoreBoard() {
         controller.assignmentTracking.value.data?.improvements?[index]?.teacherDetails?.image?? '', 
         controller.assignmentTracking.value.data?.improvements?[index]?.teacherDetails?.name?? '',
         controller.assignmentTracking.value.data?.improvements?[index]?.improvement?? '', 
-        '01:50 pm'))
+        '01:50 pm'),
+     )
        : Text('No feedback available at the moment',
          style:  TextStyleUtil.kText14_4(fontWeight: FontWeight.w400,
           )),

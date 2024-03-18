@@ -55,18 +55,6 @@ Rx<ChaptersModel> filteredChapterModel = ChaptersModel().obs;
     }
   }
 
-  // void filterChapters() {
-  //   final searchText = searchController.text.toLowerCase();
-
-  //   log('Search Text: $searchText');
-    
-  //   final filteredChapters = chapterModel.value.data?.where((chapter) {
-  //     return chapter?.chapterName?.toLowerCase().contains(searchText) == true ||
-  //            chapter?.concept?.toLowerCase().contains(searchText) == true;}).toList();
-  //   log('Filtered Chapters: $filteredChapters');
-
-  //   filteredChapterModel.value.data = filteredChapters;
-  // }
 
   @override
   void onClose() {
